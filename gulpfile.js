@@ -1,10 +1,12 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
-//var concat = require('gulp-concat');
 var include = require("gulp-include");
 var install = require("gulp-install");
 
+var spawn = require('child_process').spawn;
 var path = require('path');
+
+var node;
 
 var dirs = {
     clientbuild: "./build/public",
@@ -13,7 +15,34 @@ var dirs = {
     serversrc: "./src/server"
 };
 
-gulp.task('default', ['server', 'client']);
+
+/*High level tasks*/
+gulp.task('default', ['run']);
+gulp.task('build', ['server', 'client']);
+
+//automagically re-build and run
+gulp.task('develop', function() {
+    gulp.start('build');
+    gulp.start('run');
+    gulp.watch(dirs.serversrc+'/**/*', ['copy_server', 'run']);
+    gulp.watch(dirs.clientsrc+'/**/*', ['client']);
+});
+
+//run node, if it's already running
+gulp.task('run', function() {
+    if (node) node.kill();
+    node = spawn('node', [dirs.serverbuild+'/index.js'], {stdio: 'inherit'});
+    node.on('close', function (code) {
+        if (code === 8) {
+            gulp.log('Error detected, waiting for changes...');
+        }
+    });
+});
+
+//kill node on exit
+process.on('exit', function() {
+    if (node) node.kill();
+});
 
 /*Build server*/
 gulp.task('server', ['copy_server' ,'install_npm']);
@@ -27,12 +56,7 @@ gulp.task('install_npm',function(){
     gulp.src([dirs.serverbuild+'/package.json']).pipe(install());
 });
 
-//use this to automagically re-build on file change
-gulp.task('watchserver', function() {
-    gulp.watch(dirs.serversrc+'/**/*', ['copy_server']);
-});
-
-/*Build client*/
+/* Build client */
 gulp.task('client', ['js', 'less', 'html', 'static']);
 //concatenate all js files into one
 gulp.task('js', function(){
@@ -60,9 +84,4 @@ gulp.task('html', function(){
 gulp.task('static', function(){
     return gulp.src(dirs.clientsrc+'/static/*')
         .pipe(gulp.dest(dirs.clientbuild+'/static'));
-});
-
-//use this to automagically re-build on file change
-gulp.task('watchclient', function() {
-    gulp.watch('./src/**/*', ['default']);
 });

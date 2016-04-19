@@ -4,7 +4,7 @@ var database = require('./database');
 var app = express();
 
 //serve client files
-app.use(express.static('public'));
+app.use(express.static(__dirname+ '/public'));
 
 //serve api
 app.get('/api/', function (req, res) {

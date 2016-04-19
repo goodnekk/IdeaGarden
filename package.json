@@ -1,10 +1,11 @@
 {
-    "name": "digital prototype",
-    "author": "Marcel Goethals",
-    "dependencies": {
-        "gulp": "~3.9.1",
-        "gulp-include": "~2.1.0",
-        "gulp-install": "~0.6.0",
-        "gulp-less": "~3.0.5"
-    }
+  "name": "ideatree",
+  "author": "Marcel Goethals",
+  "dependencies": {
+    "gulp": "~3.9.1",
+    "gulp-include": "~2.1.0",
+    "gulp-install": "~0.6.0",
+    "gulp-less": "~3.0.5",
+    "pm2": "~1.1.2"
+  }
 }
