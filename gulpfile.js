@@ -18,7 +18,7 @@ var dirs = {
 
 /*High level tasks*/
 gulp.task('default', ['run']);
-gulp.task('build', ['server', 'client']);
+gulp.task('build', ['client', 'server']);
 
 //automagically re-build and run
 gulp.task('develop', function() {
@@ -53,7 +53,8 @@ gulp.task('copy_server',function(){
 });
 
 gulp.task('install_npm',function(){
-    gulp.src([dirs.serverbuild+'/package.json']).pipe(install());
+    return gulp.src([dirs.serverbuild+'/package.json'])
+        .pipe(install());
 });
 
 /* Build client */
