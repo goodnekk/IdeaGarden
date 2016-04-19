@@ -1,7 +1,7 @@
-#Ideatree
+#IdeaGarden
 
 This project uses gulp as a build system.
-Use the following commands will get you going:
+The following commands will get you going:
 ```
 npm install
 gulp build
