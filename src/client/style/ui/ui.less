@@ -1,0 +1,75 @@
+@import "../theme/theme.less";
+
+body {
+    margin: 0px;
+    background-color: @back-color;
+    font-family: @font;
+    font-size: @font-size;
+}
+
+.ui {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.ui.menu {
+    background-color: @base-color;
+    height: 60px;
+    vertical-align: middle;
+    border-bottom: 1px solid @base-border-color;
+    margin-bottom: 20px;
+}
+
+.ui.menuelement {
+    line-height: 60px;
+    float: left;
+    padding-left: @padding;
+    padding-right: @padding;
+    cursor: pointer;
+}
+
+.ui.menuelement.highlight{
+    background-color: #B3E5CC;
+}
+
+.ui.card {
+    background-color: @base-color;
+    border: 1px solid @base-border-color;
+    padding: @padding;
+    border-radius: @border-radius;
+    margin: 10px;
+}
+
+input.ui, textarea.ui {
+    padding: 10px;
+    background-color: @base-color;
+
+    font-family: @font;
+    font-size: @font-size;
+
+    width: 100%;
+    border: 0px;
+    border-bottom: 1px solid @base-border-color;
+
+    resize: none;
+}
+
+button.ui {
+    margin-top: 10px;
+    background-color: @button-color;
+    color: @button-text-color;
+    border: 0px;
+    padding: 10px;
+    border-radius: @border-radius;
+    cursor: pointer;
+}
+
+.ui.switchbar {
+    border-bottom: 1px solid @base-border-color;
+}
+
+.ui.switch {
+    text-align: center;
+    padding: @padding;
+}
