@@ -3,35 +3,27 @@
     <head>
         <meta charset="utf-8">
         <title></title>
-        <script src="/static/two.min.js" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.min.js" charset="utf-8"></script>
     </head>
     <body>
-        <div id="content"></div>
+        <canvas id="content"></canvas>
 
         <script type="text/javascript">
-            var elem = document.getElementById('content');
-            var params = { width: 285, height: 200 };
-            var two = new Two(params).appendTo(elem);
 
-            var a = two.makeCurve(0, 0, 20, -50, 0, -100, true);
-            var b = two.makeCurve(0, 0, -20, -50, 0, -100, true);
-            var c = two.makePath(0,-40,0,50);
+        var canvas = document.getElementById('content');
+        paper.setup(canvas);
+        var path = new paper.Path();
+        path.strokeColor = '#005CC2';
+        path.strokeWeight = 5;
 
-            var leaf = two.makeGroup(a,b,c);
-
-            leaf.stroke = '#005CC2';
-            leaf.linewidth = 3;
-
-            //
-
-            leaf.translation.set(50,50);
-
-            two.bind('update', function(frameCount) {
-                leaf.rotation += 0.01;
-            }).play();
-
-
-            //two.update();
+		var start = new paper.Point(100, 100);
+		// Move to start and draw a line from there
+		path.moveTo(start);
+		// Note that the plus operator on Point objects does not work
+		// in JavaScript. Instead, we need to call the add() function:
+		path.lineTo(start.add([ 200, -50 ]));
+		// Draw the view now:
+		paper.view.draw();
         </script>
     </body>
 </html>

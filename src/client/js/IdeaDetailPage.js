@@ -1,8 +1,13 @@
 //=require Menu.js
 //=require VoteButtons.js
+//=require Models.js
 
 var IdeaDetailPage = {
-    view: function() {
+    controller: function(){
+        this.idea = Model.getDetail();
+    },
+    view: function(ctrl) {
+        var idea = ctrl.idea();
         return m("div", [
             m.component(Menu),
             m("div", {class: "ui page"}, [
@@ -11,9 +16,9 @@ var IdeaDetailPage = {
                         m("div", {class: "ui card"}, "hello this is a card"),
                     ]),
                     m("div", {class: "ui col-7"}, [
-                        m.component(IdeaText),
+                        m.component(IdeaText, idea),
                         m.component(DoAddition),
-                        m.component(AdditionOverview),
+                        m.component(AdditionOverview, idea.additions),
                     ])
                 ]),
             ])
@@ -22,10 +27,10 @@ var IdeaDetailPage = {
 };
 
 var IdeaText = {
-    view: function() {
+    view: function(ctrl, idea) {
         return m("div", {class: "ui card"}, [
-            m("h1", {class: "ui"}, "Fiets - Monorail"),
-            m("p", {class: ""}, "Er moet een monorail komen van de Universiteit naar Strijp-s. Maar je moet zelf fietsen.")
+            m("h1", {class: "ui"}, idea.title),
+            m("p", {class: ""}, idea.summary)
         ]);
     }
 };
@@ -45,78 +50,36 @@ var DoAddition = {
 };
 
 var AdditionOverview = {
-    view: function() {
-        var AdditionList = [
-            {
-                message: "Kees heeft een idee geplant",
-                type: "origin",
-                content: {
-                    title: "Monorail",
-                    description: "Er moet een monorail komen."
-                },
-                comments: []
-            },
-            {
-                message: "Anouk heeft een afbeelding toegevoegd",
-                type: "image",
-                content: {
-                    description: "Misschien kunnen we er zo'n fiets monorail van maken.",
-                    src: "static/shweeb.jpg"
-                },
-                comments: []
-            },
-            {
-                message: "Peter stelde een vraag",
-                type: "addition",
-                content: {
-                    description: "Wie gaat dat allemaal betalen?"
-                },
-                comments: [
-                    {
-                        name: "Anja",
-                        comment: "Gaat de gemeente dat niet betalen?"
-                    },
-                    {
-                        name: "Gijs",
-                        comment: "Nee de gemeente kan dat allemaal niet betalen hoor, daar hebben ze geen geld voor."
-                    },
-                    {
-                        name: "Fred",
-                        comment: "Wij willen het wel bouwen maar alleen als we voor eeuwig de exploitatie rechten krijgen."
-                    }
-                ]
-            },
-        ];
-
-        return m("div",AdditionList.map(function(e){
-            return m.component(AdditionCard, e);
+    view: function(ctrl, additions) {
+        return m("div", additions.map(function(e, index){
+            return m.component(AdditionCard, e, index);
         }));
     }
 };
 
 var AdditionCard = {
-    view: function(ctrl, data) {
+    view: function(ctrl, addition, index) {
         return m("div", {class: "ui card addition"}, [
-            m("p", {class: "label"}, data.message),
-            m.component(PostSection, data),
-            m.component(CommentSection, data.comments),
-            m.component(ReactionBar),
+            m("p", {class: "label"}, addition.message),
+            m.component(PostSection, addition),
+            m.component(CommentSection, addition.comments),
+            m.component(ReactionBar, index),
         ]);
     }
 };
 
 var PostSection = {
     view: function(ctrl, data){
-        if(data.type === "origin") {
+        if(data.category === "origin") {
             return m("div", {class: "section"}, [
                 m("h2", data.content.title),
                 m("p",{class: "description"}, data.content.description)
             ]);
-        } else if (data.type === "addition") {
+        } else if (data.category === "addition") {
             return m("div", {class: "section"}, [
                 m("p",{class: "description"}, data.content.description)
             ]);
-        } else if (data.type === "image") {
+        } else if (data.category === "image") {
             return m("div", [
                 m("p", {class: "description"}, data.content.description),
                 m("div", {style: "background-image: url('"+data.content.src+"');", class: "image"})
@@ -141,9 +104,12 @@ var ReactionBar = {
             this.comment = function(){
                 this.show = true;
             };
+            this.close = function(){
+                this.show = false;
+            };
             this.show = false;
         },
-        view: function(ctrl, data){
+        view: function(ctrl, index){
             return m("div",[
                 m("div", {class:"reactionbar"}, [
                     m.component(VoteButtons),
@@ -152,21 +118,32 @@ var ReactionBar = {
                         m("span", "comment")
                     ]),
                 ]),
-                (function(){if(ctrl.show) return m.component(AddComment);})()
+                (function(){if(ctrl.show) return m.component(AddComment, index, ctrl.close.bind(ctrl));})()
             ]);
         }
 };
 
 var AddComment = {
-    controller: function(){
+    controller: function(index, closeCallback){
         this.focus = function(e){
             e.focus();
         };
+
+        this.value = "";
+        this.update = function(e){
+            this.value = e.target.value;
+        };
+        this.comment = function(e){
+            e.preventDefault();
+            Model.commentOnAddition(index, this.value);
+            this.value = "";
+            closeCallback();
+        };
     },
     view: function(ctrl, data) {
-        return m("div", {class: "addcomment"}, [
-            m("input", {config: ctrl.focus, class: "ui", placeholder: "Write your comment..."}),
-            m("button", {class: "ui"}, "submit")
+        return m("form", {onsubmit: ctrl.comment.bind(ctrl), class: "addcomment"}, [
+            m("input", {value: ctrl.value, config: ctrl.focus, onchange: ctrl.update.bind(ctrl), class: "ui", placeholder: "Write your comment..."}),
+            m("button", {type: "submit", class: "ui", value: "submit"}, "submit")
         ]);
     }
 };

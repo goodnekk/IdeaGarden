@@ -1,5 +1,6 @@
 //=require Menu.js
 //=require VoteButtons.js
+//=require Models.js
 
 var IdeaOverviewPage = {
     view: function() {
@@ -20,14 +21,9 @@ var IdeaOverviewPage = {
 };
 
 var SubmitCard = {
-    controller: function(){
-        this.focus = function(e){
-            e.focus();
-        }
-    },
     view: function(ctrl) {
         return m("div", {class: "ui card"}, [
-            m("input", {config: ctrl.focus, class: "ui", placeholder: "Give your idea a title..."}),
+            m("input", {class: "ui", placeholder: "Give your idea a title..."}),
             m("textarea", {class: "ui", placeholder: "Describe your idea..."}),
             m("input", {class: "ui", placeholder: "Email Adress..."}),
             m("button", {class: "ui"}, "submit")
@@ -37,40 +33,12 @@ var SubmitCard = {
 
 
 var IdeaGrid = {
-    view: function(){
-        var cards = [
-            {
-                "title": "Monorail",
-                "summary": "Er moet een monorail komen van de Universiteit naar Strijp-s. Maar je moet zelf fietsen.",
-                "votes": 20,
-                "additions": 2,
-                "age": 5
-            },
-            {
-                "title": "We gaan per Schaap!",
-                "summary": "We laten schapen heen en weer pendelen. De schapen trekken kleine karretjes vooruit waar we dan in kunnen zitten.",
-                "votes": -2,
-                "additions": 5,
-                "age": 3
-            },
-            {
-                "title": "Teleportatie",
-                "summary": "We desintegreren je moleculaire structuur en bouwen die in strijp-s weer op. Het heeft nagenoeg geen bij-effecten.",
-                "votes": 4,
-                "additions": 0,
-                "age": 10
-            },
-            {
-                "title": "Je kan gewoon met de bus",
-                "summary": "Serieus doe niet zo moeilijk",
-                "votes": 30,
-                "additions": 1,
-                "age": 7
-            }
-        ];
-
+    controller: function(){
+        this.cards = Model.getOverview();
+    },
+    view: function(ctrl){
         return m("div", {class: "ui grid"},
-            cards.map(function(e){
+            ctrl.cards().map(function(e){
                 return m("div", {class: "ui col-6"}, [
                     m.component(IdeaCard, e)
                 ]);
@@ -82,22 +50,26 @@ var IdeaGrid = {
 var IdeaCard = {
     controller: function(data){
         this.open = function(){
-            m.route("/idea/"+data.title);
+            m.route("/idea/"+data.id);
+        };
+
+        this.onvote = function(value){
+            Model.voteIdeaOverview(data.id, value);
         };
     },
     view: function(ctrl, data){
-        return m("div", {class: "ui card ideacard", onclick: ctrl.open}, [
+        return m("div", {class: "ui card ideacard"}, [
             m("div", {class: "top"},[
                 m("div", {class: "status"}, [
                     m("img", {src:"static/stage2.png"})
                 ]),
                 m("div", {class: "info"}, [
-                    m("h3",{class: "ui"}, data.title),
+                    m("h3",{class: "ui", onclick: ctrl.open}, data.title),
                     m("p", data.summary)
                 ]),
             ]),
             m("div", {class: "bottom"},[
-                m.component(VoteButtons),
+                m.component(VoteButtons, ctrl.onvote),
                 m("span", {class: "metric"}, [
                     m("span", {class:"number"}, data.votes),
                     m("span", {class:"label"}, "votes")
