@@ -69,7 +69,6 @@ IdeaSchema.methods.getPublic = function(){
     return {
         id: this._id,
         title: this.title,
-        owner: this.owner,
         summary: this.summary,
         additions: additions,
         votes: votes,
@@ -119,7 +118,7 @@ module.exports = (function(){
     }
 
     function getIdeas(callback){
-        Idea.find({}).select('title summary votes').exec(function(err, ideaDocList){
+        Idea.find({}).select('title summary votes').sort('-createdAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList.map(function(ideaDoc){
                 return ideaDoc.getPublic();
             });
@@ -156,7 +155,7 @@ module.exports = (function(){
         });
     }
 
-    function additionIdea(id, addition, callback){
+    function addAddition(id, addition, callback){
         Idea.findOne({_id : id}).exec(function(err, ideaDoc){
             if(!ideaDoc){
                 if(callback) callback({error: "idea does not exist"});
@@ -171,7 +170,7 @@ module.exports = (function(){
         });
     }
 
-    function commentAdditionIdea(id, aid, comment, callback){
+    function addComment(id, aid, comment, callback){
         Idea.findOne({_id : id}).exec(function(err, ideaDoc){
             if(!ideaDoc){
                 if(callback) callback({error: "idea does not exist"});
@@ -192,11 +191,13 @@ module.exports = (function(){
     return {
         addUser: addUser,
         addIdea: addIdea,
+
         getQuestion: getQuestion,
         getIdeas: getIdeas,
         getIdea: getIdea,
+
         voteIdea: voteIdea,
-        additionIdea: additionIdea,
-        commentAdditionIdea: commentAdditionIdea
+        addAddition: addAddition,
+        addComment: addComment
     };
 })();

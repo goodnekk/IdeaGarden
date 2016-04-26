@@ -13,6 +13,12 @@ var Model = (function(){
         });
     }
 
+    function addIdea(data) {
+        m.request({method: "POST", url: "/api/idea", data: data}).then(function(){
+            getOverview();
+        });
+    }
+
     var detail = m.prop({});
     var id = "";
     function getDetail(){
@@ -21,37 +27,21 @@ var Model = (function(){
         return detail;
     }
 
-    function commentOnAddition(aid, comment){
-        console.log(aid+" "+comment);
+    function addAddition(addition){
+        m.request({method: "POST", url: "/api/idea/"+id+"/addition", data: addition}).then(detail);
+    }
+
+    function addComment(aid, comment){
         m.request({method: "POST", url: "/api/idea/"+id+"/addition/"+aid+"/comment", data: {comment: comment}}).then(detail);
     }
 
-
     return {
         getOverview: getOverview,
-        getDetail: getDetail,
-
         voteIdeaOverview: voteIdeaOverview,
-        commentOnAddition: commentOnAddition
+        addIdea: addIdea,
+
+        getDetail: getDetail,
+        addAddition: addAddition,
+        addComment: addComment
     };
 })();
-
-/*
-var VoteModel = {
-    vote: function(id, value){
-        return m.request({method: "GET", url: "/api/vote/"+id+"/"+value});
-    }
-};
-
-var IdeaOverviewModel = {
-    get: function(){
-        return m.request({method: "GET", url: "/api/ideas"});
-    }
-};
-
-var IdeaModel = {
-    get: function(){
-        return m.request({method: "GET", url: "/api/idea/"+id});
-    }
-};
-*/

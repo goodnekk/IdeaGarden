@@ -36,15 +36,38 @@ var IdeaText = {
 };
 
 var DoAddition = {
-    view: function() {
+    controller: function(){
+        this.addition = "";
+        this.update = function(e){
+            this.addition = e.target.value;
+        };
+
+        this.submit = function(e){
+            e.preventDefault();
+            Model.addAddition({
+                category: "addition",
+                content: {
+                    description: this.addition
+                },
+                message: "Iemand voegde iets toe"
+            });
+            return false;
+        };
+    },
+    view: function(ctrl) {
         return m("div", {class: "ui card"}, [
             m("div", {class: "ui switchbar grid"}, [
                 m("span", {class: "ui switch selected col-4"}, "Make Addition"),
                 m("span", {class: "ui switch col-4"}, "Ask Question"),
                 m("span", {class: "ui switch col-4"}, "Add Image")
             ]),
-            m("textarea", {class: "ui", placeholder: "Write your Addition"}),
-            m("button", {class: "ui"}, "submit")
+            m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
+                m("textarea", {
+                    class: "ui", placeholder: "Write your Addition",
+                    onchange: ctrl.update.bind(ctrl)
+                }),
+                m("button", {action: "submit", class: "ui"}, "submit")
+            ])
         ]);
     }
 };
@@ -135,14 +158,17 @@ var AddComment = {
         };
         this.comment = function(e){
             e.preventDefault();
-            Model.commentOnAddition(index, this.value);
+            Model.addComment(index, this.value);
             this.value = "";
             closeCallback();
         };
     },
     view: function(ctrl, data) {
-        return m("form", {onsubmit: ctrl.comment.bind(ctrl), class: "addcomment"}, [
-            m("input", {value: ctrl.value, config: ctrl.focus, onchange: ctrl.update.bind(ctrl), class: "ui", placeholder: "Write your comment..."}),
+        return m("form", {class: "addcomment", onsubmit: ctrl.comment.bind(ctrl)}, [
+            m("input", {
+                class: "ui", placeholder: "Write your comment...",
+                value: ctrl.value, config: ctrl.focus, onchange: ctrl.update.bind(ctrl)
+            }),
             m("button", {type: "submit", class: "ui", value: "submit"}, "submit")
         ]);
     }

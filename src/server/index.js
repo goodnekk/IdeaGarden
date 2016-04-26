@@ -15,24 +15,33 @@ app.get('/api/', function (req, res) {
     res.send('Hello World!');
 });
 
-//get data
+//get question data
 app.get('/api/question', function (req, res) {
     //
 });
 
+//get all ideas
 app.get('/api/ideas', function (req, res) {
     database.getIdeas(function(data){
         res.json(data);
     });
 });
 
+//get specific idea
 app.get('/api/idea/:id', function (req, res) {
     database.getIdea(req.params.id, function(data){
         res.json(data);
     });
 });
 
-//modifications
+//post new idea
+app.post('/api/idea', function (req, res) {
+    database.addIdea(req.body, function(data){
+        res.json(data);
+    });
+});
+
+//vote on an idea
 app.get('/api/idea/:id/vote/:operation', function (req, res) {
     var value;
     if(req.params.operation==="up"){ value = 1; }
@@ -47,26 +56,34 @@ app.get('/api/idea/:id/vote/:operation', function (req, res) {
     });
 });
 
+//make an addition to an idea
 app.post('/api/idea/:id/addition/', function (req, res) {
-    //
-});
-
-app.post('/api/idea/:id/addition/:aid/comment', function (req, res) {
-    var message = req.body.comment;
-    if(!message){
-        res.json({message: "no comment"});
+    if(!req.body){
+        res.json({error: "no addition"});
     } else {
-        var comment = {
-            comment: message,
-            name: "marceltest"
-        };
-
-        database.commentAdditionIdea(req.params.id, req.params.aid, comment, function(data){
+        database.addAddition(req.params.id, req.body, function(data){
             res.json(data);
         });
     }
 });
 
+//comment on an addition
+app.post('/api/idea/:id/addition/:aid/comment', function (req, res) {
+    if(!req.body.comment){
+        res.json({error: "no comment"});
+    } else {
+
+        var comment = {
+            comment: req.body.comment,
+            name: "marceltest"
+        };
+        database.addComment(req.params.id, req.params.aid, comment, function(data){
+            res.json(data);
+        });
+    }
+});
+
+//vote on an addition
 app.get('/api/idea/:id/addition/:aid/vote/:operation', function (req, res) {
     //
 });
