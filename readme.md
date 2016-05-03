@@ -1,3 +1,5 @@
+[![Dependency Status](https://david-dm.org/CodeForEindhoven/IdeaGarden.svg?path=src/server)](https://david-dm.org/CodeForEindhoven/IdeaGarden?path=src/server)
+
 #IdeaGarden
 
 This project uses gulp as a build system.
