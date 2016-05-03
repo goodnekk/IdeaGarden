@@ -2,32 +2,40 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var include = require("gulp-include");
 var install = require("gulp-install");
+var sequence = require("gulp-sequence");
 
 var spawn = require('child_process').spawn;
 var path = require('path');
 
-var node;
+var node; //this stores the node instance
 
+//build and source directories
 var dirs = {
-    clientbuild: "./build/public",
-    clientsrc: "./src/client",
-    serverbuild: "./build",
-    serversrc: "./src/server"
+    clientbuild: "build/public",
+    clientsrc: "src/client",
+    serverbuild: "build",
+    serversrc: "src/server"
 };
 
-
-/*High level tasks*/
+/* High level tasks */
 gulp.task('default', ['run']);
+
 gulp.task('build', ['client', 'server']);
+
+gulp.task('install_npm',function(){
+    return gulp.src([dirs.serverbuild+'/package.json'])
+        .pipe(install());
+});
 
 //automagically re-build and run
 gulp.task('develop', function() {
-    gulp.start('build');
-    gulp.start('run');
-    gulp.watch(dirs.serversrc+'/**/*', ['copy_server', 'run']);
+    gulp.start(sequence('build', 'run'));
+    gulp.watch(dirs.serversrc+'/**/*', sequence('server', 'run'));
     gulp.watch(dirs.clientsrc+'/**/*', ['client']);
 });
 
+
+/* Node.js */
 //run node, if it's already running
 gulp.task('run', function() {
     if (node) node.kill();
@@ -44,21 +52,16 @@ process.on('exit', function() {
     if (node) node.kill();
 });
 
-/*Build server*/
-gulp.task('server', ['copy_server' ,'install_npm']);
 
-gulp.task('copy_server',function(){
+/* Build server */
+gulp.task('server',function(){
     return gulp.src(dirs.serversrc+'/**/*')
         .pipe(gulp.dest(dirs.serverbuild+'/'));
 });
 
-gulp.task('install_npm',function(){
-    return gulp.src([dirs.serverbuild+'/package.json'])
-        .pipe(install());
-});
-
 /* Build client */
 gulp.task('client', ['js', 'less', 'html', 'static']);
+
 //concatenate all js files into one
 gulp.task('js', function(){
     return gulp.src(dirs.clientsrc+'/js/App.js')
@@ -67,7 +70,7 @@ gulp.task('js', function(){
         .pipe(gulp.dest(dirs.clientbuild+'/js'));
 });
 
-//compile Less files to Css
+//compile Less files to CSS
 gulp.task('less', function () {
     return gulp.src(dirs.clientsrc+'/style/style.less')
         .pipe(less({

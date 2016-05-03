@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-
+var config = require('./config');
 var db = mongoose.connection;
-db.on('error', console.error);
+db.on('error', console.log);
 db.once('open', function() { console.log('connected to database'); });
-mongoose.connect("mongodb://localhost/ideagarden");
+mongoose.connect(config.database.url);
 
 var SchemaOptions = {
     timestamps: true,
@@ -96,6 +96,16 @@ module.exports = (function(){
         });
     }
 
+    function getUser(user, callback){
+        User.findOne({ email: user.email }, function(err, found) {
+            if(!found) {
+                if(callback) callback({succes: false});
+            } else {
+                if(callback) callback({succes: true, user: found});
+            }
+        });
+    }
+
     function addIdea(idea, callback){
         Idea.findOne({ title: idea.title }, function(err, found) {
             if(!found) {
@@ -158,38 +168,44 @@ module.exports = (function(){
     function addAddition(id, addition, callback){
         Idea.findOne({_id : id}).exec(function(err, ideaDoc){
             if(!ideaDoc){
-                if(callback) callback({error: "idea does not exist"});
-            } else {
-                ideaDoc.additions.push(addition);
-
-                ideaDoc.save(function(err, data) {
-                    if (err) return console.error(err);
-                    if(callback) callback(data.getPublic());
-                });
+                return callback({succes: false});
             }
+
+            ideaDoc.additions.push(addition);
+
+            ideaDoc.save(function(err, data) {
+                if (err) return callback({succes: false});
+                return callback(data.getPublic());
+            });
         });
     }
 
-    function addComment(id, aid, comment, callback){
-        Idea.findOne({_id : id}).exec(function(err, ideaDoc){
+    function addComment(post, callback){
+        Idea.findOne({_id : post.id}).exec(function(err, ideaDoc){
             if(!ideaDoc){
-                if(callback) callback({error: "idea does not exist"});
-            } else {
-                if(!ideaDoc.additions[aid]){
-                    if(callback) callback({error: "addition does not exist"});
-                } else {
-                    ideaDoc.additions[aid].comments.push(comment);
-                    ideaDoc.save(function(err, data) {
-                        if (err) return console.error(err);
-                        if(callback) callback(data.getPublic());
-                    });
-                }
+                return callback({succes: false});
             }
+
+            if(!ideaDoc.additions[post.aid]){
+                return callback({succes: false});
+            }
+
+            ideaDoc.additions[post.aid].comments.push({
+                name: post.name,
+                comment: post.comment
+            });
+
+            ideaDoc.save(function(err, data) {
+                if (err) return callback({succes: false});
+                return callback({succes: true, data: data.getPublic()});
+            });
         });
     }
 
     return {
         addUser: addUser,
+        getUser: getUser,
+
         addIdea: addIdea,
 
         getQuestion: getQuestion,

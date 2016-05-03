@@ -11,6 +11,8 @@
   "dependencies": {
     "express": "~4.13.4",
     "body-parser": "~1.15.0",
-    "mongoose": "~4.4.12"
+    "mongoose": "~4.4.12",
+    "jsonwebtoken": "~6.1.0",
+    "jsonschema": "~1.1.0"
   }
 }

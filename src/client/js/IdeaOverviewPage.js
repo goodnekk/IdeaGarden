@@ -22,50 +22,24 @@ var IdeaOverviewPage = {
 
 var SubmitCard = {
     controller: function(){
-        this.title = "";
-        this.onTitle = function(e){
-            this.title = e.target.value;
-        };
-
-        this.summary = "";
-        this.onSummary = function(e){
-            this.summary = e.target.value;
-        };
-
-        this.email = "";
-        this.onEmail = function(e){
-            this.email = e.target.value;
-        };
-
         this.submit = function(e){
             e.preventDefault();
-            Model.addIdea({
-                title: this.title,
-                summary: this.summary,
-                email: this.email
-            });
 
-            this.title = "";
-            this.summary = "";
-            this.email = "";
+            var elements = e.target.elements;
+            Model.addIdea({
+                title: elements.title.value,
+                summary: elements.summary.value,
+                email: elements.email.value
+            });
 
             return false;
         };
     },
     view: function(ctrl) {
         return m("form", {class: "ui card", onsubmit: ctrl.submit.bind(ctrl)}, [
-            m("input", {
-                class: "ui", placeholder: "Geef je idee een titel...",
-                value: ctrl.title, onchange: ctrl.onTitle.bind(ctrl)
-            }),
-            m("textarea", {
-                class: "ui", placeholder: "Omschrijf je idee...",
-                value: ctrl.summary, onchange: ctrl.onSummary.bind(ctrl)
-            }),
-            m("input", {
-                class: "ui", placeholder: "Email adres...",
-                value: ctrl.email, onchange: ctrl.onEmail.bind(ctrl)
-            }),
+            m("input", {class: "ui", name: "title", placeholder: "Geef je idee een titel..."}),
+            m("textarea", {class: "ui", name: "summary", placeholder: "Omschrijf je idee..."}),
+            m("input", {class: "ui", name: "email", placeholder: "Email adres..."}),
             m("button", {type:"submit", class: "ui"}, "submit")
         ]);
     }

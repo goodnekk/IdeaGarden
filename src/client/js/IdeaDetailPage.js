@@ -37,6 +37,7 @@ var IdeaText = {
 
 var DoAddition = {
     controller: function(){
+        this.token = Model.token;
         this.addition = "";
         this.update = function(e){
             this.addition = e.target.value;
@@ -55,20 +56,23 @@ var DoAddition = {
         };
     },
     view: function(ctrl) {
-        return m("div", {class: "ui card"}, [
-            m("div", {class: "ui switchbar grid"}, [
-                m("span", {class: "ui switch selected col-4"}, "Make Addition"),
-                m("span", {class: "ui switch col-4"}, "Ask Question"),
-                m("span", {class: "ui switch col-4"}, "Add Image")
-            ]),
-            m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
-                m("textarea", {
-                    class: "ui", placeholder: "Write your Addition",
-                    onchange: ctrl.update.bind(ctrl)
-                }),
-                m("button", {action: "submit", class: "ui"}, "submit")
-            ])
-        ]);
+        if(ctrl.token().succes){
+            return m("div", {class: "ui card"}, [
+                m("div", {class: "ui switchbar grid"}, [
+                    m("span", {class: "ui switch selected col-4"}, "Make Addition"),
+                    m("span", {class: "ui switch col-4"}, "Ask Question"),
+                    m("span", {class: "ui switch col-4"}, "Add Image")
+                ]),
+                m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
+                    m("textarea", {
+                        class: "ui", placeholder: "Write your Addition",
+                        onchange: ctrl.update.bind(ctrl)
+                    }),
+                    m("button", {action: "submit", class: "ui"}, "submit")
+                ])
+            ]);
+        }
+        return m("");
     }
 };
 
@@ -113,7 +117,7 @@ var PostSection = {
 
 var CommentSection = {
     view: function(ctrl, comments) {
-        return m("div", {class: "comment section"}, comments.map(function(e){
+        return m("div", {class: "comment"}, comments.map(function(e){
             return m("p", [
                 m("span", {class: "name"}, e.name),
                 m("span", {class: "message"}, e.comment)
@@ -124,6 +128,8 @@ var CommentSection = {
 
 var ReactionBar = {
         controller: function(){
+            this.token = Model.token;
+
             this.comment = function(){
                 this.show = true;
             };
@@ -133,43 +139,53 @@ var ReactionBar = {
             this.show = false;
         },
         view: function(ctrl, index){
-            return m("div",[
-                m("div", {class:"reactionbar"}, [
-                    m.component(VoteButtons),
-                    m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
-                        m("img", {src: "static/comment.png"}),
-                        m("span", "comment")
+            if(ctrl.token().succes){
+                return m("div",[
+                    m("div", {class:"reactionbar"}, [
+                        m.component(VoteButtons),
+                        m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
+                            m("img", {src: "static/comment.png"}),
+                            m("span", "comment")
+                        ]),
                     ]),
-                ]),
-                (function(){if(ctrl.show) return m.component(AddComment, index, ctrl.close.bind(ctrl));})()
-            ]);
+                    m.component(AddComment, ctrl.show ,index, ctrl.close.bind(ctrl))
+                ]);
+            }
+            return m("");
         }
 };
 
 var AddComment = {
-    controller: function(index, closeCallback){
+    controller: function(show, index, closeCallback){
+        this.exists = false;
         this.focus = function(e){
-            e.focus();
+            if(!this.exists){
+                e.focus();
+                this.exists = true;
+            }
         };
 
-        this.value = "";
-        this.update = function(e){
-            this.value = e.target.value;
-        };
         this.comment = function(e){
             e.preventDefault();
-            Model.addComment(index, this.value);
-            this.value = "";
+            this.exists = false;
+            Model.addComment(index, e.target.elements.comment.value);
             closeCallback();
         };
     },
-    view: function(ctrl, data) {
-        return m("form", {class: "addcomment", onsubmit: ctrl.comment.bind(ctrl)}, [
-            m("input", {
-                class: "ui", placeholder: "Write your comment...",
-                value: ctrl.value, config: ctrl.focus, onchange: ctrl.update.bind(ctrl)
-            }),
-            m("button", {type: "submit", class: "ui", value: "submit"}, "submit")
-        ]);
+    view: function(ctrl, show, index) {
+        if(show){
+            return m("form", {
+                    class: "addcomment", onsubmit: ctrl.comment.bind(ctrl),
+                }, [
+                m("input", {
+                    class: "ui", name: "comment", placeholder: "Write your comment...",
+                    config: ctrl.focus.bind(ctrl)
+                }),
+                m("button", {type: "submit", class: "ui", value: "submit"}, "submit")
+            ]);
+        } else {
+            return m("",[]);
+        }
+
     }
 };
