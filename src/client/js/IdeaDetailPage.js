@@ -128,7 +128,12 @@ var ReactionBar = {
             this.token = Model.token;
 
             this.comment = function(){
-                this.show = true;
+                if(!Model.token().succes){
+                    ViewModel.loginPopup(true);
+                } else {
+                    this.show = true;
+                }
+
             };
             this.close = function(){
                 this.show = false;
