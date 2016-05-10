@@ -1,4 +1,5 @@
 //=require LoginPopup.js
+//=require ViewModels.js
 
 var Menu = {
     controller: function(){
@@ -8,19 +9,13 @@ var Menu = {
             m.route("/ideas");
         };
 
-        this.login = function(){};
-
-        this.onLoginClick = function(callback){
-            this.login = callback;
-        };
-
         this.loginClick = function(){
-            this.login();
+            ViewModel.loginPopup(true);
         };
     },
     view: function(ctrl, data) {
         return m("nav", {class: "ui menu"}, [
-            m.component(LoginPopup, ctrl.onLoginClick.bind(ctrl)),
+            m.component(LoginPopup),
             m("img", {src: "static/logo.png", class: "ui menuelement"}),
             m("h3", {class: "ui menuelement"}, "Ideeën Vijver"),
             m("a", {class: "ui menuelement"}, "Uitdaging"),

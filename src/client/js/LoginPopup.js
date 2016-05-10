@@ -1,14 +1,12 @@
+//=require ViewModels.js
+
 var LoginPopup = {
     controller: function(onLoginClick){
 
-        this.show = false;
-
-        onLoginClick(function(){
-            this.show = true;
-        }.bind(this));
+        this.show = ViewModel.loginPopup;
 
         this.hide = function(){
-            this.show = false;
+            this.show(false);
         };
 
         this.submit = function(e){
@@ -20,14 +18,14 @@ var LoginPopup = {
                 if(!token.succes){
                     return console.log(token);
                 }
-                this.show = false;
+                this.hide();
             }.bind(this));
             return false;
         };
 
     },
     view: function(ctrl) {
-        if(ctrl.show){
+        if(ctrl.show()){
             return m("div", [
                 m("div", {class: "ui overlay", onclick: ctrl.hide.bind(ctrl)}),
                 m("form", {class: "ui card popup", onsubmit: ctrl.submit.bind(ctrl)}, [
