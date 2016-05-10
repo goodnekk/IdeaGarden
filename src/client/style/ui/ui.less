@@ -77,3 +77,35 @@ button.ui {
     text-align: center;
     padding: @padding;
 }
+
+.ui.popup {
+    z-index: 2;
+    margin: auto;
+    width: 400px;
+    height: 200px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+}
+
+.ui.overlay {
+    z-index: 1;
+    background-color: rgba(0,0,0,0.7);
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    animation: 1s fadein;
+}
+
+@keyframes fadein {
+  from {
+    background-color: rgba(0,0,0,0);
+  }
+  to {
+    background-color: rgba(0,0,0,0.7);
+  }
+}

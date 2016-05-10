@@ -1,8 +1,8 @@
 var jwt = require('jsonwebtoken');
 var config = require('./config');
+var database = require('./database');
 
 module.exports = (function(){
-
     function sign(user, callback){
         jwt.sign(user, config.secret, {}, function(err, token) {
             if(err){

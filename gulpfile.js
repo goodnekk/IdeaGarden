@@ -29,7 +29,7 @@ gulp.task('install_npm',function(){
 
 //automagically re-build and run
 gulp.task('develop', function() {
-    gulp.start(sequence('build', 'run'));
+    gulp.start('run');
     gulp.watch(dirs.serversrc+'/**/*', sequence('server', 'run'));
     gulp.watch(dirs.clientsrc+'/**/*', ['client']);
 });

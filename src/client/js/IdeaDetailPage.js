@@ -56,23 +56,20 @@ var DoAddition = {
         };
     },
     view: function(ctrl) {
-        if(ctrl.token().succes){
-            return m("div", {class: "ui card"}, [
-                m("div", {class: "ui switchbar grid"}, [
-                    m("span", {class: "ui switch selected col-4"}, "Make Addition"),
-                    m("span", {class: "ui switch col-4"}, "Ask Question"),
-                    m("span", {class: "ui switch col-4"}, "Add Image")
-                ]),
-                m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
-                    m("textarea", {
-                        class: "ui", placeholder: "Write your Addition",
-                        onchange: ctrl.update.bind(ctrl)
-                    }),
-                    m("button", {action: "submit", class: "ui"}, "submit")
-                ])
-            ]);
-        }
-        return m("");
+        return m("div", {class: "ui card"}, [
+            m("div", {class: "ui switchbar grid"}, [
+                m("span", {class: "ui switch selected col-4"}, "Make Addition"),
+                m("span", {class: "ui switch col-4"}, "Ask Question"),
+                m("span", {class: "ui switch col-4"}, "Add Image")
+            ]),
+            m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
+                m("textarea", {
+                    class: "ui", placeholder: "Write your Addition",
+                    onchange: ctrl.update.bind(ctrl)
+                }),
+                m("button", {action: "submit", class: "ui"}, "submit")
+            ])
+        ]);
     }
 };
 
@@ -139,19 +136,16 @@ var ReactionBar = {
             this.show = false;
         },
         view: function(ctrl, index){
-            if(ctrl.token().succes){
-                return m("div",[
-                    m("div", {class:"reactionbar"}, [
-                        m.component(VoteButtons),
-                        m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
-                            m("img", {src: "static/comment.png"}),
-                            m("span", "comment")
-                        ]),
+            return m("div",[
+                m("div", {class:"reactionbar"}, [
+                    m.component(VoteButtons),
+                    m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
+                        m("img", {src: "static/comment.png"}),
+                        m("span", "comment")
                     ]),
-                    m.component(AddComment, ctrl.show ,index, ctrl.close.bind(ctrl))
-                ]);
-            }
-            return m("");
+                ]),
+                m.component(AddComment, ctrl.show ,index, ctrl.close.bind(ctrl))
+            ]);
         }
 };
 

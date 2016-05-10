@@ -10,7 +10,8 @@ module.exports = (function(){
 
         if(!post.email)      return res.json({succes: false, message: "no email"});
         if(!post.password)   return res.json({succes: false, message: "no password"});
-
+        //if(!post.strategy)   return res.json({succes: false, message: "no strategy"});
+        
         //database
         database.getUser({email: post.email}, function(doc){
             if(!doc.succes){
