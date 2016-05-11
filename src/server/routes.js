@@ -48,13 +48,42 @@ module.exports = (function(){
 
     function getIdea(req, res) {
         database.getIdea(req.params.id, function(data){
+            if(!data.succes) return res.json({succes: false, message: "idea does not exist"});
             res.json(data);
         });
     }
 
     function postIdea(req, res) {
-        database.addIdea(req.body, function(data){
-            res.json(data);
+        //validate
+        if(!req.body) return res.json({succes: false, message: "empty post"});
+        var post = req.body;
+
+        if(!post.title)      return res.json({succes: false, message: "no title"});
+        if(!post.summary)   return res.json({succes: false, message: "no summary"});
+
+        //authenticate
+        authenticate.verify(req, function(auth){
+            function addIdeawithUser(userId){
+                database.addIdea({
+                    title: post.title,
+                    summary: post.summary,
+                    votecount: 0,
+                    owner: userId
+
+                }, function(data){
+                    res.json({succes: true, idea: data});
+                });
+            }
+
+            if(!auth.succes) {//create a new user
+                if(!post.email)   return res.json({succes: false, message: "no email"});
+                database.addUser({email: post.email}, function(userDoc){
+                    if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
+                    addIdeawithUser(userDoc.user._id);
+                });
+            } else {//use logged in user
+                addIdeawithUser(auth.decoded.id);
+            }
         });
     }
 
@@ -96,7 +125,7 @@ module.exports = (function(){
             //database
             database.addComment({
                 comment: post.comment,
-                name: auth.decoded.name,
+                owner: auth.decoded.id,
                 id: req.params.id,
                 aid: req.params.aid,
             }, function(doc){

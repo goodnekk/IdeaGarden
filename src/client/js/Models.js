@@ -59,7 +59,7 @@ var Model = (function(){
         m.request({
             method: "GET",
             url: "/api/idea/"+id
-        }).then(detail);
+        }).then(validate).then(detail);
         return detail;
     }
 

@@ -116,7 +116,7 @@ var CommentSection = {
     view: function(ctrl, comments) {
         return m("div", {class: "comment"}, comments.map(function(e){
             return m("p", [
-                m("span", {class: "name"}, e.name),
+                m("span", {class: "name"}, e.owner.name),
                 m("span", {class: "message"}, e.comment)
             ]);
         }));
