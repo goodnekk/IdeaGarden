@@ -30,7 +30,7 @@ gulp.task('install_npm',function(){
 //automagically re-build and run
 gulp.task('develop', function() {
     gulp.start('run');
-    gulp.watch(dirs.serversrc+'/**/*', sequence('server', 'run'));
+    gulp.watch(dirs.serversrc+'/**/*', ['server', 'run']);
     gulp.watch(dirs.clientsrc+'/**/*', ['client']);
 });
 

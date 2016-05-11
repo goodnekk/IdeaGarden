@@ -11,7 +11,7 @@ module.exports = (function(){
         if(!post.email)      return res.json({succes: false, message: "no email"});
         if(!post.password)   return res.json({succes: false, message: "no password"});
         //if(!post.strategy)   return res.json({succes: false, message: "no strategy"});
-        
+
         //database
         database.getUser({email: post.email}, function(doc){
             if(!doc.succes){
@@ -41,7 +41,7 @@ module.exports = (function(){
     }
 
     function getIdeas(req, res) {
-        database.getIdeas(function(data){
+        database.getIdeas(req.ip, function(data){
             res.json(data);
         });
     }
@@ -67,7 +67,7 @@ module.exports = (function(){
             return;
         }
 
-        database.voteIdea(req.params.id, value, function(data){
+        database.voteIdea({id:req.params.id, value:value, ip: req.ip}, function(data){
             res.json(data);
         });
     }

@@ -19,6 +19,7 @@ var IdeaSchema = new mongoose.Schema({
     title: String,
     owner: String,
     summary: String,
+    votecount: Number,
     votes: [
         {
             vote: Number,
@@ -26,6 +27,7 @@ var IdeaSchema = new mongoose.Schema({
             ip: String,
         }
     ],
+
     additions: [
         {
             message: String,
@@ -41,18 +43,15 @@ var IdeaSchema = new mongoose.Schema({
     ]
 }, SchemaOptions);
 
-IdeaSchema.methods.getPublic = function(){
+IdeaSchema.methods.getPublic = function(requestIp){
 
-    var votes, votecount, additions;
+    var additions;
+    var yourvote = 0;
 
-    //count votes
-    if(this.votes){
-        votes = this.votes.reduce(function(c, v){
-            return c + v.vote;
-        },0);
-
-        votecount = this.votes.length;
-    }
+    var allreadyVoted = this.votes.find(function(e){
+        return e.ip === requestIp;
+    });
+    if(allreadyVoted) yourvote = allreadyVoted.vote;
 
     if(this.additions){
         //hide id's
@@ -71,8 +70,8 @@ IdeaSchema.methods.getPublic = function(){
         title: this.title,
         summary: this.summary,
         additions: additions,
-        votes: votes,
-        votecount: votecount
+        votecount: this.votecount,
+        yourvote: yourvote
     };
 };
 
@@ -109,6 +108,7 @@ module.exports = (function(){
     function addIdea(idea, callback){
         Idea.findOne({ title: idea.title }, function(err, found) {
             if(!found) {
+                idea.votecount = 0;
                 var ideaDoc = new Idea(idea);
                 ideaDoc.save(function(err, data) {
                     if (err) return console.error(err);
@@ -127,10 +127,10 @@ module.exports = (function(){
         };
     }
 
-    function getIdeas(callback){
-        Idea.find({}).select('title summary votes').sort('-createdAt').exec(function(err, ideaDocList){
+    function getIdeas(requestIp, callback){
+        Idea.find({}).select('title summary votes votecount').sort('-createdAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList.map(function(ideaDoc){
-                return ideaDoc.getPublic();
+                return ideaDoc.getPublic(requestIp);
             });
             if(callback) callback(ideaDocList);
         });
@@ -146,22 +146,43 @@ module.exports = (function(){
         });
     }
 
-    function voteIdea(id, value, callback){
-        Idea.findOne({_id : id}).exec(function(err, ideaDoc){
-            if(!ideaDoc){
-                if(callback) callback({error: "idea does not exist"});
-            } else {
-                ideaDoc.votes.push({
-                    vote: value
-                });
+    function voteIdea(vote, callback){
+        Idea.findOne({_id : vote.id}).exec(function(err, ideaDoc){
+            if(!ideaDoc) return callback({succes: false});
 
-                ideaDoc.votecount += value;
+            //if this ip allready voted, just update the vote
+            var allreadyVoted = false;
+            for(var i in ideaDoc.votes){
+                if(ideaDoc.votes[i].ip === vote.ip){
+                    allreadyVoted = true;
+                    //undo the vote
+                    ideaDoc.votecount -= ideaDoc.votes[i].vote;
 
-                ideaDoc.save(function(err, data) {
-                    if (err) return console.error(err);
-                    if(callback) callback(data.getPublic());
-                });
+                    //if the vote changed direction update it
+                    if(ideaDoc.votes[i].vote !== vote.value) {
+                        ideaDoc.votecount += vote.value;
+                        ideaDoc.votes[i].vote = vote.value;
+                    } else {
+                        ideaDoc.votes[i].vote = 0;
+                    }
+                    break;
+                }
             }
+
+            //if not allready voted add a new vote
+            if(!allreadyVoted){
+                ideaDoc.votes.push({
+                    vote: vote.value,
+                    ip: vote.ip
+                });
+
+                ideaDoc.votecount += vote.value;
+            }
+
+            ideaDoc.save(function(err, data) {
+                if (err) return console.error(err);
+                callback(data.getPublic());
+            });
         });
     }
 

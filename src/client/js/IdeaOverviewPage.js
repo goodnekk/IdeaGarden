@@ -85,9 +85,9 @@ var IdeaCard = {
                 ]),
             ]),
             m("div", {class: "bottom"},[
-                m.component(VoteButtons, ctrl.onvote.bind(ctrl)),
+                m.component(VoteButtons, data.yourvote, ctrl.onvote.bind(ctrl)),
                 m("span", {class: "metric"}, [
-                    m("span", {class:"number"}, data.votes),
+                    m("span", {class:"number"}, data.votecount),
                     m("span", {class:"label"}, "kudos")
                 ])
             ])

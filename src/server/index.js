@@ -10,6 +10,9 @@ app.use(express.static(__dirname+ '/public'));
 //parse JSON posts
 app.use(bodyParser.json());
 
+//enable getting client ip
+app.enable('trust proxy');
+
 //serve api
 app.get('/api', function (req, res) {
     res.json({message: 'Hello World!'});
