@@ -40,17 +40,27 @@ var DoAddition = {
     controller: function(){
         this.token = Model.token;
         this.addition = "";
+        this.category = 0;
+
+        this.onSwitch = function(id){
+            this.category = id;
+        };
+
         this.update = function(e){
             this.addition = e.target.value;
         };
 
         this.submit = function(e){
+            var category = "addition";
+            if(this.category === 1) category = "question";
+            if(this.category === 2) category = "image";
+
             e.preventDefault();
             if(!Model.token().succes){
                 ViewModel.loginPopup(true);
             } else {
                 Model.addAddition({
-                    category: "addition",
+                    category: category,
                     content: {
                         description: this.addition
                     }
@@ -61,12 +71,21 @@ var DoAddition = {
     },
     view: function(ctrl) {
         return m("div", {class: "ui card"}, [
-            m.component(SwitchBar, ["Make Addition", "Ask Question", "Add Image"]),
+            m.component(SwitchBar, ["Make Addition", "Ask Question", "Add Image"], ctrl.onSwitch.bind(ctrl)),
             m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
-                m("textarea", {
-                    class: "ui", placeholder: "Write your Addition",
-                    onchange: ctrl.update.bind(ctrl)
-                }),
+                function(){
+                    if(ctrl.category === 0){
+                        return m("textarea", {
+                            class: "ui", placeholder: "Write your Addition",
+                            onchange: ctrl.update.bind(ctrl)
+                        });
+                    } else if(ctrl.category === 1){
+                        return m("textarea", {
+                            class: "ui", placeholder: "Ask your Question",
+                            onchange: ctrl.update.bind(ctrl)
+                        });
+                    }
+                }(),
                 m("button", {action: "submit", class: "ui"}, "submit")
             ])
         ]);
@@ -99,7 +118,7 @@ var PostSection = {
                 m("h2", data.content.title),
                 m("p",{class: "description"}, data.content.description)
             ]);
-        } else if (data.category === "addition") {
+        } else if (data.category === "addition" || data.category === "question") {
             return m("div", {class: "section"}, [
                 m("p",{class: "description"}, data.content.description)
             ]);

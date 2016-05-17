@@ -45,6 +45,16 @@ body {
     margin: 10px;
 }
 
+label.ui {
+    display: inline-block;
+    padding: 10px;
+    padding-bottom: 5px;
+    font-size: 14pt;
+    margin-top:20px;
+    width: 100%;
+    border-bottom: 1px solid @base-border-color;
+}
+
 input.ui, textarea.ui {
     padding: 10px;
     background-color: @base-color;
@@ -84,14 +94,15 @@ button.ui {
 }
 
 .ui.switch.selected {
-    border-bottom: 3px solid @base-border-color;
+    border-bottom: 5px solid @button-color;
+    color: @button-color;
 }
 
 .ui.popup {
     z-index: 2;
     margin: auto;
     width: 400px;
-    height: 200px;
+    height: 250px;
     top:0;
     bottom: 0;
     left: 0;

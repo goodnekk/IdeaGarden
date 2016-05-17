@@ -29,6 +29,7 @@ var LoginPopup = {
             return m("div", [
                 m("div", {class: "ui overlay", onclick: ctrl.hide.bind(ctrl)}),
                 m("form", {class: "ui card popup", onsubmit: ctrl.submit.bind(ctrl)}, [
+                    m("h2", "Login"),
                     m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
                     m("input", {class: "ui", name: "password", type: "password", placeholder: "wachtwoord",}),
                     m("button", {type:"submit", class: "ui"}, "login"),

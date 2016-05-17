@@ -1,11 +1,47 @@
 var Model = (function(){
 
+
+    var token = m.prop({succes: false});
+    //load token from session
+    if(typeof(Storage) !== "undefined") {
+        var t = localStorage.getItem("token");
+        if(t) {
+            try{
+                t = JSON.parse(t);
+                token(t);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+
+    }
+
+    function login(user, callback) {
+        m.request({
+            method: "POST",
+            url: "/api/login",
+            data: user
+        }).then(function(t){
+            if(typeof(Storage) !== "undefined") {
+                localStorage.setItem("token", JSON.stringify(t));
+            }
+            return t;
+        }).then(token).then(callback);
+    }
+
+    function logout(callback){
+        token({succes: false});
+        localStorage.setItem("token", "");
+    }
+
+    //add token to the header
     function xhrConfig(xhr) {
         if(token()){
             xhr.setRequestHeader("x-access-token", token().token);
         }
     }
 
+    //validate requests
     function validate(answer){
         if(!answer.succes) {
             console.log(answer.message);
@@ -14,14 +50,6 @@ var Model = (function(){
         }
     }
 
-    var token = m.prop({succes: false});
-    function login(user, callback) {
-        m.request({
-            method: "POST",
-            url: "/api/login",
-            data: user
-        }).then(token).then(callback);
-    }
 
     var overview = m.prop({});
     function getOverview(){
@@ -83,6 +111,7 @@ var Model = (function(){
 
     return {
         login: login,
+        logout: logout,
         token: token,
         getOverview: getOverview,
         voteIdeaOverview: voteIdeaOverview,

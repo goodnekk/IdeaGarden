@@ -12,6 +12,10 @@ var Menu = {
         this.loginClick = function(){
             ViewModel.loginPopup(true);
         };
+
+        this.dashboardClick = function(){
+            m.route("/dashboard");
+        };
     },
     view: function(ctrl, data) {
         return m("nav", {class: "ui menu"}, [
@@ -22,7 +26,7 @@ var Menu = {
             m("a", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeën"),
             (function(){
                 if(ctrl.token().succes) {
-                    return m("a", {class: "ui menuelement right", onclick: ctrl.loginClick.bind(ctrl)}, ctrl.token().email);
+                    return m("a", {class: "ui menuelement right", onclick: ctrl.dashboardClick.bind(ctrl)}, ctrl.token().email);
                 }
                 return m("a", {class: "ui menuelement right", onclick: ctrl.loginClick.bind(ctrl)}, "Login");
             })()
