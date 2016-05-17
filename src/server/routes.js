@@ -102,13 +102,24 @@ module.exports = (function(){
     }
 
     function postIdeaAddition(req, res){
-        if(!req.body){
-            res.json({error: "no addition"});
-        } else {
-            database.addAddition(req.params.id, req.body, function(data){
-                res.json(data);
+        //validate
+        if(!req.body) return res.json({succes: false, message: "empty post"});
+        var post = req.body;
+
+        if(!post.content) return res.json({succes: false, message: "no content"});
+
+        authenticate.verify(req, function(auth){
+            if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+            post.owner = auth.decoded.id;
+            //database
+            database.addAddition({
+                id: req.params.id,
+                addition: post,
+            }, function(doc){
+                if(!doc.succes) return res.json({succes: false, message: "comment failed."});
+                res.json({succes: true, data: doc.data});
             });
-        }
+        });
     }
 
     function postIdeaComment(req, res){
@@ -124,8 +135,10 @@ module.exports = (function(){
 
             //database
             database.addComment({
-                comment: post.comment,
-                owner: auth.decoded.id,
+                comment: {
+                    comment: post.comment,
+                    owner: auth.decoded.id
+                },
                 id: req.params.id,
                 aid: req.params.aid,
             }, function(doc){

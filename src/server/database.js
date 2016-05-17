@@ -12,12 +12,12 @@ var SchemaOptions = {
 
 var UserSchema =  new mongoose.Schema({
     name: String,
-    email: String,
+    email: {type : String , unique : true},
     password: String
 });
 
 var IdeaSchema = new mongoose.Schema({
-    title: String,
+    title: {type : String , unique : true},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: {select: 'name'}},
     summary: String,
     votecount: Number,
@@ -52,26 +52,11 @@ IdeaSchema.methods.getPublic = function(requestIp){
     });
     if(allreadyVoted) yourvote = allreadyVoted.vote;
 
-    //hide id's on additions and comments
-    var additions;
-    if(this.additions){
-        //hide id's
-        additions = this.additions.map(function(addition){
-            addition._id = undefined;
-            addition.comments.map(function(comment){
-                comment._id = undefined;
-                return comment;
-            });
-            return addition;
-        });
-    }
-
-
     return {
-        id: this._id,
+        _id: this._id,
         title: this.title,
         summary: this.summary,
-        additions: additions,
+        additions: this.additions,
         votecount: this.votecount,
         owner: this.owner,
         yourvote: yourvote
@@ -85,40 +70,27 @@ var Idea = mongoose.model('Idea', IdeaSchema);
 module.exports = (function(){
 
     function addUser(user, callback){
-        //create new user
-        User.findOne({ email: user.email }, function(err, found) {
-            if(found || err) return callback({succes: false});
-
-            var userDoc = new User(user);
-            userDoc.save(function(err, data) {
-                if (err) return callback({succes: false});
-                callback({succes: true, user: data});
-            });
+        var userDoc = new User(user);
+        userDoc.save(function(err, data) {
+            if (err) return callback({succes: false});
+            callback({succes: true, user: data});
         });
     }
 
     function getUser(user, callback){
         User.findOne({ email: user.email }, function(err, found) {
-            if(!found) {
-                if(callback) callback({succes: false});
-            } else {
-                if(callback) callback({succes: true, user: found});
-            }
+            if(!found) return callback({succes: false});
+            callback({succes: true, user: found});
         });
     }
 
     function addIdea(idea, callback){
-        Idea.findOne({ title: idea.title }, function(err, found) {
-            if(found || err) return callback({succes: false});
-
-            var ideaDoc = new Idea(idea);
-            ideaDoc.save(function(err, data) {
-                if (err) return console.error(err);
-                if(callback) callback(data.getPublic());
-            });
+        var ideaDoc = new Idea(idea);
+        ideaDoc.save(function(err, data) {
+            if (err) return console.error(err);
+            if(callback) callback(data.getPublic());
         });
     }
-
 
     function getQuestion(){
         return {
@@ -138,11 +110,23 @@ module.exports = (function(){
     function getIdea(id, callback){
         Idea.findOne({_id : id}).exec(function(err, found){
             if(!found || err) return callback({succes: false});
-            return callback({succes: true, data: found.getPublic()});
+            callback({succes: true, data: found.getPublic()});
         });
     }
 
     function voteIdea(vote, callback){
+        Idea.update(
+            {"_id": vote.id},
+            {$push: {
+                'votes': post.addition
+            }},
+            {upsert: true},
+            function(err, data){
+                if (err) return callback({succes: false});
+                getIdea(post.id, callback);
+            }
+        );
+
         Idea.findOne({_id : vote.id}).exec(function(err, ideaDoc){
             if(!ideaDoc) return callback({succes: false});
 
@@ -182,41 +166,32 @@ module.exports = (function(){
         });
     }
 
-    function addAddition(id, addition, callback){
-        Idea.findOne({_id : id}).exec(function(err, ideaDoc){
-            if(!ideaDoc){
-                return callback({succes: false});
-            }
-
-            ideaDoc.additions.push(addition);
-
-            ideaDoc.save(function(err, data) {
+    function addAddition(post, callback){
+        Idea.update(
+            {"_id": post.id},
+            {$push: {
+                'additions': post.addition
+            }},
+            {upsert: true},
+            function(err, data){
                 if (err) return callback({succes: false});
-                return callback(data.getPublic());
-            });
-        });
+                getIdea(post.id, callback);
+            }
+        );
     }
 
     function addComment(post, callback){
-        Idea.findOne({_id : post.id}).exec(function(err, ideaDoc){
-            if(!ideaDoc){
-                return callback({succes: false});
-            }
-
-            if(!ideaDoc.additions[post.aid]){
-                return callback({succes: false});
-            }
-
-            ideaDoc.additions[post.aid].comments.push({
-                owner: post.owner,
-                comment: post.comment
-            });
-
-            ideaDoc.save(function(err, data) {
+        Idea.update(
+            {"_id": post.id, "additions._id" : post.aid},
+            {$push: {
+                'additions.$.comments': post.comment
+            }},
+            {upsert: true},
+            function(err, data){
                 if (err) return callback({succes: false});
-                return callback({succes: true, data: data.getPublic()});
-            });
-        });
+                getIdea(post.id, callback);
+            }
+        );
     }
 
     return {

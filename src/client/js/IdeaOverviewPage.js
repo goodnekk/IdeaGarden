@@ -63,7 +63,7 @@ var IdeaGrid = {
 
 var IdeaCard = {
     controller: function(data){
-        this.id = data.id;
+        this.id = "";
         this.open = function(){
             m.route("/idea/"+this.id);
         };
@@ -73,7 +73,7 @@ var IdeaCard = {
         };
     },
     view: function(ctrl, data){
-        ctrl.id = data.id;
+        ctrl.id = data._id;
         return m("div", {class: "ui card ideacard"}, [
             m("div", {class: "top"},[
                 m("div", {class: "status"}, [

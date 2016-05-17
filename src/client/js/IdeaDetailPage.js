@@ -1,6 +1,7 @@
 //=require Menu.js
 //=require VoteButtons.js
 //=require Models.js
+//=require SwitchBar.js
 
 var IdeaDetailPage = {
     controller: function(){
@@ -45,23 +46,22 @@ var DoAddition = {
 
         this.submit = function(e){
             e.preventDefault();
-            Model.addAddition({
-                category: "addition",
-                content: {
-                    description: this.addition
-                },
-                message: "Iemand voegde iets toe"
-            });
+            if(!Model.token().succes){
+                ViewModel.loginPopup(true);
+            } else {
+                Model.addAddition({
+                    category: "addition",
+                    content: {
+                        description: this.addition
+                    }
+                });
+            }
             return false;
         };
     },
     view: function(ctrl) {
         return m("div", {class: "ui card"}, [
-            m("div", {class: "ui switchbar grid"}, [
-                m("span", {class: "ui switch selected col-4"}, "Make Addition"),
-                m("span", {class: "ui switch col-4"}, "Ask Question"),
-                m("span", {class: "ui switch col-4"}, "Add Image")
-            ]),
+            m.component(SwitchBar, ["Make Addition", "Ask Question", "Add Image"]),
             m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
                 m("textarea", {
                     class: "ui", placeholder: "Write your Addition",
@@ -75,8 +75,8 @@ var DoAddition = {
 
 var AdditionOverview = {
     view: function(ctrl, additions) {
-        return m("div", additions.map(function(e, index){
-            return m.component(AdditionCard, e, index);
+        return m("div", additions.map(function(e){
+            return m.component(AdditionCard, e);
         }));
     }
 };
@@ -84,10 +84,10 @@ var AdditionOverview = {
 var AdditionCard = {
     view: function(ctrl, addition, index) {
         return m("div", {class: "ui card addition"}, [
-            m("p", {class: "label"}, addition.message),
+            m("p", {class: "label"}, addition.owner.name + " voegde een " + addition.category + " toe"),
             m.component(PostSection, addition),
             m.component(CommentSection, addition.comments),
-            m.component(ReactionBar, index),
+            m.component(ReactionBar, addition._id),
         ]);
     }
 };
@@ -133,7 +133,6 @@ var ReactionBar = {
                 } else {
                     this.show = true;
                 }
-
             };
             this.close = function(){
                 this.show = false;

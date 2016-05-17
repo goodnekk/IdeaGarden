@@ -67,8 +67,9 @@ var Model = (function(){
         m.request({
             method: "POST",
             url: "/api/idea/"+id+"/addition",
-            data: addition
-        }).then(detail);
+            data: addition,
+            config: xhrConfig
+        }).then(validate).then(detail);
     }
 
     function addComment(aid, comment){
