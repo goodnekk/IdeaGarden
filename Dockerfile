@@ -1,16 +1,30 @@
 FROM node:argon
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+#Environment Variables
+ENV DATABASE_URI "mongodb://localhost/ideagarden"
+ENV DATABASE_USER ""
+ENV DATABASE_PASS ""
+ENV HASH_SECRET "shhhhh"
 
-# Install app dependencies
-COPY package.json /usr/src/app/
-RUN npm install
+# Create app directory
+RUN mkdir -p /ideaGarden
+WORKDIR /ideaGarden
+
+# Install
+COPY package.json /ideaGarden
+COPY gulpfile.js /ideaGarden
+COPY ./src /ideaGarden/src
+
 
 # Bundle app source
-COPY . /usr/src/app
+RUN npm install
 RUN ./node_modules/.bin/gulp build
 RUN ./node_modules/.bin/gulp install_npm
+COPY config_docker.js /ideaGarden/build/config.js
+
+#Image configuration
+ADD start.sh /start.sh
+RUN chmod 755 /*.sh
+
 EXPOSE 80
-CMD [ "./node_modules/.bin/gulp", "run" ]
+CMD ["/start.sh"]
