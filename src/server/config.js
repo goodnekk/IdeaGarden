@@ -6,5 +6,8 @@ module.exports = {
             pass: ""
         }
     },
-    secret: "shhhh"
+    email:{
+        senderAdress: "info@ideeënvijver.nl"
+    },
+    secret: "shhhh",
 };

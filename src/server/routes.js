@@ -1,5 +1,7 @@
 var database = require('./database');
+var email = require('./email');
 var authenticate = require('./authenticate');
+var uuid = require("uuid");
 
 module.exports = (function(){
 
@@ -40,6 +42,19 @@ module.exports = (function(){
         });
     }
 
+    function confirmUser(req, res){
+        if(!req.body) return res.json({succes: false, message: "empty post"});
+        var post = req.body;
+
+        if(!post.name)      return res.json({succes: false, message: "no name"});
+        if(!post.password)  return res.json({succes: false, message: "no password"});
+        if(!post.secret)    return res.json({succes: false, message: "no secret"});
+
+        database.confirmUser(post, function(data){
+            res.json(data);
+        });
+    }
+
     function getIdeas(req, res) {
         database.getIdeas(req.ip, function(data){
             res.json(data);
@@ -77,9 +92,13 @@ module.exports = (function(){
 
             if(!auth.succes) {//create a new user
                 if(!post.email)   return res.json({succes: false, message: "no email"});
-                database.addUser({email: post.email}, function(userDoc){
+
+                var secret = uuid.v4(); //generate a secret
+
+                database.addUser({email: post.email, secret: secret}, function(userDoc){
                     if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
                     addIdeawithUser(userDoc.user._id);
+                    email.sendMail(userDoc.user.email, "welkom bij IdeaGarden!", userDoc.user.secret);
                 });
             } else {//use logged in user
                 addIdeawithUser(auth.decoded.id);
@@ -150,9 +169,12 @@ module.exports = (function(){
 
     return {
         login: login,
+        confirmUser: confirmUser,
+
         getIdeas: getIdeas,
         getIdea: getIdea,
         postIdea: postIdea,
+        
         postIdeaVote: postIdeaVote,
         postIdeaAddition: postIdeaAddition,
         postIdeaComment: postIdeaComment

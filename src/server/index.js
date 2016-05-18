@@ -19,6 +19,7 @@ app.get('/api', function (req, res) {
 });
 
 app.post('/api/login', routes.login); //login
+app.post('/api/confirm', routes.confirmUser);
 
 app.get('/api/question', function (req, res) {}); //get question data
 
@@ -32,6 +33,8 @@ app.post('/api/idea/:id/addition/:aid/comment', routes.postIdeaComment); //comme
 
 //vote on an addition
 app.get('/api/idea/:id/addition/:aid/vote/:operation', function (req, res) {});
+
+
 
 //run server
 app.listen(80, function () {

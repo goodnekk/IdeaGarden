@@ -109,6 +109,19 @@ var Model = (function(){
         } ).then(validate).then(detail);
     }
 
+    function confirmUser(user){
+        user.secret = m.route.param("secret");
+        m.request({
+            method: "POST",
+            url: "/api/confirm",
+            data: user,
+        }).then(function(answer){
+            if(answer.succes){
+                route("/");
+            }
+        });
+    }
+
     return {
         login: login,
         logout: logout,
@@ -119,6 +132,7 @@ var Model = (function(){
 
         getDetail: getDetail,
         addAddition: addAddition,
-        addComment: addComment
+        addComment: addComment,
+        confirmUser: confirmUser
     };
 })();

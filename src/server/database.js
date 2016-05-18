@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var autopopulate = require('mongoose-autopopulate');
 var config = require('./config');
+
 var db = mongoose.connection;
 db.on('error', console.log);
 db.once('open', function() { console.log('connected to database'); });
@@ -13,7 +14,8 @@ var SchemaOptions = {
 var UserSchema =  new mongoose.Schema({
     name: String,
     email: {type : String , unique : true},
-    password: String
+    password: String,
+    secret: String,
 });
 
 var IdeaSchema = new mongoose.Schema({
@@ -81,6 +83,23 @@ module.exports = (function(){
             if(!found) return callback({succes: false});
             callback({succes: true, user: found});
         });
+    }
+
+    function confirmUser(user, callback){
+        User.update(
+            {"secret": user.secret},
+            {$set: {
+                'name': user.name,
+                'password': user.password,
+                'secret': ""
+            }},
+            {upsert: true},
+            function(err, data){
+                if (err) return callback({succes: false});
+                if(data.ok !== 1) return callback({succes: false});
+                callback({succes: true});
+            }
+        );
     }
 
     function addIdea(idea, callback){
@@ -218,6 +237,7 @@ module.exports = (function(){
     return {
         addUser: addUser,
         getUser: getUser,
+        confirmUser: confirmUser,
 
         addIdea: addIdea,
 
