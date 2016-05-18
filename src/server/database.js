@@ -4,7 +4,7 @@ var config = require('./config');
 var db = mongoose.connection;
 db.on('error', console.log);
 db.once('open', function() { console.log('connected to database'); });
-mongoose.connect(config.database.url);
+mongoose.connect(config.database.url, config.database.options);
 
 var SchemaOptions = {
     timestamps: true,

@@ -6,8 +6,13 @@ var DashboardPage = {
         this.token = Model.token;
 
         this.submit = function(e){
-            
-        }
+
+        };
+
+        this.logout = function(e){
+            Model.logout();
+            m.route("/");
+        };
     },
     view: function(ctrl) {
         var idea = ctrl.idea();
@@ -16,6 +21,11 @@ var DashboardPage = {
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
                     m("div", {class: "ui col-6 center"}, [
+                        m("div", {class: "ui card"}, [
+                            m("form", {class: "ui", onsubmit: ctrl.logout.bind(ctrl)}, [
+                                m("button", {type:"submit", class: "ui"}, "Nu Uitloggen")
+                            ]),
+                        ]),
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.submit.bind(ctrl)}, [
                                 m("label", {class: "ui"}, "Gebruikersnaam"),
