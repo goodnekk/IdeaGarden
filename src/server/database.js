@@ -20,13 +20,8 @@ var IdeaSchema = new mongoose.Schema({
     title: {type : String , unique : true},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: {select: 'name'}},
     summary: String,
-    votecount: Number,
-    votes: [
-        {
-            vote: Number,
-            ip: String
-        }
-    ],
+    upvotes: [String],
+    downvotes: [String],
 
     additions: [
         {
@@ -46,18 +41,22 @@ var IdeaSchema = new mongoose.Schema({
 IdeaSchema.plugin(autopopulate);
 IdeaSchema.methods.getPublic = function(requestIp){
     //get user votes
-    var yourvote = 0;
-    var allreadyVoted = this.votes.find(function(e){
-        return e.ip === requestIp;
+    var yourvote = false;
+
+    var allvotes = this.upvotes.concat(this.downvotes);
+    var allreadyVoted = allvotes.find(function(ip){
+        return ip === requestIp;
     });
-    if(allreadyVoted) yourvote = allreadyVoted.vote;
+    if(allreadyVoted) yourvote = true;
+
+    var votecount = this.upvotes.length-this.downvotes.length;
 
     return {
         _id: this._id,
         title: this.title,
         summary: this.summary,
         additions: this.additions,
-        votecount: this.votecount,
+        votecount: votecount,
         owner: this.owner,
         yourvote: yourvote
     };
@@ -99,7 +98,7 @@ module.exports = (function(){
     }
 
     function getIdeas(requestIp, callback){
-        Idea.find({}).select('title summary votes votecount').sort('-createdAt').exec(function(err, ideaDocList){
+        Idea.find({}).select('title summary upvotes downvotes').sort('-createdAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList.map(function(ideaDoc){
                 return ideaDoc.getPublic(requestIp);
             });
@@ -114,19 +113,40 @@ module.exports = (function(){
         });
     }
 
-    function voteIdea(vote, callback){
-        Idea.update(
-            {"_id": vote.id},
-            {$push: {
-                'votes': post.addition
-            }},
-            {upsert: true},
-            function(err, data){
-                if (err) return callback({succes: false});
-                getIdea(post.id, callback);
-            }
-        );
+    function voteIdea(vote, callback) {
+        if(vote.value === 1){
+            Idea.update(
+                {"_id": vote.id},
+                {$addToSet: {
+                    "upvotes": vote.ip
+                }},
+                {upsert: true},
+                function(err, data){
+                    if (err) return callback({succes: false});
+                    getIdeas(vote.id, callback);
+                }
+            );
+        } else if(vote.value === -1){
+            Idea.update(
+                {"_id": vote.id},
+                {$addToSet: {
+                    "downvotes": vote.ip
+                }},
+                {upsert: true},
+                function(err, data){
+                    if (err) return callback({succes: false});
+                    getIdeas(vote.id, callback);
+                }
+            );
+        } else {
+            return callback({succes: false});
+        }
 
+
+
+
+
+/*
         Idea.findOne({_id : vote.id}).exec(function(err, ideaDoc){
             if(!ideaDoc) return callback({succes: false});
 
@@ -164,6 +184,7 @@ module.exports = (function(){
                 callback(data.getPublic());
             });
         });
+        */
     }
 
     function addAddition(post, callback){

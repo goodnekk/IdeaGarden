@@ -9,19 +9,14 @@ var VoteButtons = {
         };
     },
     view: function(ctrl, yourvote) {
-        var votedUp = "";
-        var votedDown = "";
-        if(yourvote === 1 ) {
-            votedUp = "voted";
-        }
-
-        if(yourvote === -1 ) {
-            votedDown = "voted";
+        var voted = "";
+        if(yourvote === true) {
+            voted = "voted";
         }
 
         return m("div", {class: "voteset"}, [
-            m("button", {value: "up", class: "ui vote up "+votedUp, onclick: ctrl.vote}, "▲"),
-            m("button", {value: "down", class: "ui vote down "+votedDown, onclick: ctrl.vote}, "▼"),
+            m("button", {value: "up", class: "ui vote up "+voted, onclick: ctrl.vote}, "▲"),
+            m("button", {value: "down", class: "ui vote down "+voted, onclick: ctrl.vote}, "▼"),
         ]);
     }
 };
