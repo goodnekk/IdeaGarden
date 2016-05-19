@@ -9,6 +9,6 @@ module.exports = {
     email:{
         senderAdress: "info@ideeënvijver.nl"
     },
-    secret: "shhhh",
-    imagePath: "./build/imageData"
+    imagePath: "./build/imageData",
+    secret: "shhhhh"
 };

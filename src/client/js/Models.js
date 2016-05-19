@@ -116,6 +116,7 @@ var Model = (function(){
             url: "/api/confirm",
             data: user,
         }).then(function(answer){
+            console.log(answer);
             if(answer.succes){
                 route("/");
             }

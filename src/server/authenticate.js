@@ -4,7 +4,9 @@ var database = require('./database');
 
 module.exports = (function(){
     function sign(user, callback){
+        console.log("1sign");
         jwt.sign(user, config.secret, {}, function(err, token) {
+            console.log("sign");
             if(err){
                 callback({ succes: false });
             } else {

@@ -4,6 +4,7 @@ var email = require("./email");
 var authenticate = require("./authenticate");
 
 var uuid = require("uuid");
+var bcrypt = require("bcryptjs");
 var dataurl = require("dataurl");
 var fs = require("fs");
 
@@ -16,7 +17,6 @@ module.exports = (function(){
 
         if(!post.email)      return res.json({succes: false, message: "no email"});
         if(!post.password)   return res.json({succes: false, message: "no password"});
-        //if(!post.strategy)   return res.json({succes: false, message: "no strategy"});
 
         //database
         database.getUser({email: post.email}, function(doc){
@@ -24,15 +24,17 @@ module.exports = (function(){
                 return res.json({succes: false, message: "unknown user"});
             }
 
-            if(doc.user.password !== post.password){
-                return res.json({succes: false, message: "wrong password"});
-            }
+            //check password
+            var correct = bcrypt.compareSync(post.password, doc.user.password);
+            if(!correct) return res.json({succes: false, message: "wrong password"});
 
+            //console.log(correct);
             authenticate.sign({
                 name: doc.user.name,
                 email: doc.user.email,
                 id: doc.user._id
             }, function(auth){
+
                 if(!auth.succes){
                     return res.json({succes: false, message: "failed to sign token"});
                 }
@@ -53,6 +55,9 @@ module.exports = (function(){
         if(!post.name)      return res.json({succes: false, message: "no name"});
         if(!post.password)  return res.json({succes: false, message: "no password"});
         if(!post.secret)    return res.json({succes: false, message: "no secret"});
+
+        //security
+        post.password = bcrypt.hashSync(post.password, 10);
 
         database.confirmUser(post, function(data){
             res.json(data);
@@ -146,10 +151,13 @@ module.exports = (function(){
         //if the post is an image
         if(post.category === "image") {
             if(!post.content.image) return res.json({succes: false, message: "no image"});
+
+            //parse image file from base64
             var dataUrl = post.content.image;
             var image = dataurl.parse(dataUrl);
             if(image.mimetype !== "image/jpeg") return res.json({succes: false, message: "not a jpeg image"});
 
+            //save image file
             var imageId = uuid.v4();
             var fileUrl = config.imagePath+"/"+imageId+".jpg";
 

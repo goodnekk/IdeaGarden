@@ -8,12 +8,12 @@ var transporter = nodemailer.createTransport(directTransport());
 
 module.exports = (function(){
     function sendMail(receiver, subject, content){
-        // send mail with defined transport object
+        //send mail with defined transport object
         var mailOptions = {
-            from: config.email.senderAdress, // sender address
-            to: receiver, // list of receivers
-            subject: subject, // Subject line
-            text: content, // plaintext body
+            from: config.email.senderAdress, //sender address
+            to: receiver, //list of receivers
+            subject: subject, //Subject line
+            text: content, //plaintext body
             //html: '<b>Hello world</b>' // html body
         };
 

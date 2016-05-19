@@ -133,6 +133,7 @@ module.exports = (function(){
     }
 
     function voteIdea(vote, callback) {
+        //Undo votes
         if(vote.value === 1){
             Idea.update(
                 {"_id": vote.id},
@@ -160,50 +161,6 @@ module.exports = (function(){
         } else {
             return callback({succes: false});
         }
-
-
-
-
-
-/*
-        Idea.findOne({_id : vote.id}).exec(function(err, ideaDoc){
-            if(!ideaDoc) return callback({succes: false});
-
-            //if this ip allready voted, just update the vote
-            var allreadyVoted = false;
-            for(var i in ideaDoc.votes){
-                if(ideaDoc.votes[i].ip === vote.ip){
-                    allreadyVoted = true;
-                    //undo the vote
-                    ideaDoc.votecount -= ideaDoc.votes[i].vote;
-
-                    //if the vote changed direction update it
-                    if(ideaDoc.votes[i].vote !== vote.value) {
-                        ideaDoc.votecount += vote.value;
-                        ideaDoc.votes[i].vote = vote.value;
-                    } else {
-                        ideaDoc.votes[i].vote = 0;
-                    }
-                    break;
-                }
-            }
-
-            //if not allready voted add a new vote
-            if(!allreadyVoted){
-                ideaDoc.votes.push({
-                    vote: vote.value,
-                    ip: vote.ip
-                });
-
-                ideaDoc.votecount += vote.value;
-            }
-
-            ideaDoc.save(function(err, data) {
-                if (err) return console.error(err);
-                callback(data.getPublic());
-            });
-        });
-        */
     }
 
     function addAddition(post, callback){
