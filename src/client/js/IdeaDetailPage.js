@@ -2,6 +2,7 @@
 //=require VoteButtons.js
 //=require Models.js
 //=require SwitchBar.js
+//=require MediaInput.js
 
 var IdeaDetailPage = {
     controller: function(){
@@ -42,6 +43,9 @@ var DoAddition = {
         this.addition = "";
         this.category = 0;
 
+        //this if for file uploads
+        this.mediaDataUrl = m.prop();
+
         this.onSwitch = function(id){
             this.category = id;
         };
@@ -51,20 +55,35 @@ var DoAddition = {
         };
 
         this.submit = function(e){
+            e.preventDefault();
+
             var category = "addition";
             if(this.category === 1) category = "question";
             if(this.category === 2) category = "image";
 
-            e.preventDefault();
+
             if(!Model.token().succes){
                 ViewModel.loginPopup(true);
             } else {
-                Model.addAddition({
-                    category: category,
-                    content: {
-                        description: this.addition
-                    }
-                });
+                if(category === "addition" || category === "question"){
+                    Model.addAddition({
+                        category: category,
+                        content: {
+                            description: this.addition
+                        }
+                    });
+                    this.addition = "";
+                } else if(category === "image") {
+                    Model.addAddition({
+                        category: category,
+                        content: {
+                            description: this.addition,
+                            image: this.mediaDataUrl()
+                        }
+                    });
+                    this.addition = "";
+                    this.mediaDataUrl("");
+                }
             }
             return false;
         };
@@ -76,14 +95,23 @@ var DoAddition = {
                 function(){
                     if(ctrl.category === 0){
                         return m("textarea", {
-                            class: "ui", placeholder: "Write your Addition",
+                            value: ctrl.addition,class: "ui", placeholder: "Write your Addition",
                             onchange: ctrl.update.bind(ctrl)
                         });
                     } else if(ctrl.category === 1){
                         return m("textarea", {
-                            class: "ui", placeholder: "Ask your Question",
+                            value: ctrl.addition, class: "ui", placeholder: "Ask your Question",
                             onchange: ctrl.update.bind(ctrl)
                         });
+                    } else {
+                        return m("div",[
+                            m("textarea", {
+                                value: ctrl.addition, class: "ui", placeholder: "Describe your image",
+                                onchange: ctrl.update.bind(ctrl)
+                            }),
+                            m.component(MediaInput, ctrl.mediaDataUrl)
+                        ]);
+
                     }
                 }(),
                 m("button", {action: "submit", class: "ui"}, "submit")
@@ -125,7 +153,7 @@ var PostSection = {
         } else if (data.category === "image") {
             return m("div", [
                 m("p", {class: "description"}, data.content.description),
-                m("div", {style: "background-image: url('"+data.content.src+"');", class: "image"})
+                m("div", {style: "background-image: url('/images/"+data.content.src+"');", class: "image"})
             ]);
         }
     }

@@ -10,4 +10,5 @@ module.exports = {
         senderAdress: "info@ideeënvijver.nl"
     },
     secret: "shhhh",
+    imagePath: "./build/imageData"
 };

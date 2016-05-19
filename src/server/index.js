@@ -1,14 +1,19 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 var routes = require('./routes');
+var config = require('./config');
 
 var app = express();
 
 //serve client files
 app.use(express.static(__dirname+ '/public'));
 
+//serve image files
+app.use('/images', express.static(config.imagePath));
+
 //parse JSON posts
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '1000kb'}));
 
 //enable getting client ip
 app.enable('trust proxy');

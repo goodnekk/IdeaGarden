@@ -1,7 +1,11 @@
-var database = require('./database');
-var email = require('./email');
-var authenticate = require('./authenticate');
+var config = require("./config");
+var database = require("./database");
+var email = require("./email");
+var authenticate = require("./authenticate");
+
 var uuid = require("uuid");
+var dataurl = require("dataurl");
+var fs = require("fs");
 
 module.exports = (function(){
 
@@ -127,18 +131,49 @@ module.exports = (function(){
 
         if(!post.content) return res.json({succes: false, message: "no content"});
 
-        authenticate.verify(req, function(auth){
-            if(!auth.succes) return res.json({succes: false, message: "verification failed"});
-            post.owner = auth.decoded.id;
-            //database
-            database.addAddition({
+        function postToDatabase(addition){
+            authenticate.verify(req, function(auth){
+                if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+                post.owner = auth.decoded.id;
+                //database
+                database.addAddition(addition, function(doc){
+                    if(!doc.succes) return res.json({succes: false, message: "comment failed."});
+                    res.json({succes: true, data: doc.data});
+                });
+            });
+        }
+
+        //if the post is an image
+        if(post.category === "image") {
+            if(!post.content.image) return res.json({succes: false, message: "no image"});
+            var dataUrl = post.content.image;
+            var image = dataurl.parse(dataUrl);
+            if(image.mimetype !== "image/jpeg") return res.json({succes: false, message: "not a jpeg image"});
+
+            var imageId = uuid.v4();
+            var fileUrl = config.imagePath+"/"+imageId+".jpg";
+
+            fs.writeFile(fileUrl, image.data, function (err) {
+                if (err) return console.log(err);
+                console.log('saved file '+imageId);
+                post.content = {
+                    src: imageId+".jpg",
+                    description: post.content.description
+                };
+
+                postToDatabase({
+                    id: req.params.id,
+                    addition: post
+                });
+            });
+        } else {
+            postToDatabase({
                 id: req.params.id,
                 addition: post,
-            }, function(doc){
-                if(!doc.succes) return res.json({succes: false, message: "comment failed."});
-                res.json({succes: true, data: doc.data});
             });
-        });
+        }
+
+
     }
 
     function postIdeaComment(req, res){
@@ -174,7 +209,7 @@ module.exports = (function(){
         getIdeas: getIdeas,
         getIdea: getIdea,
         postIdea: postIdea,
-        
+
         postIdeaVote: postIdeaVote,
         postIdeaAddition: postIdeaAddition,
         postIdeaComment: postIdeaComment
