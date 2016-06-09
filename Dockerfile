@@ -1,10 +1,9 @@
 FROM node:argon
 
 #Environment Variables
-ENV DATABASE_URI "mongodb://localhost/ideagarden"
-ENV DATABASE_USER ""
-ENV DATABASE_PASS ""
-ENV HASH_SECRET "shhhhh"
+ENV DATABASE_URI mongodb://localhost/ideagarden
+ENV HASH_SECRET shhhhh
+ENV DEFAULT_EMAIL info@ideagarden.local
 
 # Create app directory
 RUN mkdir -p /ideaGarden
@@ -21,6 +20,8 @@ RUN npm install
 RUN ./node_modules/.bin/gulp build
 RUN ./node_modules/.bin/gulp install_npm
 COPY config_docker.js /ideaGarden/build/config.js
+
+VOLUME /ideaGarden/build/imageData
 
 #Image configuration
 ADD start.sh /start.sh

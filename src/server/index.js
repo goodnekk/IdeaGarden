@@ -7,10 +7,10 @@ var config = require('./config');
 var app = express();
 
 //serve client files
-app.use(express.static(__dirname+ '/public'));
+app.use(express.static(__dirname + '/public'));
 
 //serve image files
-app.use('/images', express.static(config.imagePath));
+app.use('/images', express.static(__dirname + '/imageData'));
 
 //parse JSON posts
 app.use(bodyParser.json({limit: '1000kb'}));
