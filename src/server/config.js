@@ -7,8 +7,7 @@ module.exports = {
         }
     },
     email:{
-        senderAdress: "info@ideeënvijver.nl"
+        senderAdress: "info@ideeenvijver.nl"
     },
-    imagePath: "./build/imageData",
     secret: "shhhhh"
 };

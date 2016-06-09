@@ -38,8 +38,9 @@ gulp.task('develop', function() {
 /* Node.js */
 //run node, if it's already running
 gulp.task('run', function() {
+    process.chdir(dirs.serverbuild);
     if (node) node.kill();
-    node = spawn('node', [dirs.serverbuild+'/index.js'], {stdio: 'inherit'});
+    node = spawn('node', [ 'index.js'], {stdio: 'inherit'});
     node.on('close', function (code) {
         if (code === 8) {
             gulp.log('Error detected, waiting for changes...');
