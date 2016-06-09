@@ -21,7 +21,7 @@ var QuestionPage = {
                         ])
                     ]),
                     m("div", {class: "ui col-12"}, [
-                        m("div", {class: "ui card color footer"}, [
+                        m("div", {class: "ui card color"}, [
                             m("div", {class: "centerimage"},[
                                 m("p", [
                                     "Eindhoven nodigt je uit om ",
@@ -41,12 +41,27 @@ var QuestionPage = {
                         ])
                     ]),
                     m("div", {class: "ui col-12"}, [
+                        m("div", {class: "ui card color"},[
+
+                            m("p", [
+                                m("h2","HOE?"),
+                                "Een nieuw vervoersconcept? De looproute spannender maken? Andere ideeën? Doe Mee Met Jouw Idee! Je kunt ook de ideeën van anderen bekijken, aanvullen & stemmen op de ideeën die jou het meest aanspreken."
+                            ]),
+                            m("p", [
+                                m("h2","WAAROM?"),
+                                "Strijp-s en het centrum van Eindhoven zijn nu twee gescheiden werelden. Je loopt niet voor je lol van het centrum naar Strijp-s of andersom. Dan pak je de trein of de bus of je gaat rechtstreeks naar huis. Hoe mooi zou het zijn als mensen die Strijp-s voor een evenement bezoeken, ook worden uitgenodigd de rest van Eindhoven te verkennen? Hoe mooi zou het zijn als winkelend publiek in het centrum ook even een hapje gaat eten op Strijp-s?"
+                            ]),
+                            m("p", "Bezoekers zien meer, inwoners genieten meer en studenten ontdekken meer als we beide gebieden op een leuke manier met elkaar verbinden. Bovendien kunnen ondernemers profiteren van meer traffic.")
+                        ])
+                    ]),
+                    m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card colorless footerimage"}, [
                             m("div", {class: "centerimage"},[
                                 m("img", {src: "static/bottom2.png"})
                             ])
                         ]),
                         m("div", {class: "ui card color footer"}, [
+                            m("div", "Ideeënvijver is een initiatief van de Gemeente Eindhoven."),
                             m("img", {src: "static/eindhoven.png"})
                         ])
                     ])
