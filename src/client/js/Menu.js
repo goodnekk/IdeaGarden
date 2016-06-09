@@ -20,7 +20,7 @@ var Menu = {
     view: function(ctrl, data) {
         return m("nav", {class: "ui menu"}, [
             m.component(LoginPopup),
-            m("img", {src: "static/logo.png", class: "ui menuelement"}),
+            m("img", {src: "static/fish logo.png", class: "ui menuelement"}),
             m("h3", {class: "ui menuelement"}, "Ideeën Vijver"),
             m("a", {class: "ui menuelement"}, "Uitdaging"),
             m("a", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeën"),

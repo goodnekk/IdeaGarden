@@ -134,7 +134,17 @@ module.exports = (function(){
 
     function voteIdea(vote, callback) {
         //Undo votes
+
         if(vote.value === 1){
+            Idea.update(
+                {
+                    "_id": vote.id
+                },
+                {
+
+                }
+            );
+            /*
             Idea.update(
                 {"_id": vote.id},
                 {$addToSet: {
@@ -146,7 +156,9 @@ module.exports = (function(){
                     getIdeas(vote.id, callback);
                 }
             );
+            */
         } else if(vote.value === -1){
+            /*
             Idea.update(
                 {"_id": vote.id},
                 {$addToSet: {
@@ -158,6 +170,7 @@ module.exports = (function(){
                     getIdeas(vote.id, callback);
                 }
             );
+            */
         } else {
             return callback({succes: false});
         }
