@@ -9,7 +9,7 @@ var QuestionPage = {
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card color header"}, [
                             m("div", {class: "title"},[
-                                m("img", {src: "static/full logo.png"}),
+                                m("img", {src: "static/biglogo.png"}),
                             ])
                         ])
                     ]),
@@ -23,7 +23,7 @@ var QuestionPage = {
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card color"}, [
                             m("div", {class: "centerimage"},[
-                                m("p", "De Ideeën vijver is een initiatief van de gemeente Eindhoven om iedereen te betrekken bij vraagstukken."),
+                                m("p", "De Ideeënvijver is een initiatief van de gemeente Eindhoven om iedereen te betrekken bij vraagstukken."),
                                 m("img", {src: "static/route.png"})
                             ])
                         ])

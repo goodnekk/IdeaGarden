@@ -21,7 +21,7 @@ var Menu = {
         return m("nav", {class: "ui menu"}, [
             m.component(LoginPopup),
             m("img", {src: "static/fish logo.png", class: "ui menuelement"}),
-            m("h3", {class: "ui menuelement"}, "Ideeën Vijver"),
+            m("h3", {class: "ui menuelement"}, "Ideeënvijver"),
             m("a", {class: "ui menuelement"}, "Uitdaging"),
             m("a", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeën"),
             (function(){
