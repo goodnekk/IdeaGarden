@@ -38,6 +38,7 @@ gulp.task('develop', function() {
 /* Node.js */
 //run node, if it's already running
 gulp.task('run', function() {
+
     process.chdir(dirs.serverbuild);
     if (node) node.kill();
     node = spawn('node', [ 'index.js'], {stdio: 'inherit'});
@@ -46,6 +47,7 @@ gulp.task('run', function() {
             gulp.log('Error detected, waiting for changes...');
         }
     });
+    process.chdir(__dirname);
 });
 
 //kill node on exit
