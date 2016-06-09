@@ -23,8 +23,15 @@ var QuestionPage = {
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card color"}, [
                             m("div", {class: "centerimage"},[
-                                m("p", "De Ideeën vijver is een initiatief van de gemeente Eindhoven om iedereen te betrekken bij vraagstukken."),
-                                m("img", {src: "static/route.png"})
+                                m("p", [
+                                    "Eindhoven nodigt je uit om ",
+                                    m("em", "jouw stad"),
+                                    " mooier, leuker, chiller en aantrekkelijker te maken!"
+                                ]),
+                                m("p", "Heel de maand juli kun je reageren op de vraag:"),
+
+                                m("img", {src: "static/route.png"}),
+                                m("h1", "Hoe zou jij het Centrum met Strijp-s verbinden?"),
                             ])
                         ])
                     ]),
