@@ -34,10 +34,8 @@ var QuestionPage = {
                                 m("h1", "Hoe zou jij het Centrum met Strijp-s verbinden?"),
                             ])
                         ]),
-                        m("div", {class: "ui videoFrame"},[
-                            m("div", {class: "videoWrapper"},[
-                                m("iframe", {src:"https://www.youtube.com/embed/hseiRm-JzXg?showinfo=0", frameborder:"0"})
-                            ])
+                        m("div", {class: "videoWrapper"},[
+                            m("iframe", {src:"https://www.youtube.com/embed/hseiRm-JzXg?showinfo=0", frameborder:"0"})
                         ])
                     ]),
                     m("div", {class: "ui col-12"}, [
@@ -61,8 +59,13 @@ var QuestionPage = {
                             ])
                         ]),
                         m("div", {class: "ui card color footer"}, [
-                            m("div", "Ideeënvijver is een initiatief van de Gemeente Eindhoven."),
-                            m("img", {src: "static/eindhoven.png"})
+                            m("div", {class: "left"},
+                                m("div","Ideeënvijver is een initiatief van de Gemeente Eindhoven."),
+                                m("div", "Ideeënvijver is ontwikkeld door Code 4 NL")
+                            ),
+                            m("div", {class: "right"},
+                                m("img", {src: "static/eindhoven.png"})
+                            )
                         ])
                     ])
                 ])
