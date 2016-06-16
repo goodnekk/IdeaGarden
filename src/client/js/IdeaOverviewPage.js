@@ -8,14 +8,24 @@ var IdeaOverviewPage = {
             m.component(Menu),
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
-                    m("div", {class: "ui col-3"}, [
-                        m("div", {class: "ui card"}, "hello this is a card"),
-                    ]),
+                    m("div", {class: "ui col-3"}, m.component(QuestionCard)),
                     m("div", {class: "ui col-9"}, m.component(SubmitCard)),
                 ]),
 
                 m.component(IdeaGrid)
             ])
+        ]);
+    }
+};
+
+var QuestionCard = {
+    controller: function(){
+
+    },
+    view: function(){
+        return m("div", {class: "ui card"}, [
+            m("img", {class: "ui fit", src: "static/route.png"}),
+            m("h3", "Hoe zou jij het Centrum met Strijp-s verbinden?"),
         ]);
     }
 };
@@ -74,10 +84,15 @@ var IdeaCard = {
     },
     view: function(ctrl, data){
         ctrl.id = data._id;
+        var image = data.additions+1;
+        if(image > 4) {
+            image = 4;
+        }
+
         return m("div", {class: "ui card ideacard"}, [
             m("div", {class: "top"},[
                 m("div", {class: "status"}, [
-                    m("img", {src:"static/stage2.png"})
+                    m("img", {src:"static/stage"+image+".png"})
                 ]),
                 m("div", {class: "info"}, [
                     m("h3",{class: "ui", onclick: ctrl.open.bind(ctrl)}, data.title),

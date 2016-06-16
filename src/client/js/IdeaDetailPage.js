@@ -14,15 +14,42 @@ var IdeaDetailPage = {
             m.component(Menu),
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
-                    m("div", {class: "ui col-3"}, [
-                        m("div", {class: "ui card"}, "hello this is a card"),
+                    m("div", {class: "ui col-2"}, [
+                        m.component(IdeaData, idea),
                     ]),
-                    m("div", {class: "ui col-7"}, [
+                    m("div", {class: "ui col-8"}, [
                         m.component(IdeaText, idea),
                         m.component(DoAddition),
                         m.component(AdditionOverview, idea.additions),
                     ])
                 ]),
+            ])
+        ]);
+    }
+};
+
+var IdeaData = {
+    controller: function(idea){
+        this.onvote = function(value){
+            Model.voteIdeaOverview(idea._id, value);
+        };
+    },
+    view: function(ctrl, idea) {
+        var image = idea.additions.length+1;
+        if(image > 4) {
+            image = 4;
+        }
+
+        return m("div", {class: "ui card stats"}, [
+            m("img", {src:"static/stage"+image+".png"}),
+            m.component(VoteButtons, idea.yourvote, ctrl.onvote.bind(ctrl)),
+            m("span", {class: "metric"}, [
+                m("span", {class:"number"}, idea.votecount),
+                m("span", {class:"label"}, "kudos")
+            ]),
+            m("span", {class: "metric"}, [
+                m("span", {class:"number"}, idea.additions.length),
+                m("span", {class:"label"}, "aanvullingen")
             ])
         ]);
     }
@@ -189,7 +216,7 @@ var ReactionBar = {
         view: function(ctrl, index){
             return m("div",[
                 m("div", {class:"reactionbar"}, [
-                    m.component(VoteButtons),
+                    //m.component(VoteButtons),
                     m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
                         m("img", {src: "static/comment.png"}),
                         m("span", "comment")

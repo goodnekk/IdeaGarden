@@ -1,9 +1,20 @@
 .ui.menu {
-    background-color: #FFFFFF;
-    color: #212121;
+    background-color: #9DD2D7;
+    color: #424242;
     border: 0px;
+}
+.ui.menu img {
+    padding-right: 0px;
 }
 
 .ui.menu h3 {
-    font-family: "Hind", sans-serif;
+    padding-left: 0px;
+    font-family: @font;
+    font-size: 14pt;
+}
+
+@media only screen and (max-width: 500px) {
+    .ui.menuelement.option {
+        display: none;
+    }
 }

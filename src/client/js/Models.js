@@ -50,12 +50,16 @@ var Model = (function(){
         }
     }
 
-
     var overview = m.prop({});
     function getOverview(){
         m.request({
             method: "GET",
             url: "/api/ideas"
+        }).then(function(o){
+            return o.map(function(i){
+                i.additions = i.additions.length;
+                return i;
+            });
         }).then(overview);
         return overview;
     }

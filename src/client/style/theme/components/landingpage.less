@@ -1,18 +1,12 @@
-p {
+.card.color p {
     font-size: 16pt;
     max-width: 500px;
     margin: 0 auto;
-    font-family: "Hind";
     padding-top: 50px;
 }
 
 em {
     font-style: italic;
-}
-
-h1, h2 {
-    font-family: "Amatic SC";
-    margin-bottom: 20px;
 }
 
 .videoWrapper {
@@ -30,20 +24,18 @@ h1, h2 {
 	height: 100%;
 }
 
-.card {
-    margin: 0px;
-}
-
 .card.color {
     background-color: #9DD2D7;
     color: #424242;
     margin-bottom: 0px;
     padding-bottom: 140px;
+    margin: 0px;
 }
 
 .card.colorless {
     background-color: transparent;
     color: #424242;
+    margin: 0px;
 }
 
 .card.header {
@@ -102,7 +94,7 @@ h1, h2 {
 }
 
 @media only screen and (max-width: 500px) {
-    img {
+    .card img {
         width: 100%;
     }
 }

@@ -22,8 +22,8 @@ var Menu = {
             m.component(LoginPopup),
             m("img", {src: "static/fish logo.png", class: "ui menuelement"}),
             m("h3", {class: "ui menuelement"}, "Ideeënvijver"),
-            m("a", {class: "ui menuelement"}, "Uitdaging"),
-            m("a", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeën"),
+            m("a", {class: "ui menuelement option"}, "Uitdaging"),
+            m("a", {class: "ui menuelement option", onclick: ctrl.ideas}, "Ideeën"),
             (function(){
                 if(ctrl.token().succes) {
                     return m("a", {class: "ui menuelement right", onclick: ctrl.dashboardClick.bind(ctrl)}, ctrl.token().email);
