@@ -3,7 +3,7 @@ var Model = (function(){
 
     var token = m.prop({succes: false});
     //load token from session
-    if(typeof(Storage) !== "undefined") {
+    if(typeof(localStorage) !== "undefined") {
         var t = localStorage.getItem("token");
         if(t) {
             try{
@@ -22,7 +22,7 @@ var Model = (function(){
             url: "/api/login",
             data: user
         }).then(function(t){
-            if(typeof(Storage) !== "undefined") {
+            if(typeof(localStorage) !== "undefined") {
                 localStorage.setItem("token", JSON.stringify(t));
             }
             return t;
