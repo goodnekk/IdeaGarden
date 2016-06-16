@@ -4,16 +4,15 @@ var Model = (function(){
     var token = m.prop({succes: false});
     //load token from session
     if(typeof(localStorage) !== "undefined") {
-        var t = localStorage.getItem("token");
-        if(t) {
-            try{
+        try{
+            var t = localStorage.getItem("token");
+            if(t) {
                 t = JSON.parse(t);
                 token(t);
-            } catch(e) {
-                console.log(e);
             }
+        } catch(e) {
+            console.log(e);
         }
-
     }
 
     function login(user, callback) {
@@ -23,7 +22,11 @@ var Model = (function(){
             data: user
         }).then(function(t){
             if(typeof(localStorage) !== "undefined") {
-                localStorage.setItem("token", JSON.stringify(t));
+                try{
+                    localStorage.setItem("token", JSON.stringify(t));
+                } catch(e) {
+                    console.log(e);
+                }
             }
             return t;
         }).then(token).then(callback);
