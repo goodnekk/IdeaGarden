@@ -50,7 +50,7 @@ var SubmitCard = {
             m("input", {class: "ui", name: "title", placeholder: "Geef je idee een titel..."}),
             m("textarea", {class: "ui", name: "summary", placeholder: "Omschrijf je idee..."}),
             m("input", {class: "ui", name: "email", placeholder: "Email adres..."}),
-            m("button", {type:"submit", class: "ui"}, "submit")
+            m("button", {type:"submit", class: "ui"}, "Verstuur")
         ]);
     }
 };

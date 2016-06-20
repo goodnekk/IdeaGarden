@@ -2,7 +2,9 @@
     background-color: #9DD2D7;
     color: #424242;
     border: 0px;
+    display: block;
 }
+
 .ui.menu img {
     padding-right: 0px;
 }
@@ -13,8 +15,35 @@
     font-size: 14pt;
 }
 
+.ui.menu .hamburger {
+    display: none;
+}
+
 @media only screen and (max-width: 500px) {
-    .ui.menuelement.option {
+    .ui.menuelement.option, .ui.menuelement.right  {
+        width: 100%;
+        background-color: #9DD2D7;
+        display: block;
+        clear: both;
+        float: left;
+        border-top: 1px solid #8DC2C7;
+    }
+
+    .ui.menuelement.fold {
         display: none;
+    }
+
+    .ui.menuelement.unfold {
+        display: inline-block;
+    }
+
+    nav {
+        width: 100%;
+        background-color: white;
+    }
+
+    .ui.menu .hamburger {
+        float: right;
+        display: inline-block;
     }
 }

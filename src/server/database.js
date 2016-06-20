@@ -43,13 +43,19 @@ var IdeaSchema = new mongoose.Schema({
 IdeaSchema.plugin(autopopulate);
 IdeaSchema.methods.getPublic = function(requestIp){
     //get user votes
-    var yourvote = false;
+    var yourvote = 0;
 
-    var allvotes = this.upvotes.concat(this.downvotes);
-    var allreadyVoted = allvotes.find(function(ip){
+    if (this.upvotes.find(function(ip){
         return ip === requestIp;
-    });
-    if(allreadyVoted) yourvote = true;
+    })) {
+        yourvote = 1;
+    }
+
+    if (this.downvotes.find(function(ip){
+        return ip === requestIp;
+    })) {
+        yourvote = -1;
+    }
 
     var votecount = this.upvotes.length-this.downvotes.length;
 
@@ -136,12 +142,21 @@ module.exports = (function(){
         //Undo votes
 
         if(vote.value === 1){
-            Idea.update(
+            Idea.findOneAndUpdate(
                 {
-                    "_id": vote.id
+                    "_id": vote.id,
+                    "upvotes": {"$ne": vote.ip}
                 },
                 {
-
+                    "$push": {"upvotes": vote.ip},
+                    "$pull": {"downvotes": vote.ip}
+                },
+                {
+                    upsert: true
+                },
+                function(err, data){
+                    if (err) return callback({succes: false});
+                    getIdeas(vote.id, callback);
                 }
             );
             /*
@@ -158,6 +173,23 @@ module.exports = (function(){
             );
             */
         } else if(vote.value === -1){
+            Idea.findOneAndUpdate(
+                {
+                    "_id": vote.id,
+                    "downvotes": {"$ne": vote.ip}
+                },
+                {
+                    "$push": {"downvotes": vote.ip},
+                    "$pull": {"upvotes": vote.ip}
+                },
+                {
+                    upsert: true
+                },
+                function(err, data){
+                    if (err) return callback({succes: false});
+                    getIdeas(vote.id, callback);
+                }
+            );
             /*
             Idea.update(
                 {"_id": vote.id},

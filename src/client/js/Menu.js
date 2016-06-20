@@ -16,20 +16,33 @@ var Menu = {
         this.dashboardClick = function(){
             m.route("/dashboard");
         };
+
+        this.fold = "fold";
+        this.mobileSwitch = function(){
+            if(this.fold == "fold"){
+                this.fold = "unfold";
+            } else {
+                this.fold = "fold";
+            }
+        };
     },
     view: function(ctrl, data) {
-        return m("nav", {class: "ui menu"}, [
+        return m("div", {class: "ui menu"}, [
             m.component(LoginPopup),
             m("img", {src: "static/fish logo.png", class: "ui menuelement"}),
-            m("h3", {class: "ui menuelement"}, "Ideeënvijver"),
-            m("a", {class: "ui menuelement option"}, "Uitdaging"),
-            m("a", {class: "ui menuelement option", onclick: ctrl.ideas}, "Ideeën"),
-            (function(){
-                if(ctrl.token().succes) {
-                    return m("a", {class: "ui menuelement right", onclick: ctrl.dashboardClick.bind(ctrl)}, ctrl.token().email);
-                }
-                return m("a", {class: "ui menuelement right", onclick: ctrl.loginClick.bind(ctrl)}, "Login");
-            })()
-        ]);
-    }
+
+            m("nav", [
+                m("h3", {class: "ui menuelement"}, "Ideeënvijver"),
+                m("span", {class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
+                m("a", {class: "ui menuelement option "+ctrl.fold}, "Uitdaging"),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, "Ideeën"),
+                (function(){
+                    if(ctrl.token().succes) {
+                        return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, ctrl.token().email);
+                    }
+                    return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.loginClick.bind(ctrl)}, "Login");
+                })()
+                ])
+            ])
+        }
 };

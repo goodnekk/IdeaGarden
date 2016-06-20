@@ -117,23 +117,23 @@ var DoAddition = {
     },
     view: function(ctrl) {
         return m("div", {class: "ui card"}, [
-            m.component(SwitchBar, ["Make Addition", "Ask Question", "Add Image"], ctrl.onSwitch.bind(ctrl)),
+            m.component(SwitchBar, ["Aanvulling", "Vraag", "Afbeelding"], ctrl.onSwitch.bind(ctrl)),
             m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
                 function(){
                     if(ctrl.category === 0){
                         return m("textarea", {
-                            value: ctrl.addition,class: "ui", placeholder: "Write your Addition",
+                            value: ctrl.addition,class: "ui", placeholder: "Doe een aanvulling op dit idee",
                             onchange: ctrl.update.bind(ctrl)
                         });
                     } else if(ctrl.category === 1){
                         return m("textarea", {
-                            value: ctrl.addition, class: "ui", placeholder: "Ask your Question",
+                            value: ctrl.addition, class: "ui", placeholder: "Stel een vraag over dit idee",
                             onchange: ctrl.update.bind(ctrl)
                         });
                     } else {
                         return m("div",[
                             m("textarea", {
-                                value: ctrl.addition, class: "ui", placeholder: "Describe your image",
+                                value: ctrl.addition, class: "ui", placeholder: "Omschrijf de afbeelding",
                                 onchange: ctrl.update.bind(ctrl)
                             }),
                             m.component(MediaInput, ctrl.mediaDataUrl)
@@ -141,7 +141,7 @@ var DoAddition = {
 
                     }
                 }(),
-                m("button", {action: "submit", class: "ui"}, "submit")
+                m("button", {action: "submit", class: "ui"}, "Verstuur")
             ])
         ]);
     }
@@ -188,12 +188,17 @@ var PostSection = {
 
 var CommentSection = {
     view: function(ctrl, comments) {
-        return m("div", {class: "comment"}, comments.map(function(e){
-            return m("p", [
-                m("span", {class: "name"}, e.owner.name),
-                m("span", {class: "message"}, e.comment)
-            ]);
-        }));
+        if(comments.length > 0){
+            return m("div", {class: "comment"}, comments.map(function(e){
+                return m("p", [
+                    m("span", {class: "name"}, e.owner.name),
+                    m("span", {class: "message"}, e.comment)
+                ]);
+            }));
+        } else {
+            return m("");
+        }
+
     }
 };
 
@@ -219,7 +224,7 @@ var ReactionBar = {
                     //m.component(VoteButtons),
                     m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
                         m("img", {src: "static/comment.png"}),
-                        m("span", "comment")
+                        m("span", "Reageer")
                     ]),
                 ]),
                 m.component(AddComment, ctrl.show ,index, ctrl.close.bind(ctrl))
@@ -250,10 +255,10 @@ var AddComment = {
                     class: "addcomment", onsubmit: ctrl.comment.bind(ctrl),
                 }, [
                 m("input", {
-                    class: "ui", name: "comment", placeholder: "Write your comment...",
+                    class: "ui", name: "comment", placeholder: "Uw reactie...",
                     config: ctrl.focus.bind(ctrl)
                 }),
-                m("button", {type: "submit", class: "ui", value: "submit"}, "submit")
+                m("button", {type: "submit", class: "ui", value: "submit"}, "Verstuur")
             ]);
         } else {
             return m("",[]);

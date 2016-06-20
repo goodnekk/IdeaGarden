@@ -1,7 +1,7 @@
 var SwitchBar = {
     controller: function(options, callback){
         this.options = options;
-        this.colWidth = 12/options.length;
+        //this.colWidth = 12/options.length;
 
         this.selected = 0;
         this.switch = function(count){
@@ -12,7 +12,7 @@ var SwitchBar = {
     view: function(ctrl){
         return m("div", {class: "ui switchbar grid"}, [
             ctrl.options.map(function(o, count){
-                var Class = "ui switch col-"+ctrl.colWidth+" ";
+                var Class = "ui switch ";
                 if(count === ctrl.selected) {
                     Class += "selected";
                 }

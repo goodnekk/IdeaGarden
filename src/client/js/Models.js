@@ -4,7 +4,7 @@ var Model = (function(){
     var token = m.prop({succes: false});
     //load token from session
     if(typeof(localStorage) !== "undefined") {
-        try{
+        try {
             var t = localStorage.getItem("token");
             if(t) {
                 t = JSON.parse(t);
@@ -22,7 +22,7 @@ var Model = (function(){
             data: user
         }).then(function(t){
             if(typeof(localStorage) !== "undefined") {
-                try{
+                try {
                     localStorage.setItem("token", JSON.stringify(t));
                 } catch(e) {
                     console.log(e);
