@@ -9,6 +9,10 @@ var Menu = {
             m.route("/ideas");
         };
 
+        this.question = function(){
+            m.route("/");
+        };
+
         this.loginClick = function(){
             ViewModel.loginPopup(true);
         };
@@ -32,10 +36,11 @@ var Menu = {
             m("img", {src: "static/fish logo.png", class: "ui menuelement"}),
 
             m("nav", [
-                m("h3", {class: "ui menuelement"}, "Ideeënvijver"),
-                m("span", {class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
-                m("a", {class: "ui menuelement option "+ctrl.fold}, "Uitdaging"),
+                m("h3", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeënvijver"),
+                m("img", {src:"static/hamburger.png", class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.question}, "De Vraag"),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, "Ideeën"),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, "Uitleg"),
                 (function(){
                     if(ctrl.token().succes) {
                         return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, ctrl.token().email);

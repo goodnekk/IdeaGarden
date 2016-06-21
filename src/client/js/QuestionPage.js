@@ -1,5 +1,4 @@
 //=require Menu.js
-//=require Models.js
 
 var QuestionPage = {
     view: function() {
@@ -40,7 +39,13 @@ var QuestionPage = {
                     ]),
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card color"},[
-
+                            m("p",{class: "centerimage"},[
+                                m("h2", [
+                                    "Over ",
+                                    moment([2016, 6, 1]).diff(moment(),'days'),
+                                    " dagen beginnen we!"
+                                ]),
+                            ]),
                             m("p", [
                                 m("h2","HOE?"),
                                 "Een nieuw vervoersconcept? De looproute spannender maken? Andere ideeën? Doe Mee Met Jouw Idee! Je kunt ook de ideeën van anderen bekijken, aanvullen & stemmen op de ideeën die jou het meest aanspreken."

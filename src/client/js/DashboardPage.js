@@ -20,7 +20,7 @@ var DashboardPage = {
             m.component(Menu),
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
-                    m("div", {class: "ui col-6 center"}, [
+                    m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.logout.bind(ctrl)}, [
                                 m("button", {type:"submit", class: "ui"}, "Nu Uitloggen")
