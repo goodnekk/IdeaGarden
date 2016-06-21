@@ -13,6 +13,10 @@ var Menu = {
             m.route("/");
         };
 
+        this.explain = function(){
+            m.route("/explain");
+        };
+
         this.loginClick = function(){
             ViewModel.loginPopup(true);
         };
@@ -40,7 +44,7 @@ var Menu = {
                 m("img", {src:"static/hamburger.png", class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.question}, "De Vraag"),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, "Ideeën"),
-                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, "Uitleg"),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, "Uitleg"),
                 (function(){
                     if(ctrl.token().succes) {
                         return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, ctrl.token().email);
@@ -48,6 +52,6 @@ var Menu = {
                     return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.loginClick.bind(ctrl)}, "Login");
                 })()
                 ])
-            ])
+            ]);
         }
 };

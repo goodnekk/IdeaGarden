@@ -6,8 +6,15 @@ module.exports = {
             pass: ""
         }
     },
-    email:{
-        senderAdress: "info@ideeenvijver.nl"
+    email: {
+        "host": "",
+        "port": 25,
+        "auth": {
+            "user": "",
+            "pass": ""
+        },
+        "tls": {"rejectUnauthorized": false},
+        "debug":true
     },
-    secret: "shhhhh"
+    secret: "shhhhh",
 };

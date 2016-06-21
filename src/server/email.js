@@ -3,16 +3,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 
 var config = require('./config');
 
-var transporter = nodemailer.createTransport(smtpTransport({
-    "host": "mail.ideeenvijver.nl",
-    "port": 25,
-    "auth": {
-        "user": "info@ideeenvijver.nl",
-        "pass": "hfzd8#4qoqi"
-    },
-    "tls": {"rejectUnauthorized": false},
-    "debug":true
-}));
+var transporter = nodemailer.createTransport(smtpTransport(config.email));
 
 module.exports = (function(){
     function sendMail(receiver, subject, content){
