@@ -8,6 +8,7 @@ var ConfirmPage = {
             var elements = e.target.elements;
 
             Model.confirmUser({
+                email: elements.email.value,
                 name: elements.name.value,
                 password: elements.password.value
             });
@@ -22,6 +23,8 @@ var ConfirmPage = {
                     m("div", {class: "ui col-6 center"}, [
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.submit.bind(ctrl)}, [
+                                m("label", {class: "ui"}, "Email"),
+                                m("input", {class: "ui", name: "email", placeholder: ""}),
                                 m("label", {class: "ui"}, "Gebruikersnaam"),
                                 m("input", {class: "ui", name: "name", placeholder: ""}),
                                 m("label", {class: "ui"}, "Wachtwoord"),

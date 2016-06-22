@@ -89,7 +89,8 @@ var Model = (function(){
         m.request({
             method: "POST",
             url: "/api/idea",
-            data: data
+            data: data,
+            config: xhrConfig
         }).then(callback);
     }
 
@@ -130,7 +131,9 @@ var Model = (function(){
             data: user,
         }).then(function(answer){
             if(answer.succes){
-                m.route("/ideas");
+                login(user, function(){
+                    m.route("/ideas");
+                });
             } else {
                 m.route("/error");
             }

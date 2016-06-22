@@ -32,6 +32,7 @@ var LoginPopup = {
                     m("h2", "Login"),
                     m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
                     m("input", {class: "ui", name: "password", type: "password", placeholder: "wachtwoord",}),
+                    m("p", {class: "ui left register"}, "Ik heb nog geen account"),
                     m("button", {type:"submit", class: "ui"}, "login"),
                 ])
             ]);

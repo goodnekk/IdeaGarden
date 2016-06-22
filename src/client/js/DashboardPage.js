@@ -11,7 +11,7 @@ var DashboardPage = {
 
         this.logout = function(e){
             Model.logout();
-            m.route("/");
+            m.route("/ideas");
         };
     },
     view: function(ctrl) {

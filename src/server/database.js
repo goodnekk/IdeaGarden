@@ -73,7 +73,6 @@ IdeaSchema.methods.getPublic = function(requestIp){
 var User = mongoose.model('User', UserSchema);
 var Idea = mongoose.model('Idea', IdeaSchema);
 
-
 module.exports = (function(){
 
     function addUser(user, callback){
@@ -159,19 +158,7 @@ module.exports = (function(){
                     getIdeas(vote.id, callback);
                 }
             );
-            /*
-            Idea.update(
-                {"_id": vote.id},
-                {$addToSet: {
-                    "upvotes": vote.ip
-                }},
-                {upsert: true},
-                function(err, data){
-                    if (err) return callback({succes: false});
-                    getIdeas(vote.id, callback);
-                }
-            );
-            */
+
         } else if(vote.value === -1){
             Idea.findOneAndUpdate(
                 {
@@ -190,19 +177,6 @@ module.exports = (function(){
                     getIdeas(vote.id, callback);
                 }
             );
-            /*
-            Idea.update(
-                {"_id": vote.id},
-                {$addToSet: {
-                    "downvotes": vote.ip
-                }},
-                {upsert: true},
-                function(err, data){
-                    if (err) return callback({succes: false});
-                    getIdeas(vote.id, callback);
-                }
-            );
-            */
         } else {
             return callback({succes: false});
         }

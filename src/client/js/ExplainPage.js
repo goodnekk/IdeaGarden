@@ -37,9 +37,9 @@ var ExplainPage = {
                                     ])
                                 ]),
                                 m("div",{class:"stage"},[
-                                    m("img", {class: "img", src: "static/stage4_hi.png"}),
+                                    m("img", {class: "img king", src: "static/stage4_hi.png"}),
                                     m("div", {class: "explain"},[
-                                        m("h2", "De grote vette vis"),
+                                        m("h2", "De kei grote vis"),
                                         m("p", "Jouw idee staat in de top 5! Er is zo veel op gestemd dat jouw idee tot één van de vijf beste ideeën hoort.")
                                     ])
                                 ]),

@@ -19,9 +19,6 @@ var IdeaOverviewPage = {
 };
 
 var QuestionCard = {
-    controller: function(){
-
-    },
     view: function(){
         return m("div", {class: "ui card"}, [
             m("img", {class: "ui fit", src: "static/route.png"}),
@@ -39,7 +36,7 @@ var SubmitCard = {
             Model.addIdea({
                 title: elements.title.value,
                 summary: elements.summary.value,
-                email: elements.email.value
+                email: Model.token().succes ? "" : elements.email.value
             }, function(response){
                 if(response.succes) {
                     m.route("/thanks");
@@ -47,17 +44,20 @@ var SubmitCard = {
                     console.log(response);
                 }
             });
-
-
-
             return false;
+        };
+
+        this.emailisvisible = function(){
+            return Model.token().succes;
         };
     },
     view: function(ctrl) {
         return m("form", {class: "ui card", onsubmit: ctrl.submit.bind(ctrl)}, [
             m("input", {class: "ui", name: "title", placeholder: "Geef je idee een titel..."}),
             m("textarea", {class: "ui", name: "summary", placeholder: "Omschrijf je idee..."}),
-            m("input", {class: "ui", name: "email", placeholder: "Email adres..."}),
+            (function(){
+                if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: "Email adres..."});
+            })(),
             m("button", {type:"submit", class: "ui"}, "Verstuur")
         ]);
     }
