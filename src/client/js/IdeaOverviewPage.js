@@ -40,7 +40,15 @@ var SubmitCard = {
                 title: elements.title.value,
                 summary: elements.summary.value,
                 email: elements.email.value
+            }, function(response){
+                if(response.succes) {
+                    m.route("/thanks");
+                } else  {
+                    console.log(response);
+                }
             });
+
+
 
             return false;
         };

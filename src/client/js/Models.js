@@ -1,6 +1,5 @@
 var Model = (function(){
 
-
     var token = m.prop({succes: false});
     //load token from session
     if(typeof(localStorage) !== "undefined") {
@@ -38,14 +37,14 @@ var Model = (function(){
     }
 
     //add token to the header
-    function xhrConfig(xhr) {
+    function xhrConfig(xhr){
         if(token()){
             xhr.setRequestHeader("x-access-token", token().token);
         }
     }
 
     //validate requests
-    function validate(answer){
+    function validate(answer) {
         if(!answer.succes) {
             console.log(answer.message);
         } else {
@@ -54,7 +53,7 @@ var Model = (function(){
     }
 
     var overview = m.prop({});
-    function getOverview(){
+    function getOverview() {
         m.request({
             method: "GET",
             url: "/api/ideas"
@@ -67,8 +66,7 @@ var Model = (function(){
         return overview;
     }
 
-    function voteIdeaOverview(id, value){
-        console.log("vote:"+id+": "+value);
+    function voteIdeaOverview(id, value) {
         m.request({
             method: "GET",
             url: "/api/idea/"+id+"/vote/"+value
@@ -77,14 +75,22 @@ var Model = (function(){
         });
     }
 
-    function addIdea(data) {
+    function voteIdeaDetail(id, value) {
+        console.log("vote:"+id+": "+value);
+        m.request({
+            method: "GET",
+            url: "/api/idea/"+id+"/vote/"+value
+        }).then(function(){
+            getDetail();
+        });
+    }
+
+    function addIdea(data, callback) {
         m.request({
             method: "POST",
             url: "/api/idea",
             data: data
-        }).then(function(){
-            getOverview();
-        });
+        }).then(callback);
     }
 
     var detail = m.prop({});
@@ -123,9 +129,10 @@ var Model = (function(){
             url: "/api/confirm",
             data: user,
         }).then(function(answer){
-            console.log(answer);
             if(answer.succes){
-                route("/");
+                m.route("/ideas");
+            } else {
+                m.route("/error");
             }
         });
     }
@@ -136,6 +143,7 @@ var Model = (function(){
         token: token,
         getOverview: getOverview,
         voteIdeaOverview: voteIdeaOverview,
+        voteIdeaDetail: voteIdeaDetail,
         addIdea: addIdea,
 
         getDetail: getDetail,

@@ -131,10 +131,10 @@ module.exports = (function(){
         });
     }
 
-    function getIdea(id, callback){
+    function getIdea(id, requestIp, callback){
         Idea.findOne({_id : id}).exec(function(err, found){
             if(!found || err) return callback({succes: false});
-            callback({succes: true, data: found.getPublic()});
+            callback({succes: true, data: found.getPublic(requestIp)});
         });
     }
 

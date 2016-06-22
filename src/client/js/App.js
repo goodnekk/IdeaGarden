@@ -5,6 +5,9 @@
 //=require DashboardPage.js
 //=require ConfirmPage.js
 
+//=require ThanksPage.js
+//=require ErrorPage.js
+
 m.route.mode = "hash";
 
 m.route(document.getElementById("content"), "/", {
@@ -13,5 +16,7 @@ m.route(document.getElementById("content"), "/", {
     "/ideas": IdeaOverviewPage,
     "/idea/:id": IdeaDetailPage,
     "/dashboard": DashboardPage,
-    "/confirm/:secret": ConfirmPage
+    "/confirm/:secret": ConfirmPage,
+    "/thanks": ThanksPage,
+    "/error": ErrorPage,    
 });

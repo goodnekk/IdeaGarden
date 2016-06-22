@@ -31,7 +31,7 @@ var IdeaDetailPage = {
 var IdeaData = {
     controller: function(idea){
         this.onvote = function(value){
-            Model.voteIdeaOverview(idea._id, value);
+            Model.voteIdeaDetail(idea._id, value);
         };
     },
     view: function(ctrl, idea) {
@@ -39,7 +39,6 @@ var IdeaData = {
         if(image > 4) {
             image = 4;
         }
-
         return m("div", {class: "ui card stats"}, [
             m("img", {src:"static/stage"+image+".png"}),
             m.component(VoteButtons, idea.yourvote, ctrl.onvote.bind(ctrl)),
@@ -87,7 +86,6 @@ var DoAddition = {
             var category = "addition";
             if(this.category === 1) category = "question";
             if(this.category === 2) category = "image";
-
 
             if(!Model.token().succes){
                 ViewModel.loginPopup(true);
@@ -198,7 +196,6 @@ var CommentSection = {
         } else {
             return m("");
         }
-
     }
 };
 

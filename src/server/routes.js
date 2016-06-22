@@ -7,6 +7,7 @@ var uuid = require("uuid");
 var bcrypt = require("bcryptjs");
 var dataurl = require("dataurl");
 var fs = require("fs");
+var emailValidator = require("email-validator");
 
 module.exports = (function(){
 
@@ -71,7 +72,7 @@ module.exports = (function(){
     }
 
     function getIdea(req, res) {
-        database.getIdea(req.params.id, function(data){
+        database.getIdea(req.params.id, req.ip,function(data){
             if(!data.succes) return res.json({succes: false, message: "idea does not exist"});
             res.json(data);
         });
@@ -82,8 +83,8 @@ module.exports = (function(){
         if(!req.body) return res.json({succes: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.title)      return res.json({succes: false, message: "no title"});
-        if(!post.summary)   return res.json({succes: false, message: "no summary"});
+        if(!post.title) return res.json({succes: false, message: "no title"});
+        if(!post.summary) return res.json({succes: false, message: "no summary"});
 
         //authenticate
         authenticate.verify(req, function(auth){
@@ -101,6 +102,7 @@ module.exports = (function(){
 
             if(!auth.succes) {//create a new user
                 if(!post.email)   return res.json({succes: false, message: "no email"});
+                if(!emailValidator.validate(post.email))   return res.json({succes: false, message: "invalid email"});
 
                 var secret = uuid.v4(); //generate a secret
 
