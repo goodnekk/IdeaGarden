@@ -5,22 +5,27 @@ var config = require('./config');
 
 var transporter = nodemailer.createTransport(smtpTransport(config.email));
 
+var confirmTemplate = transporter.templateSender({
+    subject: 'Welkom Bij Ideeënvijver!',
+    text: 'Hallo! tof dat je mee doet! Klik hier om je accout te activeren: http://www.ideeenvijver.nl/#/confirm/{{ code }}',
+}, {
+    from: config.email.auth.user,
+});
+
 module.exports = (function(){
     function sendMail(receiver, subject, content){
-        //send mail with defined transport object
-        var mailOptions = {
-            from: config.email.senderAdress, //sender address
-            to: '"" <'+receiver+'>', //list of receivers
-            subject: subject, //Subject line
-            text: content, //plaintext body
-            //html: '<b>Hello world</b>' // html body
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-            if(error){
-                return console.log(error);
+        // create template based sender function
+        confirmTemplate({
+            to: receiver
+        }, {
+            code: content
+        }, function(err, info){
+            if(err){
+               console.log('Error');
+               console.log(err);
+            }else{
+                console.log('Welcome sent '+ info.response);
             }
-            console.log('Message sent: ' + info.response);
         });
     }
 
