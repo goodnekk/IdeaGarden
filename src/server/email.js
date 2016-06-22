@@ -10,7 +10,7 @@ module.exports = (function(){
         //send mail with defined transport object
         var mailOptions = {
             from: config.email.senderAdress, //sender address
-            to: receiver, //list of receivers
+            to: '"" <'+receiver+'>', //list of receivers
             subject: subject, //Subject line
             text: content, //plaintext body
             //html: '<b>Hello world</b>' // html body
