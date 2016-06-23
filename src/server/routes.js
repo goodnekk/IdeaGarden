@@ -64,6 +64,23 @@ module.exports = (function(){
         });
     }
 
+    function register(req, res){
+        //validate
+        if(!req.body) return res.json({succes: false, message: "empty post"});
+        var post = req.body;
+
+        if(!post.email)                             return res.json({succes: false, message: "no email"});
+        if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+
+        var secret = uuid.v4(); //generate a secret
+
+        database.addUser({email: post.email, secret: secret}, function(userDoc){
+            if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
+            res.json({succes: true});
+            email.sendMail(userDoc.user.email, "welkom bij IdeaGarden!", userDoc.user.secret);
+        });
+    }
+
     function getIdeas(req, res) {
         database.getIdeas(req.ip, function(data){
             res.json(data);
@@ -213,6 +230,7 @@ module.exports = (function(){
     return {
         login: login,
         confirmUser: confirmUser,
+        register: register,
 
         getIdeas: getIdeas,
         getIdea: getIdea,

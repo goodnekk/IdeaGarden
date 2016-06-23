@@ -47,7 +47,7 @@ var QuestionPage = {
                                 ]),
                                 m("p", [
                                     m("h2","HOE?"),
-                                    "Een nieuw vervoersconcept? De looproute spannender maken? Andere ideeën? Doe Mee Met Jouw Idee! Je kunt ook de ideeën van anderen bekijken, aanvullen & stemmen op de ideeën die jou het meest aanspreken."
+                                    "Een nieuw vervoersconcept? De reis spannender maken? Leuke ideeën? Doe Mee Met Jouw Idee! Je kunt ook de ideeën van anderen bekijken, aanvullen & stemmen op de ideeën die jou het meest aanspreken."
                                 ]),
                                 m("p", [
                                     m("h2","WAAROM?"),
@@ -66,7 +66,7 @@ var QuestionPage = {
                         m("div", {class: "ui card color footer"}, [
                             m("div", {class: "left"},
                                 m("div","Ideeënvijver is een initiatief van de Gemeente Eindhoven."),
-                                m("div", "Ideeënvijver is ontwikkeld door Code 4 NL")
+                                m("div", "Ideeënvijver is ontwikkeld door Code for NL.")
                             ),
                             m("div", {class: "right"},
                                 m("img", {src: "static/eindhoven.png"})

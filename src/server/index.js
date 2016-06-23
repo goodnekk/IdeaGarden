@@ -25,6 +25,7 @@ app.get('/api', function (req, res) {
 
 app.post('/api/login', routes.login); //login
 app.post('/api/confirm', routes.confirmUser);
+app.post('/api/register', routes.register); //login
 
 app.get('/api/question', function (req, res) {}); //get question data
 

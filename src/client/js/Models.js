@@ -85,6 +85,14 @@ var Model = (function(){
         });
     }
 
+    function registerAccount(user, callback){
+        m.request({
+            method: "POST",
+            url: "/api/register",
+            data: user
+        }).then(callback);
+    }
+
     function addIdea(data, callback) {
         m.request({
             method: "POST",
@@ -148,6 +156,7 @@ var Model = (function(){
         voteIdeaOverview: voteIdeaOverview,
         voteIdeaDetail: voteIdeaDetail,
         addIdea: addIdea,
+        registerAccount:registerAccount,
 
         getDetail: getDetail,
         addAddition: addAddition,
