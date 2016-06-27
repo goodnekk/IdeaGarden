@@ -1,14 +1,14 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
+var yml = require('yamljs');
+var fs = require('fs');
 
 var config = require('./config');
 
 var transporter = nodemailer.createTransport(smtpTransport(config.email));
 
-var confirmTemplate = transporter.templateSender({
-    subject: 'Welkom Bij Ideeënvijver!',
-    text: 'Hallo! tof dat je mee doet! Klik hier om je accout te activeren: http://www.ideeenvijver.nl/#/confirm/{{ code }}',
-}, {
+var confirmMail = yml.parse(fs.readFileSync(__dirname +"/emailtemplates/confirm.yml", "utf8"));
+var confirmTemplate = transporter.templateSender(confirmMail, {
     from: config.email.auth.user,
 });
 

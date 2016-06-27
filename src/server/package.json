@@ -20,6 +20,7 @@
     "nodemailer-smtp-transport": "~2.5.0",
     "email-validator": "~1.0.4",
     "dataurl": "~0.1.0",
+    "yamljs": "~0.2.8",
     "bcryptjs": "~2.3.0"
   }
 }
