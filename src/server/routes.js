@@ -24,6 +24,10 @@ module.exports = (function(){
                 return res.json({succes: false, message: "unknown user"});
             }
 
+            if(!doc.user.password){
+                return res.json({succes: false, message: "unknown user"});
+            }
+
             //check password
             var correct = bcrypt.compareSync(post.password, doc.user.password);
             if(!correct) return res.json({succes: false, message: "wrong password"});
@@ -111,8 +115,8 @@ module.exports = (function(){
                     votecount: 0,
                     owner: userId
 
-                }, function(data){
-                    res.json({succes: true, idea: data});
+                }, function(answ){
+                    res.json(answ);
                 });
             }
 

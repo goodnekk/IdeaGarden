@@ -10,6 +10,7 @@ var LoginPopup = {
             } else {
                 this.mode = "login";
             }
+            this.error = "";
         };
 
         this.show = ViewModel.loginPopup;
@@ -25,9 +26,13 @@ var LoginPopup = {
                 password: e.target.elements.password.value
             }, function(token){
                 if(!token.succes){
-                    return console.log(token);
+                    if(token.message === "no email"){ this.error = "geen email";}
+                    if(token.message === "no password"){ this.error = "geen wachtwoord";}
+                    if(token.message === "wrong password"){ this.error = "verkeerd wachtwoord";}
+                    if(token.message === "unknown user"){ this.error = "onbekend email adres";}
+                } else {
+                    this.hide();
                 }
-                this.hide();
             }.bind(this));
             return false;
         };
@@ -38,13 +43,16 @@ var LoginPopup = {
                 email: e.target.elements.email.value
             }, function(answer){
                 if(!answer.succes){
-                    return console.log(answer);
+                    if(answer.message === "no email"){ this.error = "geen email";}
+                    if(answer.message === "new user failed"){ this.error = "gebruiker bestaat al";}
+                } else {
+                    this.switchMode();
                 }
-                this.switchMode();
             }.bind(this));
             return false;
         };
 
+        this.error = "";
     },
     view: function(ctrl) {
         if(ctrl.show()){
@@ -55,8 +63,9 @@ var LoginPopup = {
                         m("h2", "Login"),
                         m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
                         m("input", {class: "ui", name: "password", type: "password", placeholder: "wachtwoord",}),
-                        m("p", {class: "ui left register", onclick: ctrl.switchMode.bind(ctrl)}, "Ik heb nog geen account"),
+                        m("p", {class: "ui errorhelp"}, ctrl.error),
                         m("button", {type:"submit", class: "ui"}, "login"),
+                        m("p", {class: "ui right register", onclick: ctrl.switchMode.bind(ctrl)}, "registeren"),
                     ])
                 ]);
             } else if(ctrl.mode ==="register") {
@@ -65,8 +74,9 @@ var LoginPopup = {
                     m("form", {class: "ui card popup", onsubmit: ctrl.register.bind(ctrl)}, [
                         m("h2", "Account aanmaken"),
                         m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
-                        m("p", {class: "ui left register", onclick: ctrl.switchMode.bind(ctrl)}, "Ik wil inloggen"),
+                        m("p", {class: "ui errorhelp"}, ctrl.error),
                         m("button", {type:"submit", class: "ui"}, "Registreren"),
+                        m("p", {class: "ui left register", onclick: ctrl.switchMode.bind(ctrl)}, "Ik wil inloggen"),
                     ])
                 ]);
             }

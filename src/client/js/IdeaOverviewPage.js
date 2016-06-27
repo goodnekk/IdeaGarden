@@ -41,15 +41,21 @@ var SubmitCard = {
                 if(response.succes) {
                     m.route("/thanks");
                 } else  {
-                    console.log(response);
+                    if(response.message === "no title"){ this.error = "Vergeet niet om je idee een titel te geven!";}
+                    if(response.message === "no summary"){ this.error = "Vergeet niet om je idee te omschrijven!";}
+                    if(response.message === "no email"){ this.error = "Vergeet om je email adres in te vullen!";}
+                    if(response.message === "duplicate"){ this.error = "Er is al een idee met deze titel!";}
+                    if(response.message === "new user failed"){ViewModel.loginPopup(true);}
                 }
-            });
+            }.bind(this));
             return false;
         };
 
         this.emailisvisible = function(){
             return Model.token().succes;
         };
+
+        this.error = "";
     },
     view: function(ctrl) {
         return m("form", {class: "ui card", onsubmit: ctrl.submit.bind(ctrl)}, [
@@ -58,6 +64,7 @@ var SubmitCard = {
             (function(){
                 if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: "Email adres..."});
             })(),
+            m("p", {class: "ui errorhelp"}, ctrl.error),
             m("button", {type:"submit", class: "ui"}, "Verstuur")
         ]);
     }
