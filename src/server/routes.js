@@ -181,7 +181,7 @@ module.exports = (function(){
 
             //save image file
             var imageId = uuid.v4();
-            var fileUrl = "./build/imageData/"+imageId+".jpg";
+            var fileUrl = __dirname + "/imageData/"+imageId+".jpg";
             fs.writeFile(fileUrl, image.data, function (err) {
                 if (err) return console.log(err);
                 console.log('saved file '+imageId);

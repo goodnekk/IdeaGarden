@@ -18,5 +18,5 @@ m.route(document.getElementById("content"), "/", {
     "/dashboard": DashboardPage,
     "/confirm/:secret": ConfirmPage,
     "/thanks": ThanksPage,
-    "/error": ErrorPage,    
+    "/error": ErrorPage,
 });

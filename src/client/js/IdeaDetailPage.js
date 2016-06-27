@@ -22,7 +22,8 @@ var IdeaDetailPage = {
                         m.component(IdeaText, idea),
                         m.component(DoAddition),
                         m.component(AdditionOverview, idea.additions),
-                    ])
+                    ]),
+                    m.component(Footer)
                 ]),
             ])
         ]);

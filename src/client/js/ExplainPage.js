@@ -73,7 +73,8 @@ var ExplainPage = {
                                 m("p", "In de maand juli kun je jouw idee indienen. Van 1 juli tot 26 juli kun je jouw ideeën posten, de ideeën van anderen bekijken, deze aanvullen en omhoog of omlaag stemmen. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!"),
                             ])
                         ])
-                    ])
+                    ]),
+                    m.component(Footer)
                 ])
             ])
         ]);

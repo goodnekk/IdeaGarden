@@ -13,7 +13,8 @@ var IdeaOverviewPage = {
                     m("div", {class: "ui col-9"}, m.component(SubmitCard)),
                 ]),
 
-                m.component(IdeaGrid)
+                m.component(IdeaGrid),
+                m.component(Footer)
             ])
         ]);
     }
