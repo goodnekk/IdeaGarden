@@ -155,8 +155,13 @@ var AdditionOverview = {
 
 var AdditionCard = {
     view: function(ctrl, addition, index) {
+        var message = "";
+        if(addition.category === "addition") {message = " heeft een aanvulling gedaan:";}
+        if(addition.category === "question") {message = " heeft een vraag gesteld:";}
+        if(addition.category === "image") {message = " heeft een afbeelding toegevoed:";}
+
         return m("div", {class: "ui card addition"}, [
-            m("p", {class: "label"}, addition.owner.name + " voegde een " + addition.category + " toe"),
+            m("p", {class: "label"}, addition.owner.name + message),
             m.component(PostSection, addition),
             m.component(CommentSection, addition.comments),
             m.component(ReactionBar, addition._id),

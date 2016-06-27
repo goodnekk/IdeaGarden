@@ -182,7 +182,7 @@ module.exports = (function(){
         }
     }
 
-    function addAddition(post, callback){
+    function addAddition(post, ip, callback){
         Idea.update(
             {"_id": post.id},
             {$push: {
@@ -191,12 +191,12 @@ module.exports = (function(){
             {upsert: true},
             function(err, data){
                 if (err) return callback({succes: false});
-                getIdea(post.id, callback);
+                getIdea(post.id, ip, callback);
             }
         );
     }
 
-    function addComment(post, callback){
+    function addComment(post, ip, callback){
         Idea.update(
             {"_id": post.id, "additions._id" : post.aid},
             {$push: {
@@ -205,7 +205,7 @@ module.exports = (function(){
             {upsert: true},
             function(err, data){
                 if (err) return callback({succes: false});
-                getIdea(post.id, callback);
+                getIdea(post.id, ip, callback);
             }
         );
     }

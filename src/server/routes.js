@@ -92,7 +92,7 @@ module.exports = (function(){
     }
 
     function getIdea(req, res) {
-        database.getIdea(req.params.id, req.ip,function(data){
+        database.getIdea(req.params.id, req.ip, function(data){
             if(!data.succes) return res.json({succes: false, message: "idea does not exist"});
             res.json(data);
         });
@@ -163,7 +163,7 @@ module.exports = (function(){
                 if(!auth.succes) return res.json({succes: false, message: "verification failed"});
                 post.owner = auth.decoded.id;
                 //database
-                database.addAddition(addition, function(doc){
+                database.addAddition(addition, req.ip, function(doc){
                     if(!doc.succes) return res.json({succes: false, message: "comment failed."});
                     res.json({succes: true, data: doc.data});
                 });
@@ -224,7 +224,9 @@ module.exports = (function(){
                 },
                 id: req.params.id,
                 aid: req.params.aid,
-            }, function(doc){
+            },
+            req.ip,
+            function(doc){
                 if(!doc.succes) return res.json({succes: false, message: "comment failed."});
                 res.json({succes: true, data: doc.data});
             });
