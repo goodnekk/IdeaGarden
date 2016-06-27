@@ -1,6 +1,7 @@
 //=require Menu.js
 //=require VoteButtons.js
 //=require Models.js
+//=require Badge.js
 
 var IdeaOverviewPage = {
     view: function() {
@@ -60,7 +61,7 @@ var SubmitCard = {
     view: function(ctrl) {
         return m("form", {class: "ui card", onsubmit: ctrl.submit.bind(ctrl)}, [
             m("input", {class: "ui", name: "title", placeholder: "Geef je idee een titel..."}),
-            m("textarea", {class: "ui", name: "summary", placeholder: "Omschrijf je idee..."}),
+            m("textarea", {class: "ui", name: "summary", placeholder: "Omschrijf kort je idee..."}),
             (function(){
                 if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: "Email adres..."});
             })(),
@@ -99,15 +100,10 @@ var IdeaCard = {
     },
     view: function(ctrl, data){
         ctrl.id = data._id;
-        var image = data.additions+1;
-        if(image > 4) {
-            image = 4;
-        }
-
         return m("div", {class: "ui card ideacard"}, [
             m("div", {class: "top"},[
                 m("div", {class: "status"}, [
-                    m("img", {src:"static/stage"+image+".png"})
+                    m.component(Badge, data.additions)
                 ]),
                 m("div", {class: "info"}, [
                     m("h3",{class: "ui", onclick: ctrl.open.bind(ctrl)}, data.title),

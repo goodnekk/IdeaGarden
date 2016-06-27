@@ -3,6 +3,7 @@
 //=require Models.js
 //=require SwitchBar.js
 //=require MediaInput.js
+//=require Badge.js
 
 var IdeaDetailPage = {
     controller: function(){
@@ -35,12 +36,8 @@ var IdeaData = {
         };
     },
     view: function(ctrl, idea) {
-        var image = idea.additions.length+1;
-        if(image > 4) {
-            image = 4;
-        }
         return m("div", {class: "ui card stats"}, [
-            m("img", {src:"static/stage"+image+".png"}),
+            m.component(Badge, idea.additions.length),
             m.component(VoteButtons, idea.yourvote, ctrl.onvote.bind(ctrl)),
             m("span", {class: "metric"}, [
                 m("span", {class:"number"}, idea.votecount),
@@ -57,6 +54,10 @@ var IdeaData = {
 var IdeaText = {
     view: function(ctrl, idea) {
         return m("div", {class: "ui card"}, [
+            (function(){
+                if(idea.owner.name) {return m("p", {class: "label"}, "Idee van: "+idea.owner.name);}
+            })(),
+
             m("h1", {class: "ui"}, idea.title),
             m("p", {class: ""}, idea.summary)
         ]);

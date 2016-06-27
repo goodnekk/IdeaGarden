@@ -111,7 +111,7 @@ module.exports = (function(){
         var ideaDoc = new Idea(idea);
         ideaDoc.save(function(err, data) {
             if(err) return callback({succes: false, message: "duplicate"});
-            if(callback) return callback({succes: false, idea:data.getPublic()});
+            if(callback) return callback({succes: true, idea:data.getPublic()});
         });
     }
 
