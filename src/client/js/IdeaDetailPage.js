@@ -185,7 +185,10 @@ var PostSection = {
         } else if (data.category === "image") {
             return m("div", [
                 m("p", {class: "description"}, data.content.description),
-                m("div", {style: "background-image: url('/images/"+data.content.src+"');", class: "image"})
+                //m("div", {style: "background-image: url('/images/"+data.content.src+"');", class: "image"})
+                m("div", {class: "image"},[
+                    m("img", {src: "/images/"+data.content.src})
+                ])
             ]);
         }
     }
