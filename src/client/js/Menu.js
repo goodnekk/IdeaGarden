@@ -47,7 +47,7 @@ var Menu = {
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, "Uitleg"),
                 (function(){
                     if(ctrl.token().succes) {
-                        return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, ctrl.token().email);
+                        return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, "Mijn Ideeën"); //ctrl.token().email
                     }
                     return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.loginClick.bind(ctrl)}, "Login");
                 })()

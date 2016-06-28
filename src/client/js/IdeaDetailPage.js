@@ -72,12 +72,14 @@ var IdeaText = {
             });
             Model.updateIdea({
                 _id: idea._id,
-                summary: elements.summary.value
+                summary: elements.summary.value,
+                content: elements.content.value
             });
             this.editmode = false;
         };
     },
     view: function(ctrl, idea) {
+        if(!idea.content) {idea.content="";}
         return m("div", {class: "ui card"}, [
             (function(){
                 if(idea.owner.name) {return m("p", {class: "label left"}, "Idee van: "+idea.owner.name);}
@@ -89,7 +91,21 @@ var IdeaText = {
                             if(ctrl.owner) return m("button", {class: "ui", onclick: ctrl.edit.bind(ctrl)},"Idee Bewerken");
                         })(),
                         m("h1", {class: "ui break"}, idea.title),
-                        m("p", {class: ""}, idea.summary)
+                        (function(){
+                            if(idea.content===""){
+                                if(ctrl.owner) {
+                                    return [
+                                        m("p", "Je hebt je idee nog niet uitgebreid omschreven..."),
+                                        m("button", {class: "ui middle", onclick: ctrl.edit.bind(ctrl)},"Idee nu omschrijven")
+                                    ];
+                                } else {
+                                    return m("p", {class: ""}, idea.summary);
+                                }
+                            } else {
+                                return m("p", {class: ""}, idea.content);
+                            }
+
+                        })()
                     ];
                 } else  {
                     return m("form", {onsubmit:ctrl.update.bind(ctrl)}, [
@@ -97,7 +113,7 @@ var IdeaText = {
                         m("p", {class: "label"}, "Korte samenvatting:"),
                         m("textarea", {name: "summary", maxlength: "150", class: "ui", placeholder: "Samenvatting van je idee...", value:idea.summary}),
                         m("p", {class: "label"}, "Gedetailleerde uitwerking:"),
-                        m("textarea", {class: "ui large", name: "content", placeholder: "Omschrijf je idee..."}),
+                        m("textarea", {class: "ui large", name: "content", placeholder: "Omschrijf je idee...", value: idea.content}),
                         m("button", {action: "submit", class: "ui"}, "Idee Opslaan")
                     ]);
                 }

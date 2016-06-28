@@ -22,6 +22,7 @@ var IdeaSchema = new mongoose.Schema({
     title: {type : String , unique : true},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: {select: 'name'}},
     summary: String,
+    content: String,
     upvotes: [String],
     downvotes: [String],
 
@@ -63,6 +64,7 @@ IdeaSchema.methods.getPublic = function(requestIp){
         _id: this._id,
         title: this.title,
         summary: this.summary,
+        content: this.content,
         additions: this.additions,
         votecount: votecount,
         owner: this.owner,
@@ -120,7 +122,10 @@ module.exports = (function(){
             "_id": idea.id,
             "owner": idea.owner
         },{
-            "$set" : { "summary": idea.summary }
+            "$set" : {
+                "summary": idea.summary,
+                "content": idea.content
+            }
         },function(err) {
             if(err) return callback({succes: false, message: "invalid"});
             getIdea(idea.id, ip, callback);

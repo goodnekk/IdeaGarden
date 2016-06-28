@@ -144,6 +144,7 @@ module.exports = (function(){
 
         if(!post._id) return res.json({succes: false, message: "no id"});
         if(!post.summary) return res.json({succes: false, message: "no summary"});
+        if(!post.content) return res.json({succes: false, message: "no content"});
 
         //authenticate
         authenticate.verify(req, function(auth){
@@ -153,7 +154,8 @@ module.exports = (function(){
             database.updateIdea({
                 id: post._id,
                 owner: auth.decoded.id,
-                summary: post.summary
+                summary: post.summary,
+                content: post.content
             },
             req.ip,
             function(doc){
