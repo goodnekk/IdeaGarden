@@ -115,6 +115,18 @@ module.exports = (function(){
         });
     }
 
+    function updateIdea(idea, ip, callback){
+        Idea.findOneAndUpdate({
+            "_id": idea.id,
+            "owner": idea.owner
+        },{
+            "$set" : { "summary": idea.summary }
+        },function(err) {
+            if(err) return callback({succes: false, message: "invalid"});
+            getIdea(idea.id, ip, callback);
+        });
+    }
+
     function getQuestion(){
         return {
             "title": "wat te doen?"
@@ -216,6 +228,7 @@ module.exports = (function(){
         confirmUser: confirmUser,
 
         addIdea: addIdea,
+        updateIdea: updateIdea,
 
         getQuestion: getQuestion,
         getIdeas: getIdeas,

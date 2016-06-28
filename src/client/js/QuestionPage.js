@@ -43,7 +43,7 @@ var QuestionPage = {
                             m("p",{class: "centerimage"},[
                                 m("h2", [
                                     "Over ",
-                                    moment([2016, 6, 1]).diff(moment(),'days'),
+                                    moment([2016, 6, 2]).diff(moment(),'days'),
                                     " dagen beginnen we!"
                                 ]),
                                 m("p", [

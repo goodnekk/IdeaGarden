@@ -137,15 +137,40 @@ module.exports = (function(){
         });
     }
 
+    function updateIdea(req, res){
+        //validate
+        if(!req.body) return res.json({succes: false, message: "empty post"});
+        var post = req.body;
+
+        if(!post._id) return res.json({succes: false, message: "no id"});
+        if(!post.summary) return res.json({succes: false, message: "no summary"});
+
+        //authenticate
+        authenticate.verify(req, function(auth){
+            if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+
+            //database
+            database.updateIdea({
+                id: post._id,
+                owner: auth.decoded.id,
+                summary: post.summary
+            },
+            req.ip,
+            function(doc){
+                if(!doc.succes) return res.json({succes: false, message: "update failed."});
+                res.json({succes: true, data: doc.data});
+            });
+        });
+    }
+
     function postIdeaVote(req, res) {
+        //validate
         var value;
         if(req.params.operation==="up"){ value = 1; }
         else if(req.params.operation==="down"){ value = -1; }
-        else {
-            res.json({error: "invalid vote"});
-            return;
-        }
+        else { return res.json({error: "invalid vote"}); }
 
+        //post
         database.voteIdea({id:req.params.id, value:value, ip: req.ip}, function(data){
             res.json(data);
         });
@@ -241,6 +266,7 @@ module.exports = (function(){
         getIdeas: getIdeas,
         getIdea: getIdea,
         postIdea: postIdea,
+        updateIdea: updateIdea,
 
         postIdeaVote: postIdeaVote,
         postIdeaAddition: postIdeaAddition,

@@ -33,6 +33,8 @@ app.get('/api/ideas', routes.getIdeas); //get all ideas
 app.get('/api/idea/:id', routes.getIdea); //get specific idea
 
 app.post('/api/idea', routes.postIdea); //post new idea
+app.post('/api/updateidea', routes.updateIdea); //post new idea
+
 app.get('/api/idea/:id/vote/:operation', routes.postIdeaVote); //vote on an idea
 app.post('/api/idea/:id/addition/', routes.postIdeaAddition); //make an addition to an idea
 app.post('/api/idea/:id/addition/:aid/comment', routes.postIdeaComment); //comment on an addition

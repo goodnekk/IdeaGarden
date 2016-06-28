@@ -148,6 +148,15 @@ var Model = (function(){
         });
     }
 
+    function updateIdea(idea){
+        m.request({
+            method: "POST",
+            url: "/api/updateIdea",
+            data: idea,
+            config: xhrConfig
+        }).then(validate).then(detail);
+    }
+
     return {
         login: login,
         logout: logout,
@@ -156,11 +165,12 @@ var Model = (function(){
         voteIdeaOverview: voteIdeaOverview,
         voteIdeaDetail: voteIdeaDetail,
         addIdea: addIdea,
+        updateIdea: updateIdea,
         registerAccount:registerAccount,
 
         getDetail: getDetail,
         addAddition: addAddition,
         addComment: addComment,
-        confirmUser: confirmUser
+        confirmUser: confirmUser,
     };
 })();
