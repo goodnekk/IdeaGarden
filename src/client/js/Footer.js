@@ -8,8 +8,8 @@ var Footer = {
             ]),
             m("div", {class: "ui card color footer"}, [
                 m("div", {class: "left"},
-                    m("div","Ideeënvijver is een initiatief van de Gemeente Eindhoven."),
-                    m("div", "Ideeënvijver is ontwikkeld door Code for NL.")
+                    m("div","Dit crowdsourcing platform is een initiatief van de gemeente Eindhoven,"),
+                    m("div", "en is als pilot ontwikkeld door Code for NL.")
                 ),
                 m("div", {class: "right"},
                     m("img", {src: "static/eindhoven.png"})
