@@ -145,21 +145,13 @@ var Model = (function(){
         } ).then(validate).then(detail);
     }
 
-    function confirmUser(user){
+    function confirmUser(user, callback){
         user.secret = m.route.param("secret");
         m.request({
             method: "POST",
             url: "/api/confirm",
             data: user,
-        }).then(function(answer){
-            if(answer.succes){
-                login(user, function(){
-                    m.route("/ideas");
-                });
-            } else {
-                m.route("/error");
-            }
-        });
+        }).then(callback);
     }
 
     function updateIdea(idea){
