@@ -72,7 +72,7 @@ var ShareButtons = {
 var IdeaText = {
     controller: function(idea){
         this.owner = false;
-        if(idea.owner.name !== undefined){
+        if(idea.owner.name){
             if(idea.owner.name === Model.token().name){
                 this.owner = true;
             }
