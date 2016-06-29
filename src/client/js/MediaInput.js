@@ -35,6 +35,7 @@ var MediaInput = {
         };
     },
     view: function(ctrl){
+        console.log(ctrl.dataUrl());
         return m("div", [
             function(){
                 if(ctrl.file() !== undefined){
