@@ -72,6 +72,20 @@ var ExplainPage = {
                                 m("p", "De mogelijkheid dat jouw idee werkelijkheid wordt! Als je wilt mag je hier zelf ook een rol in nemen en meewerken aan de totstandkoming van jouw idee. Je krijgt een officiële publicatie in Groot Eindhoven, een artikel op de website van Eindhoven en een publieksonthulling tijdens de Dutch Design Week. Bovendien is er €1000,- te winnen! €500,- voor de Indiener van hét winnende idee en €500,- voor de Beste Samenwerker."),
                                 m("p", "In de maand juli kun je jouw idee indienen. Van 1 juli tot 26 juli kun je jouw ideeën posten, de ideeën van anderen bekijken, deze aanvullen en omhoog of omlaag stemmen. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!"),
                             ])
+                        ]),
+                        m("div", {class: "ui card colorless"}, [
+                            m("p", {class: "centerimage"},[
+                                m("h1", "Crowdsourcing"),
+                                m("p", "Een goed plan begint altijd met een idee. Via crowdsourcing, waarbij kennis en ideeën van een grote groep mensen gebundeld kan worden, denken er ineens honderden mensen na over een vraagstuk in plaats van een paar specialisten. De kans op een innovatief en verrassend idee is hierdoor vele mate groter.")
+                            ])
+                        ]),
+                        m("div", {class: "ui card color"}, [
+                            m("p", {class: "centerimage"},[
+                                m("h1", "Regels"),
+                                m("p", "Posts met grof taalgebruik of schokkend beeldmateriaal worden weggehaald door de webmaster."),
+                                m("p", "Als je een idee indient, blijf je intellectueel eigenaar van het idee."),
+                                m("p", "Alles wat op Ideeënvijver wordt gedeeld valt onder de creative commons licentie Naamsvermelding-GelijkDelen 4.0 Internationaal. Dit betekent dat je al je rechten behoudt en anderen toestemming geeft om het werk te delen verspreiden en te gebruiken. Dit kan in elk medium en format voor elk doel, ook  voor commerciële doeleinden.")
+                            ])
                         ])
                     ]),
                     m.component(Footer)
