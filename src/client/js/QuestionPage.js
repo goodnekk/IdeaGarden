@@ -3,25 +3,33 @@
 
 var QuestionPage = {
     controller: function(){
+      this.momentcheck = moment([2016, 6, 2]).diff(moment(),'days');
       this.ideas = function(){
           m.route("/ideas");
       };
     },
-    view: function() {
+    view: function(ctrl) {
         checkButton = function(){
-          if(moment([2016, 6, 2]).diff(moment(),'days') <= 0){
+          if(ctrl.momentcheck <= 0){
             return m("button", {type:"submit", class: "ui no-float", onclick: ctrl.ideas}, m("h2","Bekijk de ideëen"));
           } else{
            return m("h2", [
              "Over ",
-             moment([2016, 6, 2]).diff(moment(),'days'),
+             ctrl.momentcheck,
              " dagen beginnen we!"
            ]);
           }
         };
         checkMenu = function(){
-          if(moment([2016, 6, 2]).diff(moment(),'days') <= 0){
+          if(ctrl.momentcheck <= 0){
             return m.component(Menu);
+          } else {
+            return "";
+          }
+        };
+        checkBanner = function(){
+          if(ctrl.momentcheck <= 0){
+            return "";
           } else {
             return m("div", {class: "ui col-12"}, [
               m("div", {class: "ui card color header"}, [
@@ -31,11 +39,13 @@ var QuestionPage = {
               ])
             ]);
           }
+
         };
         return m("div",[
+            checkMenu(),
             m("div", {class: "ui page"}, [
+              checkBanner(),
                 m("div", {class: "ui grid"}, [
-                    checkMenu(),
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card colorless"}, [
                             m("div", {class: "centerimage"},[
