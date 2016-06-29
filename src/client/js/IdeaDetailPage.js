@@ -127,9 +127,9 @@ var IdeaText = {
                 } else  {
                     return m("form", {onsubmit:ctrl.update.bind(ctrl)}, [
                         m("h1", {class: "ui break"}, idea.title),
-                        m("p", {class: "label"}, "Korte samenvatting:"),
+                        m("p", {class: "label"}, "Samenvatting van max. 150 tekens (je kunt dit later nog aanpassen)"),
                         m("textarea", {name: "summary", maxlength: "150", class: "ui", placeholder: "Samenvatting van je idee...", value:idea.summary}),
-                        m("p", {class: "label"}, "Gedetailleerde uitwerking:"),
+                        m("p", {class: "label"}, "Gedetailleerde omschrijving:"),
                         m("textarea", {class: "ui large", name: "content", placeholder: "Omschrijf je idee...", value: idea.content}),
                         m("button", {action: "submit", class: "ui"}, "Idee Opslaan")
                     ]);

@@ -26,7 +26,10 @@ module.exports = (function(){
       }
       console.log('Sending messages');
       transporter.sendMail({
-        from: config.email.auth.user,
+        from: {
+          name: 'Frederique van Ideëenvijver',
+          address: config.email.auth.user
+        },
         to: receiver,
         subject: subject,
         html: results.html,
