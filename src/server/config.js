@@ -17,5 +17,5 @@ module.exports = {
        debug:true
    },
     secret: "shhhhh",
-    port: 8181
+    port: 80
 };

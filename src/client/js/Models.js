@@ -14,6 +14,22 @@ var Model = (function(){
         }
     }
 
+    //add token to the header
+    function xhrConfig(xhr){
+        if(token()){
+            xhr.setRequestHeader("x-access-token", token().token);
+        }
+    }
+
+    //validate requests
+    function validate(answer) {
+        if(!answer.succes) {
+            console.log(answer.message);
+        } else {
+            return answer.data;
+        }
+    }
+
     function login(user, callback) {
         m.request({
             method: "POST",
@@ -34,22 +50,6 @@ var Model = (function(){
     function logout(callback){
         token({succes: false});
         localStorage.setItem("token", "");
-    }
-
-    //add token to the header
-    function xhrConfig(xhr){
-        if(token()){
-            xhr.setRequestHeader("x-access-token", token().token);
-        }
-    }
-
-    //validate requests
-    function validate(answer) {
-        if(!answer.succes) {
-            console.log(answer.message);
-        } else {
-            return answer.data;
-        }
     }
 
     var overview = m.prop({});

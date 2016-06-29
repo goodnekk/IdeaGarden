@@ -45,6 +45,7 @@ var MediaInput = {
                     ]);
                 } else {
                     return m("div", {class:"ui media-box"}, [
+                        m("p","Je kunt alleen .jpg bestanden uploaden"),
                         m("button", {onclick: ctrl.getFile.bind(ctrl)} ,"Selecteer Foto")
                     ]);
                 }
