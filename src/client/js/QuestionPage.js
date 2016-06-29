@@ -3,6 +3,17 @@
 
 var QuestionPage = {
     view: function() {
+        checkButton = function(){
+          if(moment([2016, 6, 2]).diff(moment(),'days') <= 0){
+            return m("button", {type:"submit", class: "ui"}, "Bekijk de ideëen");
+          } else{
+           return m("h2", [
+             "Over ",
+             moment([2016, 6, 2]).diff(moment(),'days'),
+             " dagen beginnen we!"
+           ]);
+          }
+        };
         return m("div",[
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
@@ -41,11 +52,7 @@ var QuestionPage = {
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card color"},[
                             m("p",{class: "centerimage"},[
-                                m("h2", [
-                                    "Over ",
-                                    moment([2016, 6, 2]).diff(moment(),'days'),
-                                    " dagen beginnen we!"
-                                ]),
+                                checkButton(),
                                 m("p", [
                                     m("h2","HOE?"),
                                     "Een nieuw vervoersconcept? De reis spannender maken? Leuke ideeën? Doe Mee Met Jouw Idee! Je kunt ook de ideeën van anderen bekijken, aanvullen & stemmen op de ideeën die jou het meest aanspreken."

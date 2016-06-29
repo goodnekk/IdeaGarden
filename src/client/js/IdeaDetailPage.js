@@ -133,6 +133,9 @@ var IdeaText = {
                         m("textarea", {name: "summary", maxlength: "150", class: "ui", placeholder: "Samenvatting van je idee...", value:idea.summary}),
                         m("p", {class: "label"}, "Gedetailleerde omschrijving:"),
                         m("textarea", {class: "ui large", name: "content", placeholder: "Omschrijf je idee...", value: idea.content}),
+                        m("input", {type:"checkbox", name: "checkbox", value: "value", id: "license_ok"}),
+                        m("label", {for: 'license_ok'},"Mijn idee mag worden ", m("a", {href:"https://creativecommons.org/licenses/by-sa/4.0/deed.nl"}, "gedeeld en bewerkt")),
+                        m("textarea", {class: "ui large", name: "content", placeholder: "Omschrijf je idee...", value: idea.content}),
                         m("button", {action: "submit", class: "ui"}, "Idee Opslaan")
                     ]);
                 }
