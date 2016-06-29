@@ -53,7 +53,7 @@ var Model = (function(){
     }
 
     var overview = m.prop({});
-    function getOverview() {
+    function getOverview(){
         m.request({
             method: "GET",
             url: "/api/ideas"
@@ -61,6 +61,18 @@ var Model = (function(){
             return o.map(function(i){
                 i.additions = i.additions.length;
                 return i;
+            });
+        }).then(overview);
+        return overview;
+    }
+
+    function getMyIdeas(){
+        m.request({
+            method: "GET",
+            url: "/api/ideas"
+        }).then(function(o){
+            return o.filter(function(i){
+                return i.owner.name === token().name;
             });
         }).then(overview);
         return overview;
@@ -162,6 +174,7 @@ var Model = (function(){
         logout: logout,
         token: token,
         getOverview: getOverview,
+        getMyIdeas: getMyIdeas,
         voteIdeaOverview: voteIdeaOverview,
         voteIdeaDetail: voteIdeaDetail,
         addIdea: addIdea,

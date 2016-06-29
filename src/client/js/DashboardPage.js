@@ -2,7 +2,6 @@
 
 var DashboardPage = {
     controller: function(){
-        this.idea = Model.getDetail();
         this.token = Model.token;
 
         this.submit = function(e){
@@ -15,12 +14,12 @@ var DashboardPage = {
         };
     },
     view: function(ctrl) {
-        var idea = ctrl.idea();
         return m("div", [
             m.component(Menu),
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
                     m("div", {class: "ui col-12"}, [
+                        m("h2", "Mijn profiel"),
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.logout.bind(ctrl)}, [
                                 m("button", {type:"submit", class: "ui"}, "Nu Uitloggen")
@@ -35,9 +34,26 @@ var DashboardPage = {
                                 m("button", {type:"submit", class: "ui"}, "wijzigingen opslaan")
                             ]),
                         ]),
+                        m("h2", "Mijn ideeën"),
+                        m.component(MyIdeasOverview),
                     ]),
+                    m.component(Footer)
                 ]),
             ])
         ]);
+    }
+};
+
+var MyIdeasOverview = {
+    controller: function(){
+        this.cards = Model.getMyIdeas();
+    },
+    view: function(ctrl){
+        return m("div",
+            ctrl.cards().map(function(i){
+                //return m("div", i.title);
+                return m.component(IdeaCard, i);
+            })
+        );
     }
 };

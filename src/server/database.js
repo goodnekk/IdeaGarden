@@ -139,7 +139,7 @@ module.exports = (function(){
     }
 
     function getIdeas(requestIp, callback){
-        Idea.find({}).select('title summary upvotes downvotes additions').sort('-createdAt').exec(function(err, ideaDocList){
+        Idea.find({}).select('title summary upvotes downvotes additions owner').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList.map(function(ideaDoc){
                 return ideaDoc.getPublic(requestIp);
             });
