@@ -45,6 +45,6 @@ app.get('/api/idea/:id/addition/:aid/vote/:operation', function (req, res) {});
 
 
 //run server
-app.listen(80, function () {
-    console.log('App listening on port 80!');
+app.listen(config.port, function () {
+    console.log('App listening on port ' + config.port);
 });

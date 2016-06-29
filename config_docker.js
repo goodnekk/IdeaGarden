@@ -16,5 +16,6 @@ module.exports = {
         tls: {"rejectUnauthorized": false},
         debug:true
     },
-    secret: "__HASH_SECRET__"
+    secret: "__HASH_SECRET__",
+    port: "__PORT__"
 };

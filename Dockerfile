@@ -4,6 +4,7 @@ FROM node:argon
 ENV DATABASE_URI mongodb://localhost/ideagarden
 ENV HASH_SECRET shhhhh
 ENV DEFAULT_EMAIL info@ideagarden.local
+ENV PORT 80
 
 # Create app directory
 RUN mkdir -p /ideaGarden
