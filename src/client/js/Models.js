@@ -61,6 +61,8 @@ var Model = (function(){
             return o.map(function(i){
                 i.additions = i.additions.length;
                 return i;
+            }).sort(function(a,b){
+                return b.votes - a.votes;
             });
         }).then(overview);
         return overview;

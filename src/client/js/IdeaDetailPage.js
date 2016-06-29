@@ -47,7 +47,24 @@ var IdeaData = {
             m("span", {class: "metric"}, [
                 m("span", {class:"number"}, idea.additions.length),
                 m("span", {class:"label"}, "aanvullingen")
-            ])
+            ]),
+            m.component(ShareButtons, idea)
+        ]);
+    }
+};
+
+var ShareButtons = {
+    controller: function(){
+
+    },
+    view: function(ctrl, idea){
+        return m("",[
+            m("a", {href: "https://www.facebook.com/sharer/sharer.php?u=https%3A//www.ideeenvijver.nl/%23/idea/"+idea._id},
+                m("img", {class: "ui sharebutton", src:"/static/fb_share.png", title:"Deel op facebook"})
+            ),
+            m("a", {href: "https://twitter.com/home?status=Bekijk%20mijn%20idee%20op%20idee%C3%ABn%20vijver!%20https%3A//www.ideeenvijver.nl/%23/idea/"+idea._id},
+                m("img", {class: "ui sharebutton", src:"/static/tw_share.png", title:"Deel op twitter"})
+            )
         ]);
     }
 };
