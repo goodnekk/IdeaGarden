@@ -250,7 +250,9 @@ var AdditionCard = {
         if(addition.category === "image") {message = " heeft een afbeelding toegevoed:";}
 
         return m("div", {class: "ui card addition"}, [
-            m("p", {class: "label"}, addition.owner.name + message),
+            (function(){
+                if(addition.owner) return m("p", {class: "label"}, addition.owner.name + message);
+            })(),
             m.component(PostSection, addition),
             m.component(CommentSection, addition.comments),
             m.component(ReactionBar, addition._id),
