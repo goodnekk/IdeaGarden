@@ -66,6 +66,10 @@ var SubmitCard = {
             (function(){
                 if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: "Email adres..."});
             })(),
+            m("div",[
+                m("input", {type:"checkbox", name: "checkbox", value: "value", id: "license_ok"}),
+                m("label", {for: 'license_ok'},"Mijn idee mag worden ", m("a", {href:"https://creativecommons.org/licenses/by-sa/4.0/deed.nl"}, "gedeeld en bewerkt")),
+            ]),
             m("p", {class: "ui errorhelp"}, ctrl.error),
             m("button", {type:"submit", class: "ui"}, "Verstuur")
         ]);
