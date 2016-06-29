@@ -1,0 +1,13 @@
+.ui {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.card.color {
+    background-color: #9DD2D7;
+    color: #424242;
+    margin-bottom: 0px;
+    padding-bottom: 140px;
+    margin: 0px;
+}
