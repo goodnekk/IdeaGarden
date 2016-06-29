@@ -127,13 +127,20 @@ var Model = (function(){
         return detail;
     }
 
-    function addAddition(addition){
+    function addAddition(addition, callback){
         m.request({
             method: "POST",
             url: "/api/idea/"+id+"/addition",
             data: addition,
             config: xhrConfig
-        }).then(validate).then(detail);
+        }).then(function(e){
+            if(callback){ callback(e); }
+            return e;
+        }).then(validate).then(function(e){
+            if(e !== undefined){
+                detail(e);
+            }
+        });
     }
 
     function addComment(aid, comment){

@@ -159,6 +159,8 @@ var DoAddition = {
             this.addition = e.target.value;
         };
 
+        this.error = "";
+
         this.submit = function(e){
             e.preventDefault();
 
@@ -184,9 +186,16 @@ var DoAddition = {
                             description: this.addition,
                             image: this.mediaDataUrl()
                         }
-                    });
-                    this.addition = "";
-                    this.mediaDataUrl("");
+                    },function(answer){
+                        console.log(answer);
+                        if(answer.succes){
+                            this.addition = "";
+                            this.mediaDataUrl("");
+                        } else {
+                            console.log(this);
+                            this.error = "Gebruik aub alleen jpg bestanden";
+                        }
+                    }.bind(this));
                 }
             }
             return false;
@@ -218,6 +227,7 @@ var DoAddition = {
 
                     }
                 }(),
+                m("p", {class: "ui errorhelp"}, ctrl.error),
                 m("button", {action: "submit", class: "ui"}, "Verstuur")
             ])
         ]);
