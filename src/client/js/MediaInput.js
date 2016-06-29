@@ -35,9 +35,10 @@ var MediaInput = {
         };
     },
     view: function(ctrl){
+        //console.log(ctrl.dataUrl());
         return m("div", [
             function(){
-                if(ctrl.file() !== undefined){
+                if(ctrl.dataUrl() !== ""){
                     return m("div", {class:"ui media-box image"}, [
                         m("img", {src: ctrl.dataUrl()}),
                         m("button", {onclick: ctrl.getFile.bind(ctrl)}, "Andere Foto")
