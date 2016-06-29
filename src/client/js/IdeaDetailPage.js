@@ -247,7 +247,7 @@ var AdditionCard = {
         var message = "";
         if(addition.category === "addition") {message = " heeft een aanvulling gedaan:";}
         if(addition.category === "question") {message = " heeft een vraag gesteld:";}
-        if(addition.category === "image") {message = " heeft een afbeelding toegevoed:";}
+        if(addition.category === "image") {message = " heeft een afbeelding toegevoegd:";}
 
         return m("div", {class: "ui card addition"}, [
             (function(){

@@ -5,7 +5,7 @@ var QuestionPage = {
     view: function() {
         checkButton = function(){
           if(moment([2016, 6, 2]).diff(moment(),'days') <= 0){
-            return m("button", {type:"submit", class: "ui"}, "Bekijk de ideëen");
+            return m("button", {type:"submit", class: "ui no-float"}, m("h2","Bekijk de ideëen"));
           } else{
            return m("h2", [
              "Over ",
@@ -14,16 +14,23 @@ var QuestionPage = {
            ]);
           }
         };
+        checkMenu = function(){
+          if(moment([2016, 6, 2]).diff(moment(),'days') <= 0){
+            return m.component(Menu);
+          } else {
+            return m("div", {class: "ui col-12"}, [
+              m("div", {class: "ui card color header"}, [
+                  m("div", {class: "title"},[
+                      m("img", {src: "static/Full logo.png"}),
+                  ])
+              ])
+            ]);
+          }
+        };
         return m("div",[
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
-                    m("div", {class: "ui col-12"}, [
-                        m("div", {class: "ui card color header"}, [
-                            m("div", {class: "title"},[
-                                m("img", {src: "static/Full logo.png"}),
-                            ])
-                        ])
-                    ]),
+                    checkMenu(),
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card colorless"}, [
                             m("div", {class: "centerimage"},[
