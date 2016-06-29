@@ -2,10 +2,15 @@
 //=require Footer.js
 
 var QuestionPage = {
+    controller: function(){
+      this.ideas = function(){
+          m.route("/ideas");
+      };
+    },
     view: function() {
         checkButton = function(){
           if(moment([2016, 6, 2]).diff(moment(),'days') <= 0){
-            return m("button", {type:"submit", class: "ui no-float"}, m("h2","Bekijk de ideëen"));
+            return m("button", {type:"submit", class: "ui no-float", onclick: ctrl.ideas}, m("h2","Bekijk de ideëen"));
           } else{
            return m("h2", [
              "Over ",

@@ -4,7 +4,13 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var EmailTemplate = require('email-templates').EmailTemplate;
 var fs = require('fs');
 
-var config = require('./config');
+var config;
+if (!fs.existsSync(__dirname + '/./config.js')) {
+  console.log('Warning, no config.js present. Falling back to config.default.js');
+  config = require(__dirname + '/./config.default.js');
+} else {
+  config = require(__dirname + '/./config.js');
+}
 
 var transporter = nodemailer.createTransport(smtpTransport(config.email));
 

@@ -1,6 +1,13 @@
 var mongoose = require('mongoose');
 var autopopulate = require('mongoose-autopopulate');
-var config = require('./config');
+var fs = require("fs");
+var config;
+if (!fs.existsSync(__dirname + '/./config.js')) {
+  console.log('Warning, no config.js present. Falling back to config.default.js');
+  config = require(__dirname + '/./config.default.js');
+} else {
+  config = require(__dirname + '/./config.js');
+}
 
 var db = mongoose.connection;
 db.on('error', console.log);

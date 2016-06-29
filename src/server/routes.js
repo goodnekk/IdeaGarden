@@ -1,4 +1,3 @@
-var config = require("./config");
 var database = require("./database");
 var email = require("./email");
 var authenticate = require("./authenticate");

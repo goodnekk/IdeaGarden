@@ -7,15 +7,15 @@ module.exports = {
         }
     },
     email:{
-       host: "mail.ideeenvijver.nl",
+       host: "localhost",
        port: 25,
        auth: {
-           user: "info@ideeenvijver.nl",
-           pass: "6o9jn_E1ot"
+           user: "test@localhost",
+           pass: "dummy"
        },
        tls: {"rejectUnauthorized": false},
        debug:true
    },
-    secret: "shhhhh",
+    secret: "dummy",
     port: 80
 };

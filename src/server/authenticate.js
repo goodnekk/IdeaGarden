@@ -1,5 +1,12 @@
 var jwt = require('jsonwebtoken');
-var config = require('./config');
+var fs = require('fs');
+var config;
+if (!fs.existsSync(__dirname + '/./config.js')) {
+  console.log('Warning, no config.js present. Falling back to config.default.js');
+  config = require(__dirname + '/./config.default.js');
+} else {
+  config = require(__dirname + '/./config.js');
+}
 var database = require('./database');
 
 module.exports = (function(){
