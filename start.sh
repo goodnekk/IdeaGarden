@@ -7,6 +7,7 @@ sed -i "s^__HASH_SECRET__^$HASH_SECRET^g" /ideaGarden/build/config.js
 sed -i "s^__EMAIL_HOST__^$EMAIL_HOST^g" /ideaGarden/build/config.js
 sed -i "s^__EMAIL_USER__^$EMAIL_USER^g" /ideaGarden/build/config.js
 sed -i "s^__EMAIL_PASS__^$EMAIL_PASS^g" /ideaGarden/build/config.js
+sed -i "s^__PORT__^$PORT^g" /ideaGarden/build/config.js
 
 cd /ideaGarden
 ./node_modules/.bin/gulp run
