@@ -14,7 +14,7 @@ module.exports = (function(){
     var template = new EmailTemplate(templateDir);
     subject = "Gefeliciteerd met jouw idee!";
     var templateVars = {
-      title: "Ide&euml;envijver",
+      title: "Ideëenvijver",
       site: "https://www.ideeenvijver.nl",
       mail: "info@ideeenvijver.nl",
       code: content
