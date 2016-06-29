@@ -149,7 +149,7 @@ var DoAddition = {
         this.category = 0;
 
         //this if for file uploads
-        this.mediaDataUrl = m.prop();
+        this.mediaDataUrl = m.prop("");
 
         this.onSwitch = function(id){
             this.category = id;

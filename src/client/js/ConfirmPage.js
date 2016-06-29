@@ -34,10 +34,10 @@ var ConfirmPage = {
                     m("div", {class: "ui col-6 center"}, [
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.submit.bind(ctrl)}, [
-                                m("p","Welkom terug bij Ideeënvijver. Bevestig het e-mail adres waarmee je hebt geregistreerd, geef je naam en verzin een wachtwoord."),
-                                m("input", {class: "ui", name: "email", placeholder: "Email..."}),
+                                m("p","Welkom terug bij Ideeënvijver. Geef je naam en verzin een wachtwoord. Bevestig het email adres waarmee je hebt geregistreerd."),
                                 m("input", {class: "ui", name: "name", placeholder: "Gebruikersnaam..."}),
                                 m("input", {type: "password" ,class: "ui", name: "password", placeholder: "Wachtwoord..."}),
+                                m("input", {class: "ui", name: "email", placeholder: "Email..."}),
                                 m("p", {class: "ui errorhelp"}, ctrl.error),
                                 m("button", {type:"submit", class: "ui"}, "Bevestig registratie")
                             ]),
