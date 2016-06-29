@@ -25,6 +25,7 @@ var DashboardPage = {
                                 m("button", {type:"submit", class: "ui"}, "Nu Uitloggen")
                             ]),
                         ]),
+                        /*
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.submit.bind(ctrl)}, [
                                 m("label", {class: "ui"}, "Gebruikersnaam"),
@@ -34,6 +35,7 @@ var DashboardPage = {
                                 m("button", {type:"submit", class: "ui"}, "wijzigingen opslaan")
                             ]),
                         ]),
+                        */
                         m("h2", "Mijn ideeën"),
                         m.component(MyIdeasOverview),
                     ]),

@@ -11,6 +11,12 @@ var Footer = {
                     m("div","Dit crowdsourcing platform is een initiatief van de gemeente Eindhoven,"),
                     m("div", "en is als pilot ontwikkeld door Code for NL.")
                 ),
+                m("div", {class: "left"},
+                    m("div",[
+                        "Vragen? neem contact op! ",
+                        m("a", {href:"mailto:info@ideeenvijver.nl"}, "info@ideeenvijver.nl")
+                    ])
+                ),
                 m("div", {class: "right"},
                     m("img", {src: "static/eindhoven.png"})
                 )
