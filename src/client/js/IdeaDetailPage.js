@@ -72,10 +72,10 @@ var ShareButtons = {
 var IdeaText = {
     controller: function(idea){
         this.owner = false;
-        if(idea.owner.name){
-            if(idea.owner.name === Model.token().name){
-                this.owner = true;
-            }
+        if(idea.owner){
+          if(idea.owner.name === Model.token().name){
+            this.owner = true;
+          }
         }
 
         this.editmode = false;
@@ -101,7 +101,9 @@ var IdeaText = {
         if(!idea.content) {idea.content="";}
         return m("div", {class: "ui card"}, [
             (function(){
-                if(idea.owner.name) {return m("p", {class: "label left"}, "Idee van: "+idea.owner.name);}
+              if(idea.owner){
+                  return m("p", {class: "label left"}, "Idee van: " + idea.owner.name);
+              }
             })(),
             (function(){
                 if(!ctrl.editmode){
@@ -292,7 +294,9 @@ var CommentSection = {
         if(comments.length > 0){
             return m("div", {class: "comment"}, comments.map(function(e){
                 return m("p", [
-                    m("span", {class: "name"}, e.owner.name),
+                  (function(){
+                    if(e.owner) return m("span", {class: "name"}, e.owner.name);
+                  })(),
                     m("span", {class: "message"}, e.comment)
                 ]);
             }));
