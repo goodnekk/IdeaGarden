@@ -28,10 +28,10 @@ module.exports = (function(){
     };
     template.render(templateVars, function (err, results) {
       if (err) {
-        console.log('Error rendering message template');
-        return console.error(err);
+        console.log('Error rendering message template.');
+        console.error(err);
+        return res.json({succes: false, message: "Email could not be sent."});
       }
-      console.log('Sending messages');
       transporter.sendMail({
         from: {
           name: 'Frederique van Ideëenvijver',
@@ -48,12 +48,11 @@ module.exports = (function(){
         }]
       }, function (err, responseStatus) {
         if (err) {
-          console.log("Error occured during send");
+          console.log("Error occured sending email.");
           console.log(err);
-          return err;
+          return res.json({succes: false, message: "Error occured during send."});
         } else {
-          console.log("mail sent");
-          return "mail sent";
+          return res.json({succes: true, message: "Email sent."});
         }
       });
     });

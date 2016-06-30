@@ -86,9 +86,6 @@ var IdeaText = {
         this.update = function(e){
             e.preventDefault();
             var elements = e.target.elements;
-            console.log({
-                summary: elements.summary.value
-            });
             Model.updateIdea({
                 _id: idea._id,
                 summary: elements.summary.value,
@@ -193,13 +190,17 @@ var DoAddition = {
                             image: this.mediaDataUrl()
                         }
                     },function(answer){
-                        console.log(answer);
                         if(answer.succes){
                             this.addition = "";
                             this.mediaDataUrl("");
                         } else {
-                            console.log(this);
+                          if(answer.message === "The image is too large"){
+                            this.error = "Het bestand is te groot, 5Mb is het maximum";
+                          } else if (answer.message === "not a jpeg image"){
                             this.error = "Gebruik aub alleen jpg bestanden";
+                          } else {
+                            this.error = "Oeps, er gaat iets fout! Neem contact op met Frederique.";
+                          }
                         }
                     }.bind(this));
                 }

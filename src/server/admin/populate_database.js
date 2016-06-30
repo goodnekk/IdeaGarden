@@ -1,11 +1,12 @@
 var database = require("../database.js");
-
+var bcrypt = require("bcryptjs");
 database.addUser({
     name: "marcel",
-    password: "test",
+    password: bcrypt.hashSync("test", 10),
     email: "test@test.nl"
 }, function(a){
     console.log(a);
+    return;
 });
 
 database.addIdea({
@@ -56,4 +57,7 @@ database.addIdea({
         }
     ]
 
+}, function(a){
+  console.log(a);
+  return;
 });

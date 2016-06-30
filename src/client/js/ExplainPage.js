@@ -9,7 +9,7 @@ var ExplainPage = {
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card colorless header"}, [
                             m("p", {class: "centerimage"},[
-                                m("h1", "Hoe werkt de ideeën vijver?"),
+                                m("h1", "Hoe werkt Ideeënvijver?"),
                                 m("p", "Elke vis in de vijver is een idee. Hoe groter je vis, hoe verder je idee al ontwikkeld is. Elke vis kan uitgroeien tot hét winnende idee: de Koningsvis! Hieronder kun je zien welke stappen je idee kan zetten. Je vis groeit dus mee, met jouw idee! ")
                             ])
                         ]),
