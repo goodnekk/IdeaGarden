@@ -73,14 +73,6 @@ var ExplainPage = {
                                 m("p", "Een goed plan begint altijd met een idee. Via crowdsourcing, waarbij kennis en ideeën van een grote groep mensen gebundeld kan worden, denken er ineens honderden mensen na over een vraagstuk in plaats van een paar specialisten. De kans op een innovatief en verrassend idee is hierdoor vele mate groter.")
                             ])
                         ]),
-                        m("div", {class: "ui card color"}, [
-                            m("p", {class: "centerimage"},[
-                                m("h1", "Regels"),
-                                m("p", "Posts met grof taalgebruik of schokkend beeldmateriaal worden weggehaald door de webmaster."),
-                                m("p", "Als je een idee indient, blijf je intellectueel eigenaar van het idee."),
-                                m("p", "Alles wat op Ideeënvijver wordt gedeeld valt onder de creative commons licentie Naamsvermelding-GelijkDelen 4.0 Internationaal. Dit betekent dat je al je rechten behoudt en anderen toestemming geeft om het werk te delen verspreiden en te gebruiken. Dit kan in elk medium en format voor elk doel, ook  voor commerciële doeleinden.")
-                            ])
-                        ])
                     ]),
                     m.component(Footer)
                 ])

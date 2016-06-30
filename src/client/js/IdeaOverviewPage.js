@@ -71,7 +71,7 @@ var SubmitCard = {
             })(),
             m("div",[
                 m("input", {class: "checkbox", type:"checkbox", name: "license_ok", id: "license_ok"}),
-                m("label", {for: 'license_ok'},"Mijn idee mag worden ", m("a", {href:"https://creativecommons.org/licenses/by-sa/4.0/deed.nl"}, "gedeeld en bewerkt")),
+                m("label", {for: 'license_ok'},"Mijn idee mag worden ", m("a", {target: "_blank", href:"/#/rules"}, "gedeeld en bewerkt")),
             ]),
             m("p", {class: "ui errorhelp"}, ctrl.error),
             m("button", {type:"submit", class: "ui"}, "Verstuur")
