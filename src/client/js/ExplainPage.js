@@ -54,12 +54,6 @@ var ExplainPage = {
                         ]),
                         m("div", {class: "ui card colorless"}, [
                             m("p", {class: "centerimage"},[
-                                m("h1", "Hoe werkt de ideeën vijver?"),
-                                m("p", "Elke vis in de vijver is een idee. Hoe groter je vis, hoe verder je idee al ontwikkeld is. Elke vis kan uitgroeien tot hét winnende idee: de Koningsvis! Hieronder kun je zien welke stappen je idee kan zetten. Je vis groeit dus mee, met jouw idee! ")
-                            ])
-                        ]),
-                        m("div", {class: "ui card colorless"}, [
-                            m("p", {class: "centerimage"},[
                                 m("h1", "Hoe kan ik winnen?"),
                                 m("p", "Er zijn twee prijzen. Je kunt winnen door het winnende idee in te dienen óf door zoveel en zo goed mogelijk bij te dragen aan de ideeën van anderen."),
                                 m("p", "We zijn op zoek naar leuke en innovatieve ideeën om het centrum en Strijp-s met elkaar te verbinden. Maak het leuker voor voetgangers om er te lopen of bedenk een vervoersconcept. De kans dat je wint is extra groot als de pijlers van Eindhoven Design, Kennis en Technologie, terugkomen in jouw idee. "),
