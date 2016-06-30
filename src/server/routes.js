@@ -24,7 +24,7 @@ module.exports = (function(){
             }
 
             if(!doc.user.password){
-                return res.json({succes: false, message: "unknown user"});
+                return res.json({succes: false, message: "unconfirmed user"});
             }
 
             //check password

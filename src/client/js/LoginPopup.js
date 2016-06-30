@@ -30,6 +30,8 @@ var LoginPopup = {
                     if(token.message === "no password"){ this.error = "geen wachtwoord";}
                     if(token.message === "wrong password"){ this.error = "verkeerd wachtwoord";}
                     if(token.message === "unknown user"){ this.error = "onbekend email adres";}
+                    if(token.message === "unconfirmed user"){ this.error = "onbevestigd email adres";}
+
                 } else {
                     this.hide();
                 }
