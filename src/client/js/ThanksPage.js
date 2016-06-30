@@ -10,8 +10,8 @@ var ThanksPage = {
                        m("div", {class: "ui card colorless header"}, [
                            m("p", {class: "centerimage"},[
                                m("h1", "gefeliciteerd!"),
-                               m("p", "Jouw idee is zojuist geplaatst op De Ideeënvijver."),
-                               m("p", "Open het mailtje dat je zojuist ontvangen hebt en klik op de link.")
+                               m("p", "Jouw idee is zojuist geplaatst op Ideeënvijver."),
+                               m("p", "Open de email die je zojuist ontvangen hebt en klik op de link.")
                            ])
                        ])
                    ])

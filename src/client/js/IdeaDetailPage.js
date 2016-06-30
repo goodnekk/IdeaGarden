@@ -86,9 +86,6 @@ var IdeaText = {
         this.update = function(e){
             e.preventDefault();
             var elements = e.target.elements;
-            console.log({
-                summary: elements.summary.value
-            });
             Model.updateIdea({
                 _id: idea._id,
                 summary: elements.summary.value,
@@ -193,12 +190,10 @@ var DoAddition = {
                             image: this.mediaDataUrl()
                         }
                     },function(answer){
-                        console.log(answer);
                         if(answer.succes){
                             this.addition = "";
                             this.mediaDataUrl("");
                         } else {
-                            console.log(this);
                             this.error = "Gebruik aub alleen jpg bestanden";
                         }
                     }.bind(this));

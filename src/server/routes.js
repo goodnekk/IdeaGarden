@@ -31,7 +31,6 @@ module.exports = (function(){
             var correct = bcrypt.compareSync(post.password, doc.user.password);
             if(!correct) return res.json({succes: false, message: "wrong password"});
 
-            //console.log(correct);
             authenticate.sign({
                 name: doc.user.name,
                 email: doc.user.email,
@@ -199,6 +198,7 @@ module.exports = (function(){
 
         //if the post is an image
         if(post.category === "image") {
+          console.log("Posting image");
             if(!post.content.image) return res.json({succes: false, message: "no image"});
 
             //parse image file from base64
@@ -210,10 +210,13 @@ module.exports = (function(){
             var imageId = uuid.v4();
             var fileUrl = __dirname + "/imageData/"+imageId+".jpg";
             fs.writeFile(fileUrl, image.data, function (err) {
-                if (err) return console.log(err);
-                console.log('saved file '+imageId);
+                if (err) {
+                  console.log("Error saving file");
+                  console.log(err);
+                  return res.json({succes: false, message: "Error saving file"});
+                }
                 post.content = {
-                    src: imageId+".jpg",
+                    src: imageId + ".jpg",
                     description: post.content.description
                 };
 

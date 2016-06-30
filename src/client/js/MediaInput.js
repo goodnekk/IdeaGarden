@@ -29,13 +29,8 @@ var MediaInput = {
 
             input.click();
         };
-
-        this.takePicture = function(e){
-            console.log("take picture");
-        };
     },
     view: function(ctrl){
-        //console.log(ctrl.dataUrl());
         return m("div", [
             function(){
                 if(ctrl.dataUrl() !== ""){

@@ -10,6 +10,7 @@ var Model = (function(){
                 token(t);
             }
         } catch(e) {
+            console.log("Failed to get token");
             console.log(e);
         }
     }
@@ -24,7 +25,8 @@ var Model = (function(){
     //validate requests
     function validate(answer) {
         if(!answer.succes) {
-            console.log(answer.message);
+          console.log("Failed to get answer");
+          console.log(answer.message);
         } else {
             return answer.data;
         }
@@ -40,6 +42,7 @@ var Model = (function(){
                 try {
                     localStorage.setItem("token", JSON.stringify(t));
                 } catch(e) {
+                    console.log("Failed to set token");
                     console.log(e);
                 }
             }
@@ -90,7 +93,6 @@ var Model = (function(){
     }
 
     function voteIdeaDetail(id, value) {
-        console.log("vote:"+id+": "+value);
         m.request({
             method: "GET",
             url: "/api/idea/"+id+"/vote/"+value

@@ -21,7 +21,9 @@ app.use(express.static(__dirname + '/public'));
 app.use('/images', express.static(__dirname + '/imageData'));
 
 //parse JSON posts
-app.use(bodyParser.json({limit: '5000kb'}));
+var limit = '1kb';
+app.use(bodyParser.json({limit: limit}));
+app.use(bodyParser.urlencoded({limit: limit, extended: true, parameterLimit:5000}));
 
 //enable getting client ip
 app.enable('trust proxy');
