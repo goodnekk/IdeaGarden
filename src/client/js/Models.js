@@ -62,7 +62,7 @@ var Model = (function(){
                 i.additions = i.additions.length;
                 return i;
             }).sort(function(a,b){
-                return b.votes - a.votes;
+                return b.votecount - a.votecount;
             });
         }).then(overview);
         return overview;
