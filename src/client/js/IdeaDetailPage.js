@@ -194,7 +194,13 @@ var DoAddition = {
                             this.addition = "";
                             this.mediaDataUrl("");
                         } else {
+                          if(answer.message === "The image is too large"){
+                            this.error = "Het bestand is te groot, 5Mb is het maximum";
+                          } else if (answer.message === "not a jpeg image"){
                             this.error = "Gebruik aub alleen jpg bestanden";
+                          } else {
+                            this.error = "Oeps, er gaat iets fout! Neem contact op met Frederique.";
+                          }
                         }
                     }.bind(this));
                 }

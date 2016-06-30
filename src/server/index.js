@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/images', express.static(__dirname + '/imageData'));
 
 //parse JSON posts
-var limit = '1kb';
+var limit = '5Mb';
 app.use(bodyParser.json({limit: limit}));
 app.use(bodyParser.urlencoded({limit: limit, extended: true, parameterLimit:5000}));
 
@@ -51,8 +51,6 @@ app.post('/api/idea/:id/addition/:aid/comment', routes.postIdeaComment); //comme
 
 //vote on an addition
 app.get('/api/idea/:id/addition/:aid/vote/:operation', function (req, res) {});
-
-
 
 //run server
 app.listen(config.port, function () {

@@ -10,7 +10,6 @@ var Model = (function(){
                 token(t);
             }
         } catch(e) {
-            console.log("Failed to get token");
             console.log(e);
         }
     }
@@ -24,12 +23,9 @@ var Model = (function(){
 
     //validate requests
     function validate(answer) {
-        if(!answer.succes) {
-          console.log("Failed to get answer");
-          console.log(answer.message);
-        } else {
-            return answer.data;
-        }
+      if(answer.succes) {
+        return answer.data;
+      }
     }
 
     function login(user, callback) {
@@ -42,7 +38,6 @@ var Model = (function(){
                 try {
                     localStorage.setItem("token", JSON.stringify(t));
                 } catch(e) {
-                    console.log("Failed to set token");
                     console.log(e);
                 }
             }
@@ -130,13 +125,23 @@ var Model = (function(){
     }
 
     function addAddition(addition, callback){
+        var extractStatus;
         m.request({
             method: "POST",
             url: "/api/idea/"+id+"/addition",
             data: addition,
-            config: xhrConfig
+            config: xhrConfig,
+            extract: function(xhr) {
+              //if status is 413, the file was too large
+              if(xhr.status === 413){
+                callback({success: false, message: "The image is too large"});
+              }
+              return xhr.responseText;
+            }
         }).then(function(e){
-            if(callback){ callback(e); }
+            if(callback){
+              callback(e);
+            }
             return e;
         }).then(validate).then(function(e){
             if(e !== undefined){

@@ -198,7 +198,6 @@ module.exports = (function(){
 
         //if the post is an image
         if(post.category === "image") {
-          console.log("Posting image");
             if(!post.content.image) return res.json({succes: false, message: "no image"});
 
             //parse image file from base64
