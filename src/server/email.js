@@ -15,10 +15,11 @@ if (!fs.existsSync(__dirname + '/./config.js')) {
 var transporter = nodemailer.createTransport(smtpTransport(config.email));
 
 module.exports = (function(){
-  function sendMail(receiver, subject, content) {
-    var templateDir = path.join(__dirname, './templates/mail', 'confirm');
+  function sendMail(receiver, subject, content, mailtype) {
+    mailtype = mailtype || "confirm";
+    subject = subject || "Bevestig je aanmelding";
+    var templateDir = path.join(__dirname, './templates/mail', mailtype);
     var template = new EmailTemplate(templateDir);
-    subject = "Gefeliciteerd met jouw idee!";
     var templateVars = {
       title: "Ideëenvijver",
       site: "https://www.ideeenvijver.nl",

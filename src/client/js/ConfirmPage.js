@@ -16,7 +16,7 @@ var ConfirmPage = {
                     if(response.succes){
                       m.route("/ideas");
                     } else {
-                      this.error = "Het e-mail adres is niet juist";
+                      this.error = "Het email adres is niet juist";
                     }
                   }.bind(this));
                 } else  {
