@@ -101,17 +101,17 @@ module.exports = (function(){
     }
 
     function confirmUser(user, callback){
-        User.update(
-            {"secret": user.secret},
-            {$set: {
-                'name': user.name,
-                'password': user.password,
-                'secret': ""
-            }},
-            {upsert: true},
-            function(err, data){
+        User.findOneAndUpdate({
+                "secret": user.secret
+            },{
+                $set: {
+                    'name': user.name,
+                    'password': user.password,
+                    'secret': ""
+                }
+            }, function(err, doc){
                 if (err) return callback({succes: false});
-                if(data.ok !== 1) return callback({succes: false});
+                if(!doc) return callback({succes: false});
                 callback({succes: true});
             }
         );
@@ -213,7 +213,6 @@ module.exports = (function(){
             {$push: {
                 'additions': post.addition
             }},
-            {upsert: true},
             function(err, data){
                 if (err) return callback({succes: false});
                 getIdea(post.id, ip, callback);
@@ -227,7 +226,6 @@ module.exports = (function(){
             {$push: {
                 'additions.$.comments': post.comment
             }},
-            {upsert: true},
             function(err, data){
                 if (err) return callback({succes: false});
                 getIdea(post.id, ip, callback);
