@@ -80,7 +80,7 @@ module.exports = (function(){
         database.addUser({email: post.email, secret: secret}, function(userDoc){
             if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
             res.json({succes: true});
-            email.sendMail(userDoc.user.email, "welkom bij IdeaGarden!", userDoc.user.secret);
+            email.sendMail(userDoc.user.email, "Bevestig je aanmelding", userDoc.user.secret);
         });
     }
 
@@ -129,7 +129,7 @@ module.exports = (function(){
                 database.addUser({email: post.email, secret: secret}, function(userDoc){
                     if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
                     addIdeawithUser(userDoc.user._id);
-                    email.sendMail(userDoc.user.email, "welkom bij IdeaGarden!", userDoc.user.secret);
+                    email.sendMail(userDoc.user.email, "Gefeliciteerd met jouw idee!", userDoc.user.secret, "ideaconfirm");
                 });
             } else {//use logged in user
                 addIdeawithUser(auth.decoded.id);
