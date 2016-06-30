@@ -17,6 +17,7 @@ module.exports = (function(){
         if(!post.email)      return res.json({succes: false, message: "no email"});
         if(!post.password)   return res.json({succes: false, message: "no password"});
 
+        post.email = post.email.toLowerCase();
         //database
         database.getUser({email: post.email}, function(doc){
             if(!doc.succes){
@@ -74,6 +75,8 @@ module.exports = (function(){
         if(!post.email)                             return res.json({succes: false, message: "no email"});
         if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
 
+        post.email = post.email.toLowerCase();
+
         var secret = uuid.v4(); //generate a secret
 
         database.addUser({email: post.email, secret: secret}, function(userDoc){
@@ -90,6 +93,7 @@ module.exports = (function(){
 
         if(!post.email)                             return res.json({succes: false, message: "no email"});
         if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+        post.email = post.email.toLowerCase();
 
         var secret = uuid.v4(); //generate a secret
 
@@ -139,6 +143,7 @@ module.exports = (function(){
             if(!auth.succes) {//create a new user
                 if(!post.email)                             return res.json({succes: false, message: "no email"});
                 if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+                post.email = post.email.toLowerCase();
 
                 var secret = uuid.v4(); //generate a secret
 
