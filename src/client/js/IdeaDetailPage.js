@@ -180,8 +180,12 @@ var DoAddition = {
                         content: {
                             description: this.addition
                         }
-                    });
-                    this.addition = "";
+                    }, function(){
+                        window.scrollTo(0,document.body.scrollHeight);
+                        this.addition = "";
+                    }.bind(this));
+
+
                 } else if(category === "image") {
                     Model.addAddition({
                         category: category,
@@ -193,6 +197,7 @@ var DoAddition = {
                         if(answer.succes){
                             this.addition = "";
                             this.mediaDataUrl("");
+                            window.scrollTo(0,document.body.scrollHeight);
                         } else {
                           if(answer.message === "The image is too large"){
                             this.error = "Het bestand is te groot, 5Mb is het maximum";
