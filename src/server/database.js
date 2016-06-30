@@ -22,7 +22,7 @@ var UserSchema =  new mongoose.Schema({
     name: String,
     email: {type : String , unique : true},
     password: String,
-    secret: String,
+    secret: String
 });
 
 var IdeaSchema = new mongoose.Schema({
@@ -75,7 +75,8 @@ IdeaSchema.methods.getPublic = function(requestIp){
         additions: this.additions,
         votecount: votecount,
         owner: this.owner,
-        yourvote: yourvote
+        yourvote: yourvote,
+        updated: this.updatedAt
     };
 };
 
@@ -146,7 +147,7 @@ module.exports = (function(){
     }
 
     function getIdeas(requestIp, callback){
-        Idea.find({}).select('title summary upvotes downvotes additions owner').exec(function(err, ideaDocList){
+        Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList.map(function(ideaDoc){
                 return ideaDoc.getPublic(requestIp);
             });
