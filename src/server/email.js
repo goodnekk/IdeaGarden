@@ -30,7 +30,7 @@ module.exports = (function(){
       if (err) {
         console.log('Error rendering message template.');
         console.error(err);
-        return res.json({succes: false, message: "Email could not be sent."});
+        return {succes: false, message: "Email could not be sent."};
       }
       transporter.sendMail({
         from: {
@@ -50,9 +50,9 @@ module.exports = (function(){
         if (err) {
           console.log("Error occured sending email.");
           console.log(err);
-          return res.json({succes: false, message: "Error occured during send."});
+          return {succes: false, message: "Error occured during send."};
         } else {
-          return res.json({succes: true, message: "Email sent."});
+          return {succes: true, message: "Email sent."};
         }
       });
     });

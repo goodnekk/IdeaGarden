@@ -51,7 +51,8 @@ var LoginPopup = {
                     if(answer.message === "no email"){ this.error = "geen email";}
                     if(answer.message === "new user failed"){ this.error = "gebruiker bestaat al";}
                 } else {
-                    this.switchMode();
+                    this.hide();
+                    m.route("/welcomeregister");
                 }
             }.bind(this));
             return false;
@@ -64,6 +65,7 @@ var LoginPopup = {
             }, function(answer){
                 if(!answer.succes){
                     if(answer.message === "no email"){ this.error = "geen email";}
+                    if(answer.message === "new user failed"){ this.error = "gebruiker bestaat niet";}
                 } else {
                     this.hide();
                     m.route("/reset");

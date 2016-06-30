@@ -8,9 +8,11 @@
 //=require ExplainPage.js
 //=require ThanksPage.js
 //=require WelcomePage.js
+//=require WelcomeRegisterPage.js
 //=require ErrorPage.js
 //=require RulesPage.js
 //=require ResetPage.js
+
 
 m.route.mode = "hash";
 
@@ -24,6 +26,7 @@ m.route(document.getElementById("content"), "/", {
     "/explain": ExplainPage,
     "/thanks": ThanksPage,
     "/welcome": WelcomePage,
+    "/welcomeregister": WelcomeRegisterPage,
     "/rules": RulesPage,
     "/error": ErrorPage,
     "/reset": ResetPage,
