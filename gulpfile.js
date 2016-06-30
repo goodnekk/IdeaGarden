@@ -3,7 +3,9 @@ var less = require('gulp-less');
 var include = require("gulp-include");
 var install = require("gulp-install");
 var sequence = require("gulp-sequence");
-
+var gp_concat = require('gulp-concat'),
+  gp_rename = require('gulp-rename'),
+  gp_uglify = require('gulp-uglify');
 var spawn = require('child_process').spawn;
 var path = require('path');
 
@@ -66,12 +68,23 @@ gulp.task('server',function(){
 gulp.task('client', ['js', 'less', 'html', 'static']);
 
 //concatenate all js files into one
+
 gulp.task('js', function(){
-    return gulp.src(dirs.clientsrc+'/js/App.js')
-        .pipe(include())
-            .on('error', console.log)
-        .pipe(gulp.dest(dirs.clientbuild+'/js'));
+  return gulp.src(dirs.clientsrc+'/js/App.js')
+    .pipe(include())
+    //.pipe(gp_sourcemaps.init())
+    .pipe(gp_concat('App.js'))
+    .pipe(gulp.dest(dirs.clientbuild+'/js'))
+    .pipe(gp_rename('App.min.js'))
+    .pipe(gp_uglify())
+    //.pipe(gp_sourcemaps.write('./'))
+    .pipe(gulp.dest(dirs.clientbuild+'/js'));
 });
+//     return gulp.src(dirs.clientsrc+'/js/App.js')
+//         .pipe(include())
+//             .on('error', console.log)
+//         .pipe(gulp.dest(dirs.clientbuild+'/js'));
+// });
 
 //compile Less files to CSS
 gulp.task('less', function () {

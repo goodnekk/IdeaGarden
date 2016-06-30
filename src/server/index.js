@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var compress = require('compression');
 var fs = require('fs');
 var routes = require('./routes');
 var config;
@@ -12,7 +13,7 @@ if (!fs.existsSync(__dirname + '/./config.js')) {
 
 
 var app = express();
-
+app.use(compress());
 //serve client files
 app.use(express.static(__dirname + '/public'));
 
