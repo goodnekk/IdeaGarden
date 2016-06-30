@@ -63,9 +63,8 @@ var SubmitCard = {
     },
     view: function(ctrl) {
         return m("form", {class: "ui card", onsubmit: ctrl.submit.bind(ctrl)}, [
-            m("p", "Geef je idee een titel, en een korte samenvatting, je kunt dit later nog uitbreiden."),
             m("input", {class: "ui", name: "title", placeholder: "Titel..."}),
-            m("textarea", {maxlength: "150", class: "ui", name: "summary", placeholder: "Omschrijf kort je idee..."}),
+            m("textarea", {maxlength: "150", class: "ui", name: "summary", placeholder: "Omschrijf kort je idee (Je kunt dit later nog uitbreiden)..."}),
             (function(){
                 if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: "Email adres..."});
             })(),

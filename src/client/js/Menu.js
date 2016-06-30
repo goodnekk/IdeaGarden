@@ -40,7 +40,7 @@ var Menu = {
             m("img", {src: "static/fish logo.png", class: "ui menuelement"}),
 
             m("nav", [
-                m("h3", {class: "ui menuelement", onclick: ctrl.question}, "Ideeënvijver"),
+                m("h3", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeënvijver"),
                 m("img", {src:"static/hamburger.png", class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.question}, "De Vraag"),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, "Ideeën"),
