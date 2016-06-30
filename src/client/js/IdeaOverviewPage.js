@@ -38,7 +38,8 @@ var SubmitCard = {
             Model.addIdea({
                 title: elements.title.value,
                 summary: elements.summary.value,
-                email: Model.token().succes ? "" : elements.email.value
+                email: Model.token().succes ? "" : elements.email.value,
+                agree: elements.license_ok.checked
             }, function(response){
                 if(response.succes) {
                     m.route("/thanks");
@@ -46,6 +47,7 @@ var SubmitCard = {
                     if(response.message === "no title"){ this.error = "Vergeet niet om je idee een titel te geven!";}
                     if(response.message === "no summary"){ this.error = "Vergeet niet om je idee te omschrijven!";}
                     if(response.message === "no email"){ this.error = "Vergeet niet om je email adres in te vullen!";}
+                    if(response.message === "no agree"){ this.error = "Vergeet akkoord te gaan met de voorwaarden!";}
                     if(response.message === "duplicate"){ this.error = "Er is al een idee met deze titel!";}
                     if(response.message === "new user failed"){ViewModel.loginPopup(true);}
                 }
@@ -61,13 +63,14 @@ var SubmitCard = {
     },
     view: function(ctrl) {
         return m("form", {class: "ui card", onsubmit: ctrl.submit.bind(ctrl)}, [
-            m("input", {class: "ui", name: "title", placeholder: "Geef je idee een titel..."}),
+            m("p", "Geef je idee een titel, en een korte samenvatting, je kunt dit later nog uitbreiden."),
+            m("input", {class: "ui", name: "title", placeholder: "Titel..."}),
             m("textarea", {maxlength: "150", class: "ui", name: "summary", placeholder: "Omschrijf kort je idee..."}),
             (function(){
                 if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: "Email adres..."});
             })(),
             m("div",[
-                m("input", {class: "checkbox", type:"checkbox", name: "checkbox", value: "value", id: "license_ok"}),
+                m("input", {class: "checkbox", type:"checkbox", name: "license_ok", id: "license_ok"}),
                 m("label", {for: 'license_ok'},"Mijn idee mag worden ", m("a", {href:"https://creativecommons.org/licenses/by-sa/4.0/deed.nl"}, "gedeeld en bewerkt")),
             ]),
             m("p", {class: "ui errorhelp"}, ctrl.error),

@@ -104,6 +104,7 @@ module.exports = (function(){
 
         if(!post.title)     return res.json({succes: false, message: "no title"});
         if(!post.summary)   return res.json({succes: false, message: "no summary"});
+        if(!post.agree)   return res.json({succes: false, message: "no agree"});
 
         //authenticate
         authenticate.verify(req, function(auth){
