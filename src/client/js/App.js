@@ -10,6 +10,7 @@
 //=require WelcomePage.js
 //=require ErrorPage.js
 //=require RulesPage.js
+//=require ResetPage.js
 
 m.route.mode = "hash";
 
@@ -25,4 +26,5 @@ m.route(document.getElementById("content"), "/", {
     "/welcome": WelcomePage,
     "/rules": RulesPage,
     "/error": ErrorPage,
+    "/reset": ResetPage,
 });

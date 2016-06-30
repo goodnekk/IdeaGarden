@@ -80,7 +80,24 @@ module.exports = (function(){
         database.addUser({email: post.email, secret: secret}, function(userDoc){
             if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
             res.json({succes: true});
-            email.sendMail(userDoc.user.email, "Bevestig je aanmelding", userDoc.user.secret);
+            email.sendMail(userDoc.user.email, "Welkom bij Ideeënvijver", userDoc.user.secret, "confirm");
+        });
+    }
+
+    function forgetPassword(req, res){
+        //validate
+        if(!req.body) return res.json({succes: false, message: "empty post"});
+        var post = req.body;
+
+        if(!post.email)                             return res.json({succes: false, message: "no email"});
+        if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+
+        var secret = uuid.v4(); //generate a secret
+
+        database.resetUser({email: post.email, secret: secret}, function(userDoc){
+            if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
+            res.json({succes: true});
+            email.sendMail(post.email, "Wachtwoord herstellen", secret, "forgotpassword");
         });
     }
 
@@ -264,6 +281,7 @@ module.exports = (function(){
         login: login,
         confirmUser: confirmUser,
         register: register,
+        forgetPassword: forgetPassword,
 
         getIdeas: getIdeas,
         getIdea: getIdea,

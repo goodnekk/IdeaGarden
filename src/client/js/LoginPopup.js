@@ -13,6 +13,10 @@ var LoginPopup = {
             this.error = "";
         };
 
+        this.forgetMode = function(){
+            this.mode = "forget";
+        };
+
         this.show = ViewModel.loginPopup;
 
         this.hide = function(){
@@ -31,7 +35,6 @@ var LoginPopup = {
                     if(token.message === "wrong password"){ this.error = "verkeerd wachtwoord";}
                     if(token.message === "unknown user"){ this.error = "onbekend email adres";}
                     if(token.message === "unconfirmed user"){ this.error = "onbevestigd email adres";}
-
                 } else {
                     this.hide();
                 }
@@ -54,6 +57,20 @@ var LoginPopup = {
             return false;
         };
 
+        this.forget = function(e){
+            e.preventDefault();
+            Model.forgetPassword({
+                email: e.target.elements.email.value
+            }, function(answer){
+                if(!answer.succes){
+                    if(answer.message === "no email"){ this.error = "geen email";}
+                } else {
+                    this.hide();
+                    m.route("/reset");
+                }
+            }.bind(this));
+        };
+
         this.error = "";
     },
     view: function(ctrl) {
@@ -68,6 +85,8 @@ var LoginPopup = {
                         m("p", {class: "ui errorhelp"}, ctrl.error),
                         m("button", {type:"submit", class: "ui"}, "login"),
                         m("p", {class: "ui right register", onclick: ctrl.switchMode.bind(ctrl)}, "registeren"),
+                        m("p", {class: "ui register right", onclick: ctrl.forgetMode.bind(ctrl)}, "wachtwoord vergeten"),
+
                     ])
                 ]);
             } else if(ctrl.mode ==="register") {
@@ -78,6 +97,17 @@ var LoginPopup = {
                         m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
                         m("p", {class: "ui errorhelp"}, ctrl.error),
                         m("button", {type:"submit", class: "ui"}, "Registreren"),
+                        m("p", {class: "ui left register", onclick: ctrl.switchMode.bind(ctrl)}, "Ik wil inloggen"),
+                    ])
+                ]);
+            } else if(ctrl.mode ==="forget") {
+                return m("div", [
+                    m("div", {class: "ui overlay", onclick: ctrl.hide.bind(ctrl)}),
+                    m("form", {class: "ui card popup", onsubmit: ctrl.forget.bind(ctrl)}, [
+                        m("h2", "Wachtwoord herstellen"),
+                        m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
+                        m("p", {class: "ui errorhelp"}, ctrl.error),
+                        m("button", {type:"submit", class: "ui"}, "Herstellen"),
                         m("p", {class: "ui left register", onclick: ctrl.switchMode.bind(ctrl)}, "Ik wil inloggen"),
                     ])
                 ]);

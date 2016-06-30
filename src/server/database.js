@@ -117,6 +117,21 @@ module.exports = (function(){
         );
     }
 
+    function resetUser(user, callback){
+        User.findOneAndUpdate({
+                "email": user.email,
+            },{
+                $set: {
+                    "secret": user.secret
+                }
+            }, function(err, doc){
+                if (err) return callback({succes: false});
+                if(!doc) return callback({succes: false});
+                callback({succes: true});
+            }
+        );
+    }
+
     function addIdea(idea, callback){
         var ideaDoc = new Idea(idea);
         ideaDoc.save(function(err, data) {
@@ -237,6 +252,7 @@ module.exports = (function(){
         addUser: addUser,
         getUser: getUser,
         confirmUser: confirmUser,
+        resetUser: resetUser,
 
         addIdea: addIdea,
         updateIdea: updateIdea,

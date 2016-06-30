@@ -89,6 +89,14 @@ var Model = (function(){
         });
     }
 
+    function forgetPassword(user, callback) {
+        m.request({
+            method: "POST",
+            url: "/api/forgetpassword",
+            data: user
+        }).then(callback);
+    }
+
     function voteIdeaDetail(id, value) {
         console.log("vote:"+id+": "+value);
         m.request({
@@ -181,6 +189,7 @@ var Model = (function(){
         addIdea: addIdea,
         updateIdea: updateIdea,
         registerAccount:registerAccount,
+        forgetPassword: forgetPassword,
 
         getDetail: getDetail,
         addAddition: addAddition,
