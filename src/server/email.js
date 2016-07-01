@@ -21,7 +21,7 @@ module.exports = (function(){
     var templateDir = path.join(__dirname, './templates/mail', mailtype);
     var template = new EmailTemplate(templateDir);
     var templateVars = {
-      title: "Ideëenvijver",
+      title: "Ideeënvijver",
       site: "https://www.ideeenvijver.nl",
       mail: "info@ideeenvijver.nl",
       code: content
@@ -34,7 +34,7 @@ module.exports = (function(){
       }
       transporter.sendMail({
         from: {
-          name: 'Frederique van Ideëenvijver',
+          name: 'Frederique van Ideeënvijver',
           address: config.email.auth.user
         },
         to: receiver,
