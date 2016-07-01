@@ -273,19 +273,52 @@ var AdditionCard = {
 };
 
 var PostSection = {
+  controller: function(){
+    this.linkify = function(inputText){
+        inputTextArray = inputText.split(" ");
+        for (i = 0; i < inputTextArray.length; i++) {
+          inputNew = inputTextArray[i];
+          var altered = false;
+          var replacedText, replacePattern1, replacePattern2, replacePattern3;
+          //URLs starting with http://, https://, or ftp://
+          replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+          if (inputNew.match(replacePattern1)) {
+            altered = true;
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+          }
+          //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+          replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+          if (inputNew.match(replacePattern2)) {
+            altered = true;
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+          }
+          //Change email addresses to mailto:: links.
+          replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+          if (inputNew.match(replacePattern3)) {
+            altered = true;
+            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew);
+          }
+          if(!altered){
+            inputTextArray[i] = inputNew + ' ';
+          }
+
+        }
+        return inputTextArray;
+    };
+  },
     view: function(ctrl, data){
         if(data.category === "origin") {
             return m("div", {class: "section"}, [
                 m("h2", data.content.title),
-                m("p",{class: "description"}, data.content.description)
+                m("p",{class: "description"}, ctrl.linkify(data.content.description))
             ]);
         } else if (data.category === "addition" || data.category === "question") {
             return m("div", {class: "section"}, [
-                m("p",{class: "description"}, data.content.description)
+                m("p",{class: "description"}, ctrl.linkify(data.content.description))
             ]);
         } else if (data.category === "image") {
             return m("div", [
-                m("p", {class: "description"}, data.content.description),
+                m("p", {class: "description"}, ctrl.linkify(data.content.description)),
                 //m("div", {style: "background-image: url('/images/"+data.content.src+"');", class: "image"})
                 m("div", {class: "image"},[
                     m("img", {src: "/images/"+data.content.src})
@@ -296,6 +329,39 @@ var PostSection = {
 };
 
 var CommentSection = {
+  controller: function(){
+    this.linkify = function(inputText){
+        inputTextArray = inputText.split(" ");
+        for (i = 0; i < inputTextArray.length; i++) {
+          inputNew = inputTextArray[i];
+          var altered = false;
+          var replacedText, replacePattern1, replacePattern2, replacePattern3;
+          //URLs starting with http://, https://, or ftp://
+          replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+          if (inputNew.match(replacePattern1)) {
+            altered = true;
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+          }
+          //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+          replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+          if (inputNew.match(replacePattern2)) {
+            altered = true;
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+          }
+          //Change email addresses to mailto:: links.
+          replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+          if (inputNew.match(replacePattern3)) {
+            altered = true;
+            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew);
+          }
+          if(!altered){
+            inputTextArray[i] = inputNew + ' ';
+          }
+
+        }
+        return inputTextArray;
+    };
+  },
     view: function(ctrl, comments) {
         if(comments.length > 0){
             return m("div", {class: "comment"}, comments.map(function(e){
@@ -303,7 +369,7 @@ var CommentSection = {
                   (function(){
                     if(e.owner) return m("span", {class: "name"}, e.owner.name);
                   })(),
-                    m("span", {class: "message"}, e.comment)
+                    m("span", {class: "message"}, ctrl.linkify(e.comment))
                 ]);
             }));
         } else {
