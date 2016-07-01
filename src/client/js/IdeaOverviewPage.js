@@ -47,7 +47,7 @@ var SubmitCard = {
                     if(response.message === "no title"){ this.error = "Vergeet niet om je idee een titel te geven!";}
                     if(response.message === "no summary"){ this.error = "Vergeet niet om je idee te omschrijven!";}
                     if(response.message === "no email"){ this.error = "Vergeet niet om je email adres in te vullen!";}
-                    if(response.message === "no agree"){ this.error = "Vergeet akkoord te gaan met de voorwaarden!";}
+                    if(response.message === "no agree"){ this.error = "Vergeet niet akkoord te gaan met de voorwaarden!";}
                     if(response.message === "duplicate"){ this.error = "Er is al een idee met deze titel!";}
                     if(response.message === "new user failed"){ViewModel.loginPopup(true);}
                 }
