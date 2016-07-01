@@ -72,7 +72,7 @@ var ShareButtons = {
 var IdeaText = {
     controller: function(idea){
         this.owner = false;
-        if(idea.owner){
+        if(idea.owner.name){
           if(idea.owner.name === Model.token().name){
             this.owner = true;
           }
@@ -98,7 +98,7 @@ var IdeaText = {
         if(!idea.content) {idea.content="";}
         return m("div", {class: "ui card"}, [
             (function(){
-              if(idea.owner){
+              if(idea.owner.name){
                   return m("p", {class: "label left"}, "Idee van: " + idea.owner.name);
               }
             })(),
