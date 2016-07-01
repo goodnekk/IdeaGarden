@@ -284,19 +284,19 @@ var PostSection = {
           replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
           if (inputNew.match(replacePattern1)) {
             altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
           }
           //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
           replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
           if (inputNew.match(replacePattern2)) {
             altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
           }
           //Change email addresses to mailto:: links.
           replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
           if (inputNew.match(replacePattern3)) {
             altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew);
+            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew.trunc(20));
           }
           if(!altered){
             inputTextArray[i] = inputNew + ' ';
@@ -340,19 +340,19 @@ var CommentSection = {
           replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
           if (inputNew.match(replacePattern1)) {
             altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
           }
           //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
           replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
           if (inputNew.match(replacePattern2)) {
             altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew + ' ');
+            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
           }
           //Change email addresses to mailto:: links.
           replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
           if (inputNew.match(replacePattern3)) {
             altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew);
+            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew.trunc(20));
           }
           if(!altered){
             inputTextArray[i] = inputNew + ' ';
