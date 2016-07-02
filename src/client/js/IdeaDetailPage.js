@@ -123,7 +123,7 @@ var IdeaText = {
                             } else {
                                 return [
                                     m("p", {class: "label"}, "Gedetailleerde omschrijving"),
-                                    m("p", {class: ""}, idea.content)
+                                    m.component(MarkupBlock, {type: "content", text: idea.content})
                                 ];
                             }
 
@@ -274,52 +274,21 @@ var AdditionCard = {
 
 var PostSection = {
   controller: function(){
-    this.linkify = function(inputText){
-        inputTextArray = inputText.split(" ");
-        for (i = 0; i < inputTextArray.length; i++) {
-          inputNew = inputTextArray[i];
-          var altered = false;
-          var replacedText, replacePattern1, replacePattern2, replacePattern3;
-          //URLs starting with http://, https://, or ftp://
-          replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-          if (inputNew.match(replacePattern1)) {
-            altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
-          }
-          //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
-          replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-          if (inputNew.match(replacePattern2)) {
-            altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
-          }
-          //Change email addresses to mailto:: links.
-          replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
-          if (inputNew.match(replacePattern3)) {
-            altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew.trunc(20));
-          }
-          if(!altered){
-            inputTextArray[i] = inputNew + ' ';
-          }
 
-        }
-        return inputTextArray;
-    };
   },
     view: function(ctrl, data){
         if(data.category === "origin") {
             return m("div", {class: "section"}, [
                 m("h2", data.content.title),
-                m("p",{class: "description"}, ctrl.linkify(data.content.description))
+                m.component(MarkupBlock, {type: "addition", text: data.content.description})
             ]);
         } else if (data.category === "addition" || data.category === "question") {
             return m("div", {class: "section"}, [
-                m("p",{class: "description"}, ctrl.linkify(data.content.description))
+                m.component(MarkupBlock, {type: "addition", text: data.content.description})
             ]);
         } else if (data.category === "image") {
             return m("div", [
-                m("p", {class: "description"}, ctrl.linkify(data.content.description)),
-                //m("div", {style: "background-image: url('/images/"+data.content.src+"');", class: "image"})
+                m.component(MarkupBlock, {type: "addition", text: data.content.description}),
                 m("div", {class: "image"},[
                     m("img", {src: "/images/"+data.content.src})
                 ])
@@ -330,37 +299,7 @@ var PostSection = {
 
 var CommentSection = {
   controller: function(){
-    this.linkify = function(inputText){
-        inputTextArray = inputText.split(" ");
-        for (i = 0; i < inputTextArray.length; i++) {
-          inputNew = inputTextArray[i];
-          var altered = false;
-          var replacedText, replacePattern1, replacePattern2, replacePattern3;
-          //URLs starting with http://, https://, or ftp://
-          replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-          if (inputNew.match(replacePattern1)) {
-            altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
-          }
-          //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
-          replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-          if (inputNew.match(replacePattern2)) {
-            altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(20) + ' ');
-          }
-          //Change email addresses to mailto:: links.
-          replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
-          if (inputNew.match(replacePattern3)) {
-            altered = true;
-            inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew.trunc(20));
-          }
-          if(!altered){
-            inputTextArray[i] = inputNew + ' ';
-          }
 
-        }
-        return inputTextArray;
-    };
   },
     view: function(ctrl, comments) {
         if(comments.length > 0){
@@ -369,7 +308,7 @@ var CommentSection = {
                   (function(){
                     if(e.owner) return m("span", {class: "name"}, e.owner.name);
                   })(),
-                    m("span", {class: "message"}, ctrl.linkify(e.comment))
+                    m.component(MarkupBlock, {type: "comment", text: e.comment})
                 ]);
             }));
         } else {
@@ -438,6 +377,51 @@ var AddComment = {
             ]);
         } else {
             return m("",[]);
+        }
+
+    }
+};
+
+var MarkupBlock = {
+    controller: function(){
+        this.linkify = function(inputText){
+            inputTextArray = inputText.split(" ");
+            for (i = 0; i < inputTextArray.length; i++) {
+              inputNew = inputTextArray[i];
+              var altered = false;
+              var replacedText, replacePattern1, replacePattern2, replacePattern3;
+              //URLs starting with http://, https://, or ftp://
+              replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+              if (inputNew.match(replacePattern1)) {
+                altered = true;
+                inputTextArray[i] = m("a", {class: "external-link", href: inputNew, target: '_blank'}, inputNew.trunc(80) + ' ');
+              }
+              //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+              replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+              if (inputNew.match(replacePattern2)) {
+                altered = true;
+                inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(80) + ' ');
+              }
+              //Change email addresses to mailto:: links.
+              replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+              if (inputNew.match(replacePattern3)) {
+                altered = true;
+                inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew.trunc(80));
+              }
+              if(!altered){
+                inputTextArray[i] = inputNew + ' ';
+              }
+            }
+            return inputTextArray;
+        };
+    },
+    view: function(ctrl, args){
+        if(args.type === "comment"){
+            return m("span", {class: "message"}, ctrl.linkify(args.text));
+        } else if(args.type === "addition"){
+            return m("p",{class: "description"}, ctrl.linkify(args.text));
+        } else if(args.type === "content"){
+            return m("p", {class: ""}, ctrl.linkify(args.text));
         }
 
     }
