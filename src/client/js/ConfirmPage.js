@@ -30,11 +30,11 @@ var ConfirmPage = {
                     m("div", {class: "ui col-6 center"}, [
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.submit.bind(ctrl)}, [
-                                m("p","Welkom terug bij Ideeënvijver. Geef je naam en verzin een wachtwoord."),
-                                m("input", {class: "ui", name: "name", placeholder: "Gebruikersnaam..."}),
-                                m("input", {type: "password" ,class: "ui", name: "password", placeholder: "Wachtwoord..."}),
+                                m("p", i18next.t('confirmpage.description')),
+                                m("input", {class: "ui", name: "name", placeholder: i18next.t('confirmpage.username')}),
+                                m("input", {type: "password" ,class: "ui", name: "password", placeholder: i18next.t('confirmpage.password')}),
                                 m("p", {class: "ui errorhelp"}, ctrl.error),
-                                m("button", {type:"submit", class: "ui"}, "Bevestig registratie")
+                                m("button", {type:"submit", class: "ui"}, i18next.t('confirmpage.confirm'))
                             ]),
                         ]),
                     ]),

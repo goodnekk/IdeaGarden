@@ -20,16 +20,16 @@ var Footer = {
                 ),
                 m("div", {class: "ui col-4 third right"},
                     m("div",[
-                        m("a", {href:"/#/rules"}, "Regels"),
+                        m("a", {href:"/#/rules"}, i18next.t('menu.rules')),
                     ]),
                     m("div",[
-                        m("a", {href:"/#/explain"}, "Uitleg"),
+                        m("a", {href:"/#/explain"}, i18next.t('menu.explain')),
                     ]),
                     m("div",[
-                        m("a", {href:"/#/"}, "De Vraag"),
+                        m("a", {href:"/#/"}, i18next.t('menu.challenge')),
                     ]),
                     m("div",[
-                        m("a", {href:"mailto:info@ideeenvijver.nl"}, "Contact")
+                        m("a", {href:"mailto:info@ideeenvijver.nl"}, i18next.t('menu.contact'))
                     ])
                 )
             ])
