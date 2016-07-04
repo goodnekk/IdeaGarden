@@ -72,7 +72,7 @@ IdeaSchema.methods.getPublic = function(requestIp){
     if(this.additions.length > 0){
         badge = 2;
         if(this.additions.some(function(a){
-            if(this.owner){
+            if(this.owner && a.owner){
                 return (JSON.stringify(a.owner._id) !== JSON.stringify(this.owner._id));
             }
             return false;
