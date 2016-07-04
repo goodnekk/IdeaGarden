@@ -1,0 +1,53 @@
+{
+    "email": {
+      "register": "Welkom bij Ideeënvijver",
+      "forgetpassword": "Wachtwoord herstellen",
+      "postidea": "Gefeliciteerd met jouw idee!"
+    },
+    "error":{
+      "noname": "Je bent vergeten je naam in te vullen",
+      "nopassword": "Verzin een wachtwoord",
+      "registrationfailed": "Registratie mislukt"
+    },
+    "menu":{
+      "login": "Aanmelden",
+      "myideas": "Mijn Ideeën",
+      "ideas": "Ideeën",
+      "challenge": "De Vraag",
+      "explain": "Uitleg",
+      "rules": "Regels",
+      "contact":"Contact"
+    },
+    "confirmpage":{
+      "description": "Welkom terug bij Ideeënvijver. Geef je naam en verzin een wachtwoord.",
+      "username": "Gebruikersnaam...",
+      "password": "Wachtwoord...",
+      "confirm": "Bevestig registratie"
+    },
+    "dashboardpage":{
+      "logoff": "Nu Uitloggen",
+      "profile":"Mijn profiel"
+    },
+    "errorpage":{
+      "title": "Oeps!",
+      "description": "Er ging iets mis, sorry!"
+    },
+    "idea":{
+      "data":{
+        "votecount": "kudos",
+        "additions": "aanvullingen"
+      },
+      "share":{
+        "facebook": "Deel op facebook",
+        "twitter": "Deel op twitter"
+      },
+      "text":{
+        "edit": "Idee Bewerken",
+        "by": "Idee van:",
+        "summary": "Samenvatting",
+        "full": "Gedetailleerde omschrijving",
+        "fullplaceholder": "Je hebt je idee nog niet uitgebreid omschreven...",
+        "submit": "Idee nu omschrijven"
+      }
+    }
+}

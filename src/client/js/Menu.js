@@ -42,14 +42,14 @@ var Menu = {
             m("nav", [
                 m("h3", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeënvijver"),
                 m("img", {src:"static/hamburger.png", class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
-                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.question}, "De Vraag"),
-                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, "Ideeën"),
-                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, "Uitleg"),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.question}, i18next.t('menu.challenge')),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, i18next.t('menu.ideas')),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, i18next.t('menu.explain')),
                 (function(){
                     if(ctrl.token().succes) {
-                        return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, "Mijn Ideeën"); //ctrl.token().email
+                        return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, i18next.t('menu.myideas')); //ctrl.token().email
                     }
-                    return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.loginClick.bind(ctrl)}, "Login");
+                    return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.loginClick.bind(ctrl)}, i18next.t('menu.login'));
                 })()
                 ])
             ]);

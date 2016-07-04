@@ -14,9 +14,9 @@ var ConfirmPage = {
                 if(response.succes) {
                     m.route("/welcome");
                 } else {
-                    if(response.message === "no name"){ this.error = "Je bent vergeten je naam in te vullen";}
-                    if(response.message === "no password"){ this.error = "Verzin een wachtwoord";}
-                    if(!response.message){ this.error = "Registratie mislukt";}
+                    if(response.message === "no name"){ this.error = i18next.t('error.noname');}
+                    if(response.message === "no password"){ this.error = i18next.t('error.nopassword');}
+                    if(!response.message){ this.error = i18next.t('error.registrationfailed');}
                 }
             }.bind(this));
             return false;
@@ -30,11 +30,11 @@ var ConfirmPage = {
                     m("div", {class: "ui col-6 center"}, [
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.submit.bind(ctrl)}, [
-                                m("p","Welkom terug bij Ideeënvijver. Geef je naam en verzin een wachtwoord."),
-                                m("input", {class: "ui", name: "name", placeholder: "Gebruikersnaam..."}),
-                                m("input", {type: "password" ,class: "ui", name: "password", placeholder: "Wachtwoord..."}),
+                                m("p", i18next.t('confirmpage.description')),
+                                m("input", {class: "ui", name: "name", placeholder: i18next.t('confirmpage.username')}),
+                                m("input", {type: "password" ,class: "ui", name: "password", placeholder: i18next.t('confirmpage.password')}),
                                 m("p", {class: "ui errorhelp"}, ctrl.error),
-                                m("button", {type:"submit", class: "ui"}, "Bevestig registratie")
+                                m("button", {type:"submit", class: "ui"}, i18next.t('confirmpage.confirm'))
                             ]),
                         ]),
                     ]),

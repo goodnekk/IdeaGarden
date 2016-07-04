@@ -19,10 +19,10 @@ var DashboardPage = {
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
                     m("div", {class: "ui col-12"}, [
-                        m("h2", "Mijn profiel"),
+                        m("h2", i18next.t('dashboardpage.profile')),
                         m("div", {class: "ui card"}, [
                             m("form", {class: "ui", onsubmit: ctrl.logout.bind(ctrl)}, [
-                                m("button", {type:"submit", class: "ui"}, "Nu Uitloggen")
+                                m("button", {type:"submit", class: "ui"}, i18next.t('dashboardpage.logoff'))
                             ]),
                         ]),
                         /*
@@ -36,7 +36,7 @@ var DashboardPage = {
                             ]),
                         ]),
                         */
-                        m("h2", "Mijn ideeën"),
+                        m("h2", i18next.t('menu.myideas')),
                         m.component(MyIdeasOverview),
                     ]),
                     m.component(Footer)

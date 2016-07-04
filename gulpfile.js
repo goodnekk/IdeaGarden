@@ -65,7 +65,7 @@ gulp.task('server',function(){
 });
 
 /* Build client */
-gulp.task('client', ['js', 'less', 'html', 'static']);
+gulp.task('client', ['js', 'i18next', 'less', 'html', 'static']);
 
 //concatenate all js files into one
 
@@ -80,6 +80,12 @@ gulp.task('js', function(){
     //.pipe(gp_sourcemaps.write('./'))
     .pipe(gulp.dest(dirs.clientbuild+'/js'));
 });
+
+gulp.task('i18next', function(){
+  return gulp.src(dirs.clientsrc+'/lib/*')
+      .pipe(gulp.dest(dirs.clientbuild+'/js'));
+});
+
 //     return gulp.src(dirs.clientsrc+'/js/App.js')
 //         .pipe(include())
 //             .on('error', console.log)

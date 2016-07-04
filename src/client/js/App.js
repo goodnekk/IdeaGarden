@@ -3,6 +3,9 @@ String.prototype.trunc = String.prototype.trunc ||
     return (this.length > n) ? this.substr(0,n-1)+'...' : this;
 };
 
+
+//=require i18n.js
+
 //=require QuestionPage.js
 
 //=require IdeaOverviewPage.js
@@ -18,10 +21,7 @@ String.prototype.trunc = String.prototype.trunc ||
 //=require RulesPage.js
 //=require ResetPage.js
 
-
-
 m.route.mode = "hash";
-
 m.route(document.getElementById("content"), "/", {
     "/": QuestionPage,
     "/ideas": IdeaOverviewPage,
@@ -35,5 +35,5 @@ m.route(document.getElementById("content"), "/", {
     "/welcomeregister": WelcomeRegisterPage,
     "/rules": RulesPage,
     "/error": ErrorPage,
-    "/reset": ResetPage,
+    "/reset": ResetPage
 });

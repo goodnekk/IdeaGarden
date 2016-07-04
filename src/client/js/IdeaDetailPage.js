@@ -42,11 +42,11 @@ var IdeaData = {
             m.component(VoteButtons, idea.yourvote, ctrl.onvote.bind(ctrl)),
             m("span", {class: "metric"}, [
                 m("span", {class:"number"}, idea.votecount),
-                m("span", {class:"label"}, "kudos")
+                m("span", {class:"label"}, i18next.t('idea.data.votecount'))
             ]),
             m("span", {class: "metric"}, [
                 m("span", {class:"number"}, idea.additions.length),
-                m("span", {class:"label"}, "aanvullingen")
+                m("span", {class:"label"}, i18next.t('idea.data.votecount'))
             ]),
             m.component(ShareButtons, idea)
         ]);
@@ -60,10 +60,10 @@ var ShareButtons = {
     view: function(ctrl, idea){
         return m("",[
             m("a", {target: "_blank", href: "https://www.facebook.com/sharer/sharer.php?u=https%3A//www.ideeenvijver.nl/%23/idea/"+idea._id},
-                m("img", {class: "ui sharebutton", src:"/static/fb_share.png", title:"Deel op facebook"})
+                m("img", {class: "ui sharebutton", src:"/static/fb_share.png", title: i18next.t('idea.share.facebook')})
             ),
             m("a", {target: "_blank", href: "https://twitter.com/home?status=Bekijk%20mijn%20idee%20op%20%23idee%C3%ABnvijver!%20https%3A//www.ideeenvijver.nl/%23/idea/"+idea._id},
-                m("img", {class: "ui sharebutton", src:"/static/tw_share.png", title:"Deel op twitter"})
+                m("img", {class: "ui sharebutton", src:"/static/tw_share.png", title: i18next.t('idea.share.twitter')})
             )
         ]);
     }
@@ -99,7 +99,7 @@ var IdeaText = {
         return m("div", {class: "ui card"}, [
             (function(){
               if(idea.owner.name){
-                  return m("p", {class: "label left"}, "Idee van: " + idea.owner.name);
+                  return m("p", {class: "label left"}, i18next.t('idea.text.by') ,m("span", {class:"name"}, idea.owner.name));
               }
             })(),
             (function(){
