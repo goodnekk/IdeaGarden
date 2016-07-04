@@ -55,13 +55,6 @@ var Model = (function(){
         m.request({
             method: "GET",
             url: "/api/ideas"
-        }).then(function(o){
-            return o.map(function(i){
-                i.additions = i.additions.length;
-                return i;
-            }).sort(function(a,b){
-                return b.votecount - a.votecount;
-            });
         }).then(overview);
         return overview;
     }

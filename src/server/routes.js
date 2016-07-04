@@ -106,6 +106,16 @@ module.exports = (function(){
 
     function getIdeas(req, res) {
         database.getIdeas(req.ip, function(data){
+            data = data.map(function(d){
+                d.additions = d.additions.length;
+                return d;
+            }).sort(function(a,b){
+                var delta = b.votecount - a.votecount;
+                if (delta === 0) {
+                    delta = b.additions.length - a.additions.length;
+                }
+                return delta;
+            });
             res.json(data);
         });
     }
