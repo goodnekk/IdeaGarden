@@ -70,7 +70,7 @@ var ExplainPage = {
                         m("div", {class: "ui card colorless"}, [
                             m("p", {class: "centerimage"},[
                                 m("h1", "Crowdsourcing"),
-                                m("p", "Een goed plan begint altijd met een idee. Via crowdsourcing, waarbij kennis en ideeën van een grote groep mensen gebundeld kan worden, denken er ineens honderden mensen na over een vraagstuk in plaats van een paar specialisten. De kans op een innovatief en verrassend idee is hierdoor vele mate groter.")
+                                m("p", "Een goed plan begint altijd met een idee. Via crowdsourcing, waarbij kennis en ideeën van een grote groep mensen gebundeld kan worden, denken er ineens honderden mensen na over een vraagstuk in plaats van een paar specialisten. De kans op een innovatief en verrassend idee is hierdoor vele male groter.")
                             ])
                         ]),
                     ]),
