@@ -1,0 +1,19 @@
+{
+    "email": {
+        "register": "Welkom bij Ideeënvijver",
+        "forgetpassword": "Wachtwoord herstellen",
+        "postidea": "Gefeliciteerd met jouw idee!"
+    },
+    "error":{
+      "noname": "Je bent vergeten je naam in te vullen",
+      "nopassword": "Verzin een wachtwoord",
+      "registrationfailed": "Registratie mislukt"
+    },
+    "menu":{
+      "login": "Aanmelden",
+      "myideas": "Mijn Ideeën",
+      "ideas": "Ideeën",
+      "challenge": "De Vraag",
+      "explain": "Uitleg"
+    }
+}

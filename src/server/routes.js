@@ -82,7 +82,7 @@ module.exports = (function(){
         database.addUser({email: post.email, secret: secret}, function(userDoc){
             if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
             res.json({succes: true});
-            email.sendMail(userDoc.user.email, "Welkom bij Ideeënvijver", userDoc.user.secret, "confirm");
+            email.sendMail(userDoc.user.email, i18next.t('email.register'), userDoc.user.secret, "confirm");
         });
     }
 
@@ -100,7 +100,7 @@ module.exports = (function(){
         database.resetUser({email: post.email, secret: secret}, function(userDoc){
             if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
             res.json({succes: true});
-            email.sendMail(post.email, "Wachtwoord herstellen", secret, "forgotpassword");
+            email.sendMail(post.email, i18next.t('email.forgetpassword'), secret, "forgotpassword");
         });
     }
 
@@ -150,7 +150,7 @@ module.exports = (function(){
                 database.addUser({email: post.email, secret: secret}, function(userDoc){
                     if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
                     addIdeawithUser(userDoc.user._id);
-                    email.sendMail(userDoc.user.email, "Gefeliciteerd met jouw idee!", userDoc.user.secret, "ideaconfirm");
+                    email.sendMail(userDoc.user.email, i18next.t('email.postidea'), userDoc.user.secret, "ideaconfirm");
                 });
             } else {//use logged in user
                 addIdeawithUser(auth.decoded.id);
@@ -232,9 +232,7 @@ module.exports = (function(){
             var fileUrl = __dirname + "/imageData/"+imageId+".jpg";
             fs.writeFile(fileUrl, image.data, function (err) {
                 if (err) {
-                  console.log("Error saving file");
-                  console.log(err);
-                  return res.json({succes: false, message: "Error saving file"});
+                  return res.json({succes: false, message: "error saving file"});
                 }
                 post.content = {
                     src: imageId + ".jpg",

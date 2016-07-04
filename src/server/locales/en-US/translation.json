@@ -1,0 +1,19 @@
+{
+    "email": {
+        "register": "Welcome to Ideapond",
+        "forgetpassword": "Forgot password",
+        "postidea": "Thank you for your idea"
+    },
+    "error":{
+      "noname": "Enter a name",
+      "nopassword": "Enter a password",
+      "registrationfailed": "Registration failed"
+    },
+    "menu":{
+      "login":"Login",
+      "myideas":"My ideas",
+      "ideas": "Ideas",
+      "challenge": "Challenge",
+      "explain": "How it works"
+    }
+}
