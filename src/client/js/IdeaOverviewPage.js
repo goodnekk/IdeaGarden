@@ -110,7 +110,7 @@ var IdeaCard = {
         return m("div", {class: "ui card ideacard"}, [
             m("div", {class: "top"},[
                 m("div", {class: "status"}, [
-                    m.component(Badge, data.additions)
+                    m.component(Badge, data.badge)
                 ]),
                 m("div", {class: "info"}, [
                     m("h3",{class: "ui", onclick: ctrl.open.bind(ctrl)}, data.title),

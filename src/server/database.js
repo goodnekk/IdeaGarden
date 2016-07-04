@@ -67,6 +67,20 @@ IdeaSchema.methods.getPublic = function(requestIp){
 
     var votecount = this.upvotes.length-this.downvotes.length;
 
+    //get fish type
+    var badge = 1;
+    if(this.additions.length > 0){
+        badge = 2;
+        if(this.additions.some(function(a){
+            if(this.owner){
+                return (JSON.stringify(a.owner._id) !== JSON.stringify(this.owner._id));
+            }
+            return false;
+        }.bind(this))){
+            badge = 3;
+        }
+    }
+
     return {
         _id: this._id,
         title: this.title,
@@ -76,7 +90,8 @@ IdeaSchema.methods.getPublic = function(requestIp){
         votecount: votecount,
         owner: this.owner,
         yourvote: yourvote,
-        updated: this.updatedAt
+        updated: this.updatedAt,
+        badge: badge
     };
 };
 
