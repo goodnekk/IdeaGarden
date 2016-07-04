@@ -36,12 +36,12 @@ var MediaInput = {
                 if(ctrl.dataUrl() !== ""){
                     return m("div", {class:"ui media-box image"}, [
                         m("img", {src: ctrl.dataUrl()}),
-                        m("button", {onclick: ctrl.getFile.bind(ctrl)}, "Andere Foto")
+                        m("button", {onclick: ctrl.getFile.bind(ctrl)}, i18next.t('idea.image.other'))
                     ]);
                 } else {
                     return m("div", {class:"ui media-box"}, [
-                        m("p","Je kunt alleen .jpg bestanden uploaden"),
-                        m("button", {onclick: ctrl.getFile.bind(ctrl)} ,"Selecteer Foto")
+                        m("p",i18next.t('idea.image.description')),
+                        m("button", {onclick: ctrl.getFile.bind(ctrl)} ,i18next.t('idea.image.select'))
                     ]);
                 }
             }()

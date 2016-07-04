@@ -7,7 +7,8 @@
     "error":{
       "noname": "Je bent vergeten je naam in te vullen",
       "nopassword": "Verzin een wachtwoord",
-      "registrationfailed": "Registratie mislukt"
+      "registrationfailed": "Registratie mislukt",
+      "general": "Oeps, er gaat iets fout! Neem contact op met Frederique."
     },
     "menu":{
       "login": "Aanmelden",
@@ -45,9 +46,37 @@
         "edit": "Idee Bewerken",
         "by": "Idee van:",
         "summary": "Samenvatting",
+        "summary_desc": "Samenvatting van max. 150 tekens",
+        "summaryplaceholder":"Samenvatting van je idee...",
         "full": "Gedetailleerde omschrijving",
-        "fullplaceholder": "Je hebt je idee nog niet uitgebreid omschreven...",
-        "submit": "Idee nu omschrijven"
+        "full_desc": "Je hebt je idee nog niet uitgebreid omschreven...",
+        "fullplaceholder": "Omschrijf je idee...",
+        "comment": "Reageer",
+        "commentplaceholder": "Uw reactie...",
+        "submit": "Opslaan"
+      },
+      "tabs":{
+        "addition": "Aanvulling",
+        "addition_desc":"Doe een aanvulling op dit idee",
+        "question": "Vraag",
+        "question_desc":"Stel een vraag over dit idee",
+        "image": "Afbeelding",
+        "image_desc": "Geef een beschrijving van de afbeelding",
+        "submit": "Verstuur"
+      },
+      "log":{
+        "addition": "heeft een aanvulling gedaan",
+        "question": "heeft een vraag gesteld",
+        "image": "heeft een afbeelding toegevoegd"
+      },
+      "message":{
+        "image_too_large": "Het bestand is te groot, 5Mb is het maximum",
+        "no_jpeg": "Gebruik aub alleen jpg bestanden"
+      },
+      "image":{
+        "description": "Je kunt alleen .jpg bestanden uploaden",
+        "other":"Andere afbeelding",
+        "select":"Selecteer afbeelding"
       }
     }
 }

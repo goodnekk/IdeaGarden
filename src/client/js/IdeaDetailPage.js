@@ -38,7 +38,7 @@ var IdeaData = {
     },
     view: function(ctrl, idea) {
         return m("div", {class: "ui card stats"}, [
-            m.component(Badge, idea.badge),
+            m.component(Badge, idea.additions.length),
             m.component(VoteButtons, idea.yourvote, ctrl.onvote.bind(ctrl)),
             m("span", {class: "metric"}, [
                 m("span", {class:"number"}, idea.votecount),
@@ -99,30 +99,30 @@ var IdeaText = {
         return m("div", {class: "ui card"}, [
             (function(){
               if(idea.owner.name){
-                  return m("p", {class: "label left"}, i18next.t('idea.text.by') ,m("span", {class:"name"}, idea.owner.name));
+                  return m("p", {class: "label left"}, i18next.t('idea.text.by') + ' ' ,m("span", {class:"name"}, idea.owner.name));
               }
             })(),
             (function(){
                 if(!ctrl.editmode){
                     return [
                         (function(){
-                            if(ctrl.owner) return m("button", {class: "ui", onclick: ctrl.edit.bind(ctrl)},"Idee Bewerken");
+                            if(ctrl.owner) return m("button", {class: "ui", onclick: ctrl.edit.bind(ctrl)},i18next.t('idea.text.edit'));
                         })(),
                         m("h1", {class: "ui break"}, idea.title),
-                        m("p", {class: "label"}, "Samenvatting"),
+                        m("p", {class: "label"}, i18next.t('idea.text.summary')),
                         m("p", {class: ""}, idea.summary),
                         (function(){
                             if(idea.content===""){
                                 if(ctrl.owner) {
                                     return [
-                                        m("p", {class: "label"}, "Gedetailleerde omschrijving"),
-                                        m("p", "Je hebt je idee nog niet uitgebreid omschreven..."),
-                                        m("button", {class: "ui middle", onclick: ctrl.edit.bind(ctrl)},"Idee nu omschrijven")
+                                        m("p", {class: "label"}, i18next.t('idea.text.full')),
+                                        m("p", i18next.t('idea.text.fulldesc')),
+                                        m("button", {class: "ui middle", onclick: ctrl.edit.bind(ctrl)}, i18next.t('idea.text.submit'))
                                     ];
                                 }
                             } else {
                                 return [
-                                    m("p", {class: "label"}, "Gedetailleerde omschrijving"),
+                                    m("p", {class: "label"}, i18next.t('idea.text.full')),
                                     m.component(MarkupBlock, {type: "content", text: idea.content})
                                 ];
                             }
@@ -132,11 +132,22 @@ var IdeaText = {
                 } else  {
                     return m("form", {onsubmit:ctrl.update.bind(ctrl)}, [
                         m("h1", {class: "ui break"}, idea.title),
-                        m("p", {class: "label"}, "Samenvatting van max. 150 tekens"),
-                        m("textarea", {name: "summary", maxlength: "150", class: "ui", placeholder: "Samenvatting van je idee...", value:idea.summary}),
-                        m("p", {class: "label"}, "Gedetailleerde omschrijving:"),
-                        m("textarea", {class: "ui large", name: "content", placeholder: "Omschrijf je idee...", value: idea.content}),
-                        m("button", {action: "submit", class: "ui"}, "Idee Opslaan")
+                        m("p", {class: "label"}, i18next.t('idea.text.summary_desc')),
+                        m("textarea", {
+                          name: "summary",
+                          maxlength: "150",
+                          class: "ui",
+                          placeholder: i18next.t('idea.text.summaryplaceholder'),
+                          value:idea.summary
+                        }),
+                        m("p", {class: "label"}, i18next.t('idea.text.full')),
+                        m("textarea", {
+                          class: "ui large",
+                          name: "content",
+                          placeholder: i18next.t('idea.text.fullplaceholder'),
+                          value: idea.content
+                        }),
+                        m("button", {action: "submit", class: "ui"}, i18next.t('idea.text.submit'))
                     ]);
                 }
             })()
@@ -199,12 +210,12 @@ var DoAddition = {
                             this.mediaDataUrl("");
                             window.scrollTo(0,document.body.scrollHeight);
                         } else {
-                          if(answer.message === "The image is too large"){
-                            this.error = "Het bestand is te groot, 5Mb is het maximum";
+                          if(answer.message === "the image is too large"){
+                            this.error = i18next.t('message.image_too_large');
                           } else if (answer.message === "not a jpeg image"){
-                            this.error = "Gebruik aub alleen jpg bestanden";
+                            this.error = i18next.t('message.no_jpeg');
                           } else {
-                            this.error = "Oeps, er gaat iets fout! Neem contact op met Frederique.";
+                            this.error = i18next.t('error.general');
                           }
                         }
                     }.bind(this));
@@ -215,23 +226,29 @@ var DoAddition = {
     },
     view: function(ctrl) {
         return m("div", {class: "ui card"}, [
-            m.component(SwitchBar, ["Aanvulling", "Vraag", "Afbeelding"], ctrl.onSwitch.bind(ctrl)),
+            m.component(SwitchBar,
+              [
+                i18next.t('idea.tabs.addition'),
+                i18next.t('idea.tabs.question'),
+                i18next.t('idea.tabs.image')
+              ],
+              ctrl.onSwitch.bind(ctrl)),
             m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
                 function(){
                     if(ctrl.category === 0){
                         return m("textarea", {
-                            value: ctrl.addition,class: "ui", placeholder: "Doe een aanvulling op dit idee",
+                            value: ctrl.addition,class: "ui", placeholder: i18next.t('idea.tabs.addition_desc'),
                             onchange: ctrl.update.bind(ctrl)
                         });
                     } else if(ctrl.category === 1){
                         return m("textarea", {
-                            value: ctrl.addition, class: "ui", placeholder: "Stel een vraag over dit idee",
+                            value: ctrl.addition, class: "ui", placeholder: i18next.t('idea.tabs.question_desc'),
                             onchange: ctrl.update.bind(ctrl)
                         });
                     } else {
                         return m("div",[
                             m("textarea", {
-                                value: ctrl.addition, class: "ui", placeholder: "Omschrijf de afbeelding",
+                                value: ctrl.addition, class: "ui", placeholder: i18next.t('idea.tabs.image_desc'),
                                 onchange: ctrl.update.bind(ctrl)
                             }),
                             m.component(MediaInput, ctrl.mediaDataUrl)
@@ -240,7 +257,7 @@ var DoAddition = {
                     }
                 }(),
                 m("p", {class: "ui errorhelp"}, ctrl.error),
-                m("button", {action: "submit", class: "ui"}, "Verstuur")
+                m("button", {action: "submit", class: "ui"}, i18next.t('idea.tabs.submit'))
             ])
         ]);
     }
@@ -257,13 +274,13 @@ var AdditionOverview = {
 var AdditionCard = {
     view: function(ctrl, addition, index) {
         var message = "";
-        if(addition.category === "addition") {message = " heeft een aanvulling gedaan:";}
-        if(addition.category === "question") {message = " heeft een vraag gesteld:";}
-        if(addition.category === "image") {message = " heeft een afbeelding toegevoegd:";}
+        if(addition.category === "addition") {message = i18next.t('idea.log.addition');}
+        if(addition.category === "question") {message = i18next.t('idea.log.question');}
+        if(addition.category === "image") {message = i18next.t('idea.log.image');}
 
         return m("div", {class: "ui card addition"}, [
             (function(){
-                if(addition.owner) return m("p", {class: "label"}, addition.owner.name + message);
+                if(addition.owner) return m("p", {class: "label"}, m("span", {class: "name"}, addition.owner.name), ' ' + message);
             })(),
             m.component(PostSection, addition),
             m.component(CommentSection, addition.comments),
@@ -336,10 +353,9 @@ var ReactionBar = {
         view: function(ctrl, index){
             return m("div",[
                 m("div", {class:"reactionbar"}, [
-                    //m.component(VoteButtons),
                     m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
                         m("img", {src: "static/comment.png"}),
-                        m("span", "Reageer")
+                        m("span", i18next.t('idea.text.comment'))
                     ]),
                 ]),
                 m.component(AddComment, ctrl.show ,index, ctrl.close.bind(ctrl))
@@ -370,10 +386,10 @@ var AddComment = {
                     class: "addcomment", onsubmit: ctrl.comment.bind(ctrl),
                 }, [
                 m("input", {
-                    class: "ui", name: "comment", placeholder: "Uw reactie...",
+                    class: "ui", name: "comment", placeholder: i18next.t('idea.text.commentplaceholder'),
                     config: ctrl.focus.bind(ctrl)
                 }),
-                m("button", {type: "submit", class: "ui", value: "submit"}, "Verstuur")
+                m("button", {type: "submit", class: "ui", value: "submit"}, i18next.t('idea.tabs.submit'))
             ]);
         } else {
             return m("",[]);
@@ -385,66 +401,34 @@ var AddComment = {
 var MarkupBlock = {
     controller: function(){
         this.linkify = function(inputText){
-
-            function slice(text, match, pattern){
-                return {
-                    head:  text.slice(0,match.index),
-                    mid : text.slice(match.index, pattern.lastIndex),
-                    tail:  text.slice(pattern.lastIndex)
-                };
+            inputTextArray = inputText.split(" ");
+            for (i = 0; i < inputTextArray.length; i++) {
+              inputNew = inputTextArray[i];
+              var altered = false;
+              var replacedText, replacePattern1, replacePattern2, replacePattern3;
+              //URLs starting with http://, https://, or ftp://
+              replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+              if (inputNew.match(replacePattern1)) {
+                altered = true;
+                inputTextArray[i] = m("a", {class: "external-link", href: inputNew, target: '_blank'}, inputNew.trunc(80) + ' ');
+              }
+              //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+              replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+              if (inputNew.match(replacePattern2)) {
+                altered = true;
+                inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(80) + ' ');
+              }
+              //Change email addresses to mailto:: links.
+              replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+              if (inputNew.match(replacePattern3)) {
+                altered = true;
+                inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew.trunc(80));
+              }
+              if(!altered){
+                inputTextArray[i] = inputNew + ' ';
+              }
             }
-
-            //recursively slice array
-            function findUrl(inputArray){
-
-                console.log(inputArray);
-                var inputText = inputArray.pop();//
-                console.log(inputText);
-                //URLs starting with http://, https://, or ftp://
-                var pattern1 = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-                //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
-                var pattern2 = /(\b(www)\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-                //Change email addresses to mailto:: links.
-                var pattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
-
-                //find matches
-                var match1 = pattern1.exec(inputText) || {index: Infinity};
-                var match2 = pattern2.exec(inputText) || {index: Infinity};
-                var match3 = pattern3.exec(inputText) || {index: Infinity};
-
-                var slices = {};
-
-                if(match1.index < match2.index && match2.index <= match3.index){ //normal link
-                    console.log("normal link");
-                    slices = slice(inputText, match1, pattern1);
-                    inputArray.push(slices.head);
-                    inputArray.push(m("a", {class: "external-link", href: slices.mid, target: '_blank'}, slices.mid));
-                    inputArray.push(slices.tail);
-                    return findUrl(inputArray);
-                }
-
-                if(match2.index < match1.index && match2.index <= match3.index){ //just www
-                    console.log("www link");
-                    slices = slice(inputText, match2, pattern2);
-                    inputArray.push(slices.head);
-                    inputArray.push(m("a", {class: "external-link", href: "http://" + slices.mid, target: '_blank'}, slices.mid));
-                    inputArray.push(slices.tail);
-                    return findUrl(inputArray);
-                }
-
-                if(match2.index <= match1.index && match3.index < match2.index){ //email
-                    console.log("email");
-                    slices = slice(inputText, match3, pattern3);
-                    inputArray.push(slices.head);
-                    inputArray.push(m("a", {class: "external-link", href: "mailto:" + slices.mid, target: '_blank'}, slices.mid));
-                    inputArray.push(slices.tail);
-                    return findUrl(inputArray);
-                }
-                inputArray.push(inputText);
-                return inputArray;
-            }
-
-            return findUrl([inputText]);
+            return inputTextArray;
         };
     },
     view: function(ctrl, args){

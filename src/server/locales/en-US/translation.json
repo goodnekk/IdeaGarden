@@ -7,13 +7,75 @@
     "error":{
       "noname": "Enter a name",
       "nopassword": "Enter a password",
-      "registrationfailed": "Registration failed"
+      "registrationfailed": "Registration failed",
+      "general": "Something went wrong! Please contact us."
     },
     "menu":{
       "login":"Login",
       "myideas":"My ideas",
       "ideas": "Ideas",
       "challenge": "Challenge",
-      "explain": "How it works"
+      "explain": "How it works",
+      "rules": "Rules",
+      "contact":"Contact"
+    },
+    "confirmpage":{
+      "description": "Welcome in the Ideapond. Please enter your name and a password .",
+      "username": "Name...",
+      "password": "Password...",
+      "confirm": "Confirm registration"
+    },
+    "dashboardpage":{
+      "logoff": "Log off",
+      "profile":"Profile"
+    },
+    "errorpage":{
+      "title": "Oops!",
+      "description": "Something has gone wrong!"
+    },
+    "idea":{
+      "data":{
+        "votecount": "credits",
+        "additions": "additions"
+      },
+      "share":{
+        "facebook": "Share on facebook",
+        "twitter": "Share on twitter"
+      },
+      "text":{
+        "edit": "Edit Idea",
+        "by": "Idea by",
+        "summary": "Summary",
+        "summary_desc": "Write a summary with a maximum of 150 characters",
+        "full": "Description",
+        "full_desc": "Please give a detailed description of your idea...",
+        "fullplaceholder": "Describe your idea...",
+        "comment": "Comment",
+        "commentplaceholder": "Your comment...",
+        "submit": "Submit"
+      },
+      "tabs":{
+        "addition": "Addition",
+        "addition_desc":"Add something to this idea",
+        "question": "Question",
+        "question_desc":"Ask a question about this idea",
+        "image": "Image",
+        "image_desc": "Describe the image",
+        "submit": "Submit"
+      },
+      "log":{
+        "addition": "wrote an addition",
+        "question": "asked a question",
+        "image": "added an image"
+      },
+      "message":{
+        "image_too_large": "The Image is too large, 5Mb is the maximum",
+        "no_jpeg": "Please make sure your file is a jpg image"
+      },
+      "image":{
+        "description": "Only .jpg files can be uploaded",
+        "other":"Select different image",
+        "select":"Select image"
+      }
     }
 }

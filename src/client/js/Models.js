@@ -135,7 +135,7 @@ var Model = (function(){
             extract: function(xhr) {
               //if status is 413, the file was too large
               if(xhr.status === 413){
-                callback({success: false, message: "The image is too large"});
+                callback({success: false, message: "the image is too large"});
               }
               return xhr.responseText;
             }
