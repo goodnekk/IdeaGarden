@@ -127,8 +127,9 @@ IdeaSchema.methods.getPublic = function(requestIp){
         badge: badge
     };
 };
-var Challenge = mongoose.model('Challenge', ChallengeSchema);
+
 var User = mongoose.model('User', UserSchema);
+var Challenge = mongoose.model('Challenge', ChallengeSchema);
 var Idea = mongoose.model('Idea', IdeaSchema);
 
 module.exports = (function(){
@@ -203,13 +204,27 @@ module.exports = (function(){
         });
     }
 
+    function getChallenges(callback){
+      Challenge.find({}).select('title leader').exec(function(err, found){
+        if(!found || err) return callback({succes: false});
+        callback({succes: true, data: found});
+      });
+    }
+
     function getChallenge(id, callback){
-        Challenge.findOne ({_id: id}).exec(function(err, found){
+        Challenge.findOne({_id: id}).exec(function(err, found){
           if(!found || err) return callback({succes: false});
           callback({succes: true, data: found});
         });
     }
 
+    function addChallenge(challenge, callback){
+        var challengeDoc = new Challenge(challenge);
+        challengeDoc.save(function(err, data) {
+            if (err) return callback({succes: false});
+            callback({succes: true, challenge: data});
+        });
+    }
     function getIdeas(requestIp, callback){
         Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList.map(function(ideaDoc){
@@ -307,11 +322,13 @@ module.exports = (function(){
         updateIdea: updateIdea,
 
         getChallenge: getChallenge,
+        addChallenge: addChallenge,
         getIdeas: getIdeas,
         getIdea: getIdea,
 
         voteIdea: voteIdea,
         addAddition: addAddition,
-        addComment: addComment
+        addComment: addComment,
+        mongoose: mongoose
     };
 })();
