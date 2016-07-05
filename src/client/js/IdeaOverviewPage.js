@@ -44,11 +44,11 @@ var SubmitCard = {
                 if(response.succes) {
                     m.route("/thanks");
                 } else  {
-                    if(response.message === "no title"){ this.error = "Vergeet niet om je idee een titel te geven!";}
-                    if(response.message === "no summary"){ this.error = "Vergeet niet om je idee te omschrijven!";}
-                    if(response.message === "no email"){ this.error = "Vergeet niet om je email adres in te vullen!";}
-                    if(response.message === "no agree"){ this.error = "Vergeet niet akkoord te gaan met de voorwaarden!";}
-                    if(response.message === "duplicate"){ this.error = "Er is al een idee met deze titel!";}
+                    if(response.message === "no title"){ this.error = i18next.t('error.notitle');}
+                    if(response.message === "no summary"){ this.error = i18next.t('error.nosummary');}
+                    if(response.message === "no email"){ this.error = i18next.t('error.noemail');}
+                    if(response.message === "no agree"){ this.error = i18next.t('error.noagree');}
+                    if(response.message === "duplicate"){ this.error = i18next.t('error.duplicatetitle');}
                     if(response.message === "new user failed"){ViewModel.loginPopup(true);}
                 }
             }.bind(this));
@@ -63,17 +63,17 @@ var SubmitCard = {
     },
     view: function(ctrl) {
         return m("form", {class: "ui card", onsubmit: ctrl.submit.bind(ctrl)}, [
-            m("input", {class: "ui", name: "title", placeholder: "Titel..."}),
-            m("textarea", {maxlength: "150", class: "ui", name: "summary", placeholder: "Omschrijf kort je idee (Je kunt dit later nog uitbreiden)..."}),
+            m("input", {class: "ui", name: "title", placeholder: i18next.t('idea.titleplaceholder')}),
+            m("textarea", {maxlength: "150", class: "ui", name: "summary", placeholder: i18next.t('idea.summaryplaceholder')}),
             (function(){
-                if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: "Email adres..."});
+                if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: i18next.t('idea.emaillplaceholder')});
             })(),
             m("div",[
                 m("input", {class: "checkbox", type:"checkbox", name: "license_ok", id: "license_ok"}),
-                m("label", {for: 'license_ok'},"Mijn idee mag worden ", m("a", {target: "_blank", href:"/#/rules"}, "gedeeld en bewerkt")),
+                m("label", {for: 'license_ok'}, i18next.t('idea.agree') + " ", m("a", {target: "_blank", href:"/#/rules"}, i18next.t('idea.rules'))),
             ]),
             m("p", {class: "ui errorhelp"}, ctrl.error),
-            m("button", {type:"submit", class: "ui"}, "Verstuur")
+            m("button", {type:"submit", class: "ui"}, i18next.t('idea.tabs.submit'))
         ]);
     }
 };
@@ -121,7 +121,7 @@ var IdeaCard = {
                 m.component(VoteButtons, data.yourvote, ctrl.onvote.bind(ctrl)),
                 m("span", {class: "metric"}, [
                     m("span", {class:"number"}, data.votecount),
-                    m("span", {class:"label"}, "kudos")
+                    m("span", {class:"label"}, i18next.t('idea.data.votecount'))
                 ])
             ])
         ]);

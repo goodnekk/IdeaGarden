@@ -5,6 +5,11 @@
         "postidea": "Thank you for your idea"
     },
     "error":{
+      "notitle": "Please provide a title for your idea",
+      "nosummary": "Please provide a description for your idea",
+      "noemail": "Please enter a valid email address",
+      "noagree": "You have to agree to the terms to post an idea",
+      "duplicatetitle": "Another idea with the same title exists",
       "noname": "Enter a name",
       "nopassword": "Enter a password",
       "registrationfailed": "Registration failed",
@@ -34,6 +39,11 @@
       "description": "Something has gone wrong!"
     },
     "idea":{
+      "titleplaceholder": "Title...",
+      "summaryplaceholder": "Describe your idea (Can be altered later on)...",
+      "emailplaceholder": "Email address...",
+      "agree": "My idea can be",
+      "rules":"shared and edited",
       "data":{
         "votecount": "credits",
         "additions": "additions"

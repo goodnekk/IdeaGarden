@@ -5,6 +5,11 @@
       "postidea": "Gefeliciteerd met jouw idee!"
     },
     "error":{
+      "notitle": "Vergeet niet om je idee een titel te geven!",
+      "nosummary": "Vergeet niet om je idee te omschrijven!",
+      "noemail": "Vergeet niet om je email adres in te vullen!",
+      "noagree": "Vergeet niet akkoord te gaan met de voorwaarden!",
+      "duplicatetitle": "Er is al een idee met deze titel!",
       "noname": "Je bent vergeten je naam in te vullen",
       "nopassword": "Verzin een wachtwoord",
       "registrationfailed": "Registratie mislukt",
@@ -34,6 +39,11 @@
       "description": "Er ging iets mis, sorry!"
     },
     "idea":{
+      "titleplaceholder": "Titel...",
+      "summaryplaceholder": "Omschrijf kort je idee (Je kunt dit later nog uitbreiden)...",
+      "emailplaceholder": "Email adres...",
+      "agree": "Mijn idee mag worden",
+      "rules":"gedeeld en bewerkt",
       "data":{
         "votecount": "kudos",
         "additions": "aanvullingen"
