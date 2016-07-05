@@ -9,7 +9,7 @@ var Menu = {
             m.route("/ideas");
         };
 
-        this.question = function(){
+        this.challenge = function(){
             m.route("/");
         };
 
@@ -42,7 +42,7 @@ var Menu = {
             m("nav", [
                 m("h3", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeënvijver"),
                 m("img", {src:"static/hamburger.png", class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
-                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.question}, i18next.t('menu.challenge')),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.challenge}, i18next.t('menu.challenge')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, i18next.t('menu.ideas')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, i18next.t('menu.explain')),
                 (function(){

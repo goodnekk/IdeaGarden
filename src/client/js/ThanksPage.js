@@ -9,9 +9,9 @@ var ThanksPage = {
                    m("div", {class: "ui col-12"}, [
                        m("div", {class: "ui card colorless header"}, [
                            m("p", {class: "centerimage"},[
-                               m("h1", "gefeliciteerd!"),
-                               m("p", "Jouw idee is zojuist geplaatst op Ideeënvijver."),
-                               m("p", "Open de email die je zojuist ontvangen hebt en klik op de link.")
+                               m("h1", i18next.t('thankspage.title')),
+                               m("p", i18next.t('thankspage.description')),
+                               m("p", i18next.t('thankspage.action'))
                            ])
                        ])
                    ])

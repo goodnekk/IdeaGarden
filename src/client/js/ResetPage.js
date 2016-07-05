@@ -9,9 +9,9 @@ var ResetPage = {
                    m("div", {class: "ui col-12"}, [
                        m("div", {class: "ui card colorless header"}, [
                            m("p", {class: "centerimage"},[
-                               m("h1", "wachtwoord herstellen"),
-                               m("p", "We gaan je wachtwoord voor je herstellen."),
-                               m("p", "Open het mailtje dat je zojuist ontvangen hebt en klik op de link.")
+                               m("h1", i18next.t('loginpopup.reset')),
+                               m("p", i18next.t('loginpopup.reset_desc')),
+                               m("p", i18next.t('loginpopup.resetaction'))
                            ])
                        ])
                    ])

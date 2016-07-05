@@ -1,4 +1,12 @@
 {
+    "button": {
+        "submit": "submit",
+        "login": "log in",
+        "logout": "log out",
+        "register":"register",
+        "confirm": "confirm registration",
+        "reset": "reset"
+    },
     "email": {
         "register": "Welcome to Ideapond",
         "forgetpassword": "Forgot password",
@@ -12,6 +20,10 @@
       "duplicatetitle": "Another idea with the same title exists",
       "noname": "Enter a name",
       "nopassword": "Enter a password",
+      "wrongpassword": "Wrong password",
+      "unknownuser": "The email address is unknown to the system",
+      "unconfirmeduser": "The email address has not been confirmed",
+      "newuserfailed": "The email address is already registered",
       "registrationfailed": "Registration failed",
       "general": "Something went wrong! Please contact us."
     },
@@ -24,15 +36,24 @@
       "rules": "Rules",
       "contact":"Contact"
     },
+    "loginpopup":{
+      "emailplaceholder": "Email address...",
+      "reset": "Reset password",
+      "reset_desc":"Your password will be reset.",
+      "resetaction": "Open your email and click the link in the confirmation we sent you."
+    },
     "confirmpage":{
       "description": "Welcome in the Ideapond. Please enter your name and a password .",
       "username": "Name...",
-      "password": "Password...",
-      "confirm": "Confirm registration"
+      "password": "Password..."
     },
     "dashboardpage":{
-      "logoff": "Log off",
       "profile":"Profile"
+    },
+    "thankspage":{
+      "title": "Congratulations!",
+      "description": "Your idea has landed in the Ideapond.",
+      "action": "Open your email and click the link in the confirmation we sent you."
     },
     "errorpage":{
       "title": "Oops!",
@@ -42,7 +63,7 @@
       "titleplaceholder": "Title...",
       "summaryplaceholder": "Describe your idea (Can be altered later on)...",
       "emailplaceholder": "Email address...",
-      "agree": "My idea can be",
+      "agree": "I allow my idea to be",
       "rules":"shared and edited",
       "data":{
         "votecount": "credits",
@@ -61,8 +82,7 @@
         "full_desc": "Please give a detailed description of your idea...",
         "fullplaceholder": "Describe your idea...",
         "comment": "Comment",
-        "commentplaceholder": "Your comment...",
-        "submit": "Submit"
+        "commentplaceholder": "Your comment..."
       },
       "tabs":{
         "addition": "Addition",
@@ -70,8 +90,7 @@
         "question": "Question",
         "question_desc":"Ask a question about this idea",
         "image": "Image",
-        "image_desc": "Describe the image",
-        "submit": "Submit"
+        "image_desc": "Describe the image"
       },
       "log":{
         "addition": "wrote an addition",

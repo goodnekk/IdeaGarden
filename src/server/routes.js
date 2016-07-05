@@ -104,6 +104,13 @@ module.exports = (function(){
         });
     }
 
+    function getChallenge(req, res) {
+        database.getChallenge(req.params.id, function(data){
+            if(!data.succes) return res.json({succes: false, message: "challenge does not exist"});
+            res.json(data);
+        });
+    }
+
     function getIdeas(req, res) {
         database.getIdeas(req.ip, function(data){
             data = data.map(function(d){
@@ -297,6 +304,8 @@ module.exports = (function(){
         confirmUser: confirmUser,
         register: register,
         forgetPassword: forgetPassword,
+
+        getChallenge: getChallenge,
 
         getIdeas: getIdeas,
         getIdea: getIdea,

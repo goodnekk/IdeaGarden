@@ -30,11 +30,11 @@ var LoginPopup = {
                 password: e.target.elements.password.value
             }, function(token){
                 if(!token.succes){
-                    if(token.message === "no email"){ this.error = "geen email";}
-                    if(token.message === "no password"){ this.error = "geen wachtwoord";}
-                    if(token.message === "wrong password"){ this.error = "verkeerd wachtwoord";}
-                    if(token.message === "unknown user"){ this.error = "onbekend email adres";}
-                    if(token.message === "unconfirmed user"){ this.error = "onbevestigd email adres";}
+                    if(token.message === "no email"){ this.error = i18next.t('error.noemail');}
+                    if(token.message === "no password"){ this.error = i18next.t('error.nopassword');}
+                    if(token.message === "wrong password"){ this.error = i18next.t('error.wrongpassword');}
+                    if(token.message === "unknown user"){ this.error = i18next.t('error.unknownuser');}
+                    if(token.message === "unconfirmed user"){ this.error = i18next.t('error.unconfirmeduser');}
                 } else {
                     this.hide();
                 }
@@ -48,8 +48,8 @@ var LoginPopup = {
                 email: e.target.elements.email.value
             }, function(answer){
                 if(!answer.succes){
-                    if(answer.message === "no email"){ this.error = "geen email";}
-                    if(answer.message === "new user failed"){ this.error = "gebruiker bestaat al";}
+                    if(answer.message === "no email"){ this.error = i18next.t('error.noemail');}
+                    if(answer.message === "new user failed"){ this.error = this.error = i18next.t('error.newuserfailed');}
                 } else {
                     this.hide();
                     m.route("/welcomeregister");
@@ -64,8 +64,8 @@ var LoginPopup = {
                 email: e.target.elements.email.value
             }, function(answer){
                 if(!answer.succes){
-                    if(answer.message === "no email"){ this.error = "geen email";}
-                    if(answer.message === "new user failed"){ this.error = "gebruiker bestaat niet";}
+                    if(answer.message === "no email"){ this.error = i18next.t('error.noemail');}
+                    if(answer.message === "new user failed"){ this.error = i18next.t('error.unknownuser');}
                 } else {
                     this.hide();
                     m.route("/reset");
@@ -82,10 +82,10 @@ var LoginPopup = {
                     m("div", {class: "ui overlay", onclick: ctrl.hide.bind(ctrl)}),
                     m("form", {class: "ui card popup", onsubmit: ctrl.login.bind(ctrl)}, [
                         m("h2", "Login"),
-                        m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
+                        m("input", {class: "ui", name: "email", placeholder: i18next.t('loginpopup.emailplaceholder')}),
                         m("input", {class: "ui", name: "password", type: "password", placeholder: "wachtwoord",}),
                         m("p", {class: "ui errorhelp"}, ctrl.error),
-                        m("button", {type:"submit", class: "ui"}, "login"),
+                        m("button", {type:"submit", class: "ui"}, i18next.t('button.login')),
                         m("p", {class: "ui right register", onclick: ctrl.switchMode.bind(ctrl)}, "registeren"),
                         m("p", {class: "ui register right", onclick: ctrl.forgetMode.bind(ctrl)}, "wachtwoord vergeten"),
 
@@ -96,9 +96,9 @@ var LoginPopup = {
                     m("div", {class: "ui overlay", onclick: ctrl.hide.bind(ctrl)}),
                     m("form", {class: "ui card popup", onsubmit: ctrl.register.bind(ctrl)}, [
                         m("h2", "Account aanmaken"),
-                        m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
+                        m("input", {class: "ui", name: "email", placeholder: i18next.t('loginpopup.emailplaceholder')}),
                         m("p", {class: "ui errorhelp"}, ctrl.error),
-                        m("button", {type:"submit", class: "ui"}, "Registreren"),
+                        m("button", {type:"submit", class: "ui"}, i18next.t('button.register')),
                         m("p", {class: "ui left register", onclick: ctrl.switchMode.bind(ctrl)}, "Ik wil inloggen"),
                     ])
                 ]);
@@ -107,9 +107,9 @@ var LoginPopup = {
                     m("div", {class: "ui overlay", onclick: ctrl.hide.bind(ctrl)}),
                     m("form", {class: "ui card popup", onsubmit: ctrl.forget.bind(ctrl)}, [
                         m("h2", "Wachtwoord herstellen"),
-                        m("input", {class: "ui", name: "email", placeholder: "Email adres",}),
+                        m("input", {class: "ui", name: "email", placeholder: i18next.t('loginpopup.emailplaceholder')}),
                         m("p", {class: "ui errorhelp"}, ctrl.error),
-                        m("button", {type:"submit", class: "ui"}, "Herstellen"),
+                        m("button", {type:"submit", class: "ui"}, i18next.t('button.reset')),
                         m("p", {class: "ui left register", onclick: ctrl.switchMode.bind(ctrl)}, "Ik wil inloggen"),
                     ])
                 ]);

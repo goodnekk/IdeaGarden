@@ -115,7 +115,18 @@ var Model = (function(){
     }
 
     var detail = m.prop({});
+    var challenge = m.prop({});
     var id = "";
+
+    function getChallenge(){
+        id = m.route.param("id") || "577ba8ba4d325fad07cdc85e";
+        m.request({
+            method: "GET",
+            url: "/api/challenge/" + id
+        }).then(validate).then(challenge);
+        return challenge;
+    }
+
     function getDetail(){
         id = m.route.param("id");
         m.request({
@@ -190,6 +201,8 @@ var Model = (function(){
         updateIdea: updateIdea,
         registerAccount:registerAccount,
         forgetPassword: forgetPassword,
+
+        getChallenge: getChallenge,
 
         getDetail: getDetail,
         addAddition: addAddition,

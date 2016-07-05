@@ -61,7 +61,7 @@ app.post('/api/confirm', routes.confirmUser);
 app.post('/api/register', routes.register);
 app.post('/api/forgetpassword', routes.forgetPassword);
 
-app.get('/api/question', function (req, res) {}); //get question data
+app.get('/api/challenge/:id', routes.getChallenge); //get challenge data
 
 app.get('/api/ideas', routes.getIdeas); //get all ideas
 app.get('/api/idea/:id', routes.getIdea); //get specific idea

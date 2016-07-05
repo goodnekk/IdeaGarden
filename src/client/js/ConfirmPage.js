@@ -34,7 +34,7 @@ var ConfirmPage = {
                                 m("input", {class: "ui", name: "name", placeholder: i18next.t('confirmpage.username')}),
                                 m("input", {type: "password" ,class: "ui", name: "password", placeholder: i18next.t('confirmpage.password')}),
                                 m("p", {class: "ui errorhelp"}, ctrl.error),
-                                m("button", {type:"submit", class: "ui"}, i18next.t('confirmpage.confirm'))
+                                m("button", {type:"submit", class: "ui"}, i18next.t('button.confirm'))
                             ]),
                         ]),
                     ]),

@@ -17,16 +17,49 @@ mongoose.connect(config.database.url, config.database.options);
 var SchemaOptions = {
     timestamps: true,
 };
+var ChallengeSchema = new mongoose.Schema({
+  title: {type: String, unique: true},
+  leader:{
+    image: Object,
+    video: Object,
+    text: String,
+  },
+  paragraphs: [{
+    //how, when, why
+    title: String,
+    description: String
+  }],
+  contact: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    autopopulate: {select: 'name'}
+  },
+  disclaimer: String,
+  stakeholders: [
+    {
+      name: String,
+      logo: String,
+      url: String
+    }
+  ],
+  administrators: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      autopopulate: {select: 'name'}
+    }
+  ]
+}, SchemaOptions);
 
 var UserSchema =  new mongoose.Schema({
     name: String,
-    email: {type : String , unique : true},
+    email: {type: String , unique: true},
     password: String,
     secret: String
 });
 
 var IdeaSchema = new mongoose.Schema({
-    title: {type : String , unique : true},
+    title: {type: String , unique: true},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', autopopulate: {select: 'name'}},
     summary: String,
     content: String,
@@ -94,7 +127,7 @@ IdeaSchema.methods.getPublic = function(requestIp){
         badge: badge
     };
 };
-
+var Challenge = mongoose.model('Challenge', ChallengeSchema);
 var User = mongoose.model('User', UserSchema);
 var Idea = mongoose.model('Idea', IdeaSchema);
 
@@ -170,10 +203,11 @@ module.exports = (function(){
         });
     }
 
-    function getQuestion(){
-        return {
-            "title": "wat te doen?"
-        };
+    function getChallenge(id, callback){
+        Challenge.findOne ({_id: id}).exec(function(err, found){
+          if(!found || err) return callback({succes: false});
+          callback({succes: true, data: found});
+        });
     }
 
     function getIdeas(requestIp, callback){
@@ -272,7 +306,7 @@ module.exports = (function(){
         addIdea: addIdea,
         updateIdea: updateIdea,
 
-        getQuestion: getQuestion,
+        getChallenge: getChallenge,
         getIdeas: getIdeas,
         getIdea: getIdea,
 

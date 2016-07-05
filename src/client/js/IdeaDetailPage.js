@@ -400,35 +400,67 @@ var AddComment = {
 
 var MarkupBlock = {
     controller: function(){
-        this.linkify = function(inputText){
-            inputTextArray = inputText.split(" ");
-            for (i = 0; i < inputTextArray.length; i++) {
-              inputNew = inputTextArray[i];
-              var altered = false;
-              var replacedText, replacePattern1, replacePattern2, replacePattern3;
+      this.linkify = function(inputText){
+
+          function slice(text, match, pattern){
+              return {
+                  head:  text.slice(0,match.index),
+                  mid : text.slice(match.index, pattern.lastIndex),
+                  tail:  text.slice(pattern.lastIndex)
+              };
+          }
+
+          //recursively slice array
+          function findUrl(inputArray){
+
+              //console.log(inputArray);
+              var inputText = inputArray.pop();//
+              //console.log(inputText);
               //URLs starting with http://, https://, or ftp://
-              replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-              if (inputNew.match(replacePattern1)) {
-                altered = true;
-                inputTextArray[i] = m("a", {class: "external-link", href: inputNew, target: '_blank'}, inputNew.trunc(80) + ' ');
-              }
+              var pattern1 = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
               //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
-              replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-              if (inputNew.match(replacePattern2)) {
-                altered = true;
-                inputTextArray[i] = m("a", {class: "external-link", href: 'http://' + inputNew, target: '_blank'}, inputNew.trunc(80) + ' ');
-              }
+              var pattern2 = /(\b(www)\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
               //Change email addresses to mailto:: links.
-              replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
-              if (inputNew.match(replacePattern3)) {
-                altered = true;
-                inputTextArray[i] = m("a", {class: "external-link", href: 'mailto:' + inputNew}, inputNew.trunc(80));
+              var pattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+
+              //find matches
+              var match1 = pattern1.exec(inputText) || {index: Infinity};
+              var match2 = pattern2.exec(inputText) || {index: Infinity};
+              var match3 = pattern3.exec(inputText) || {index: Infinity};
+
+              var slices = {};
+
+              if(match1.index < match2.index && match2.index <= match3.index){ //normal link
+                  //console.log("normal link");
+                  slices = slice(inputText, match1, pattern1);
+                  inputArray.push(slices.head);
+                  inputArray.push(m("a", {class: "external-link", href: slices.mid, target: '_blank'}, slices.mid));
+                  inputArray.push(slices.tail);
+                  return findUrl(inputArray);
               }
-              if(!altered){
-                inputTextArray[i] = inputNew + ' ';
+
+              if(match2.index < match1.index && match2.index <= match3.index){ //just www
+                  //console.log("www link");
+                  slices = slice(inputText, match2, pattern2);
+                  inputArray.push(slices.head);
+                  inputArray.push(m("a", {class: "external-link", href: "http://" + slices.mid, target: '_blank'}, slices.mid));
+                  inputArray.push(slices.tail);
+                  return findUrl(inputArray);
               }
-            }
-            return inputTextArray;
+
+              if(match2.index <= match1.index && match3.index < match2.index){ //email
+                  //console.log("email");
+                  slices = slice(inputText, match3, pattern3);
+                  inputArray.push(slices.head);
+                  inputArray.push(m("a", {class: "external-link", href: "mailto:" + slices.mid, target: '_blank'}, slices.mid));
+                  inputArray.push(slices.tail);
+                  return findUrl(inputArray);
+              }
+              inputArray.push(inputText);
+              return inputArray;
+          }
+
+          return findUrl([inputText]);
         };
     },
     view: function(ctrl, args){

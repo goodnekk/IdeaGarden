@@ -1,8 +1,9 @@
 //=require Menu.js
 //=require Footer.js
 
-var QuestionPage = {
+var ChallengePage = {
     controller: function(){
+      //this.challenge = Model.getChallenge();
       this.momentcheck = moment([2016, 6, 2]).diff(moment(),'days');
       this.ideas = function(){
           m.route("/ideas");

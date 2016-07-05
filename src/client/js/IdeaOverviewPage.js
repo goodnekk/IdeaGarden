@@ -66,14 +66,14 @@ var SubmitCard = {
             m("input", {class: "ui", name: "title", placeholder: i18next.t('idea.titleplaceholder')}),
             m("textarea", {maxlength: "150", class: "ui", name: "summary", placeholder: i18next.t('idea.summaryplaceholder')}),
             (function(){
-                if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: i18next.t('idea.emaillplaceholder')});
+                if(!ctrl.emailisvisible()) return m("input", {class: "ui", name: "email", placeholder: i18next.t('idea.emailplaceholder')});
             })(),
             m("div",[
                 m("input", {class: "checkbox", type:"checkbox", name: "license_ok", id: "license_ok"}),
                 m("label", {for: 'license_ok'}, i18next.t('idea.agree') + " ", m("a", {target: "_blank", href:"/#/rules"}, i18next.t('idea.rules'))),
             ]),
             m("p", {class: "ui errorhelp"}, ctrl.error),
-            m("button", {type:"submit", class: "ui"}, i18next.t('idea.tabs.submit'))
+            m("button", {type:"submit", class: "ui"}, i18next.t('button.submit'))
         ]);
     }
 };
