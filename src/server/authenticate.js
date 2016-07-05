@@ -13,9 +13,9 @@ module.exports = (function(){
     function sign(user, callback){
         jwt.sign(user, config.secret, {}, function(err, token) {
             if(err){
-                callback({ succes: false });
+                callback({ success: false });
             } else {
-                callback({ succes: true, token: token });
+                callback({ success: true, token: token });
             }
         });
     }
@@ -24,9 +24,9 @@ module.exports = (function(){
         var token = req.headers['x-access-token'];
         jwt.verify(token, config.secret, function(err, decoded) {
             if (err) {
-                callback({ succes: false });
+                callback({ success: false });
             } else {
-                callback({ succes: true, decoded: decoded });
+                callback({ success: true, decoded: decoded });
             }
         });
     }

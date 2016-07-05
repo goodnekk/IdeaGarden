@@ -1,6 +1,6 @@
 var Model = (function(){
 
-    var token = m.prop({succes: false});
+    var token = m.prop({success: false});
     //load token from session
     if(typeof(localStorage) !== "undefined") {
         try {
@@ -23,7 +23,7 @@ var Model = (function(){
 
     //validate requests
     function validate(answer) {
-      if(answer.succes) {
+      if(answer.success) {
         return answer.data;
       }
     }
@@ -46,7 +46,7 @@ var Model = (function(){
     }
 
     function logout(callback){
-        token({succes: false});
+        token({success: false});
         localStorage.setItem("token", "");
     }
 

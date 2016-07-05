@@ -38,10 +38,10 @@ var SubmitCard = {
             Model.addIdea({
                 title: elements.title.value,
                 summary: elements.summary.value,
-                email: Model.token().succes ? "" : elements.email.value,
+                email: Model.token().success ? "" : elements.email.value,
                 agree: elements.license_ok.checked
             }, function(response){
-                if(response.succes) {
+                if(response.success) {
                     m.route("/thanks");
                 } else  {
                     if(response.message === "no title"){ this.error = i18next.t('error.notitle');}
@@ -56,7 +56,7 @@ var SubmitCard = {
         };
 
         this.emailisvisible = function(){
-            return Model.token().succes;
+            return Model.token().success;
         };
 
         this.error = "";

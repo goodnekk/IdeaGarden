@@ -11,26 +11,26 @@ var emailValidator = require("email-validator");
 module.exports = (function(){
     function login(req, res){
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.email)      return res.json({succes: false, message: "no email"});
-        if(!post.password)   return res.json({succes: false, message: "no password"});
+        if(!post.email)      return res.json({success: false, message: "no email"});
+        if(!post.password)   return res.json({success: false, message: "no password"});
 
         post.email = post.email.toLowerCase();
         //database
         database.getUser({email: post.email}, function(doc){
-            if(!doc.succes){
-                return res.json({succes: false, message: "unknown user"});
+            if(!doc.success){
+                return res.json({success: false, message: "unknown user"});
             }
 
             if(!doc.user.password){
-                return res.json({succes: false, message: "unconfirmed user"});
+                return res.json({success: false, message: "unconfirmed user"});
             }
 
             //check password
             var correct = bcrypt.compareSync(post.password, doc.user.password);
-            if(!correct) return res.json({succes: false, message: "wrong password"});
+            if(!correct) return res.json({success: false, message: "wrong password"});
 
             authenticate.sign({
                 name: doc.user.name,
@@ -38,11 +38,11 @@ module.exports = (function(){
                 id: doc.user._id
             }, function(auth){
 
-                if(!auth.succes){
-                    return res.json({succes: false, message: "failed to sign token"});
+                if(!auth.success){
+                    return res.json({success: false, message: "failed to sign token"});
                 }
                 return res.json({
-                    succes: true,
+                    success: true,
                     token: auth.token,
                     name: doc.user.name,
                     email: doc.user.email
@@ -52,12 +52,12 @@ module.exports = (function(){
     }
 
     function confirmUser(req, res){
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.name)      return res.json({succes: false, message: "no name"});
-        if(!post.password)  return res.json({succes: false, message: "no password"});
-        if(!post.secret)    return res.json({succes: false, message: "no secret"});
+        if(!post.name)      return res.json({success: false, message: "no name"});
+        if(!post.password)  return res.json({success: false, message: "no password"});
+        if(!post.secret)    return res.json({success: false, message: "no secret"});
 
         //security
         post.password = bcrypt.hashSync(post.password, 10);
@@ -69,44 +69,44 @@ module.exports = (function(){
 
     function register(req, res){
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.email)                             return res.json({succes: false, message: "no email"});
-        if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+        if(!post.email)                             return res.json({success: false, message: "no email"});
+        if(!emailValidator.validate(post.email))    return res.json({success: false, message: "invalid email"});
 
         post.email = post.email.toLowerCase();
 
         var secret = uuid.v4(); //generate a secret
 
         database.addUser({email: post.email, secret: secret}, function(userDoc){
-            if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
-            res.json({succes: true});
+            if(!userDoc.success) return res.json({success: false, message: "new user failed"});
+            res.json({success: true});
             email.sendMail(userDoc.user.email, i18next.t('email.register'), userDoc.user.secret, "confirm");
         });
     }
 
     function forgetPassword(req, res){
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.email)                             return res.json({succes: false, message: "no email"});
-        if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+        if(!post.email)                             return res.json({success: false, message: "no email"});
+        if(!emailValidator.validate(post.email))    return res.json({success: false, message: "invalid email"});
         post.email = post.email.toLowerCase();
 
         var secret = uuid.v4(); //generate a secret
 
         database.resetUser({email: post.email, secret: secret}, function(userDoc){
-            if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
-            res.json({succes: true});
+            if(!userDoc.success) return res.json({success: false, message: "new user failed"});
+            res.json({success: true});
             email.sendMail(post.email, i18next.t('email.forgetpassword'), secret, "forgotpassword");
         });
     }
 
     function getChallenge(req, res) {
         database.getChallenge(req.params.id, function(data){
-            if(!data.succes) return res.json({succes: false, message: "challenge does not exist"});
+            if(!data.success) return res.json({success: false, message: "challenge does not exist"});
             res.json(data);
         });
     }
@@ -129,19 +129,19 @@ module.exports = (function(){
 
     function getIdea(req, res) {
         database.getIdea(req.params.id, req.ip, function(data){
-            if(!data.succes) return res.json({succes: false, message: "idea does not exist"});
+            if(!data.success) return res.json({success: false, message: "idea does not exist"});
             res.json(data);
         });
     }
 
     function postIdea(req, res) {
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.title)     return res.json({succes: false, message: "no title"});
-        if(!post.summary)   return res.json({succes: false, message: "no summary"});
-        if(!post.agree)   return res.json({succes: false, message: "no agree"});
+        if(!post.title)     return res.json({success: false, message: "no title"});
+        if(!post.summary)   return res.json({success: false, message: "no summary"});
+        if(!post.agree)   return res.json({success: false, message: "no agree"});
 
         //authenticate
         authenticate.verify(req, function(auth){
@@ -157,15 +157,15 @@ module.exports = (function(){
                 });
             }
 
-            if(!auth.succes) {//create a new user
-                if(!post.email)                             return res.json({succes: false, message: "no email"});
-                if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+            if(!auth.success) {//create a new user
+                if(!post.email)                             return res.json({success: false, message: "no email"});
+                if(!emailValidator.validate(post.email))    return res.json({success: false, message: "invalid email"});
                 post.email = post.email.toLowerCase();
 
                 var secret = uuid.v4(); //generate a secret
 
                 database.addUser({email: post.email, secret: secret}, function(userDoc){
-                    if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
+                    if(!userDoc.success) return res.json({success: false, message: "new user failed"});
                     addIdeawithUser(userDoc.user._id);
                     email.sendMail(userDoc.user.email, i18next.t('email.postidea'), userDoc.user.secret, "ideaconfirm");
                 });
@@ -177,16 +177,16 @@ module.exports = (function(){
 
     function updateIdea(req, res){
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post._id) return res.json({succes: false, message: "no id"});
-        if(!post.summary) return res.json({succes: false, message: "no summary"});
-        if(!post.content) return res.json({succes: false, message: "no content"});
+        if(!post._id) return res.json({success: false, message: "no id"});
+        if(!post.summary) return res.json({success: false, message: "no summary"});
+        if(!post.content) return res.json({success: false, message: "no content"});
 
         //authenticate
         authenticate.verify(req, function(auth){
-            if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+            if(!auth.success) return res.json({success: false, message: "verification failed"});
 
             //database
             database.updateIdea({
@@ -197,8 +197,8 @@ module.exports = (function(){
             },
             req.ip,
             function(doc){
-                if(!doc.succes) return res.json({succes: false, message: "update failed."});
-                res.json({succes: true, data: doc.data});
+                if(!doc.success) return res.json({success: false, message: "update failed."});
+                res.json({success: true, data: doc.data});
             });
         });
     }
@@ -218,38 +218,38 @@ module.exports = (function(){
 
     function postIdeaAddition(req, res){
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.content) return res.json({succes: false, message: "no content"});
+        if(!post.content) return res.json({success: false, message: "no content"});
 
         function postToDatabase(addition){
             authenticate.verify(req, function(auth){
-                if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+                if(!auth.success) return res.json({success: false, message: "verification failed"});
                 post.owner = auth.decoded.id;
                 //database
                 database.addAddition(addition, req.ip, function(doc){
-                    if(!doc.succes) return res.json({succes: false, message: "comment failed."});
-                    res.json({succes: true, data: doc.data});
+                    if(!doc.success) return res.json({success: false, message: "comment failed."});
+                    res.json({success: true, data: doc.data});
                 });
             });
         }
 
         //if the post is an image
         if(post.category === "image") {
-            if(!post.content.image) return res.json({succes: false, message: "no image"});
+            if(!post.content.image) return res.json({success: false, message: "no image"});
 
             //parse image file from base64
             var dataUrl = post.content.image;
             var image = dataurl.parse(dataUrl);
-            if(image.mimetype !== "image/jpeg") return res.json({succes: false, message: "not a jpeg image"});
+            if(image.mimetype !== "image/jpeg") return res.json({success: false, message: "not a jpeg image"});
 
             //save image file
             var imageId = uuid.v4();
             var fileUrl = __dirname + "/imageData/"+imageId+".jpg";
             fs.writeFile(fileUrl, image.data, function (err) {
                 if (err) {
-                  return res.json({succes: false, message: "error saving file"});
+                  return res.json({success: false, message: "error saving file"});
                 }
                 post.content = {
                     src: imageId + ".jpg",
@@ -273,14 +273,14 @@ module.exports = (function(){
 
     function postIdeaComment(req, res){
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.comment) return res.json({succes: false, message: "no comment"});
+        if(!post.comment) return res.json({success: false, message: "no comment"});
 
         //authenticate
         authenticate.verify(req, function(auth){
-            if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+            if(!auth.success) return res.json({success: false, message: "verification failed"});
 
             //database
             database.addComment({
@@ -293,8 +293,8 @@ module.exports = (function(){
             },
             req.ip,
             function(doc){
-                if(!doc.succes) return res.json({succes: false, message: "comment failed."});
-                res.json({succes: true, data: doc.data});
+                if(!doc.success) return res.json({success: false, message: "comment failed."});
+                res.json({success: true, data: doc.data});
             });
         });
     }

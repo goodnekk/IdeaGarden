@@ -137,15 +137,15 @@ module.exports = (function(){
     function addUser(user, callback){
         var userDoc = new User(user);
         userDoc.save(function(err, data) {
-            if (err) return callback({succes: false});
-            callback({succes: true, user: data});
+            if (err) return callback({success: false});
+            callback({success: true, user: data});
         });
     }
 
     function getUser(user, callback){
         User.findOne({ email: user.email }, function(err, found) {
-            if(!found) return callback({succes: false});
-            callback({succes: true, user: found});
+            if(!found) return callback({success: false});
+            callback({success: true, user: found});
         });
     }
 
@@ -159,9 +159,9 @@ module.exports = (function(){
                     'secret': ""
                 }
             }, function(err, doc){
-                if (err) return callback({succes: false});
-                if(!doc) return callback({succes: false});
-                callback({succes: true});
+                if (err) return callback({success: false});
+                if(!doc) return callback({success: false});
+                callback({success: true});
             }
         );
     }
@@ -174,9 +174,9 @@ module.exports = (function(){
                     "secret": user.secret
                 }
             }, function(err, doc){
-                if (err) return callback({succes: false});
-                if(!doc) return callback({succes: false});
-                callback({succes: true});
+                if (err) return callback({success: false});
+                if(!doc) return callback({success: false});
+                callback({success: true});
             }
         );
     }
@@ -184,8 +184,8 @@ module.exports = (function(){
     function addIdea(idea, callback){
         var ideaDoc = new Idea(idea);
         ideaDoc.save(function(err, data) {
-            if(err) return callback({succes: false, message: "duplicate"});
-            if(callback) return callback({succes: true, idea:data.getPublic()});
+            if(err) return callback({success: false, message: "duplicate"});
+            if(callback) return callback({success: true, idea:data.getPublic()});
         });
     }
 
@@ -199,32 +199,46 @@ module.exports = (function(){
                 "content": idea.content
             }
         },function(err) {
-            if(err) return callback({succes: false, message: "invalid"});
+            if(err) return callback({success: false, message: "invalid"});
             getIdea(idea.id, ip, callback);
         });
     }
 
     function getChallenges(callback){
       Challenge.find({}).select('title leader').exec(function(err, found){
-        if(!found || err) return callback({succes: false});
-        callback({succes: true, data: found});
+        if(!found || err) return callback({success: false});
+        callback({success: true, data: found});
       });
     }
 
     function getChallenge(id, callback){
         Challenge.findOne({_id: id}).exec(function(err, found){
-          if(!found || err) return callback({succes: false});
-          callback({succes: true, data: found});
+          if(!found || err) return callback({success: false});
+          callback({success: true, data: found});
         });
     }
 
     function addChallenge(challenge, callback){
         var challengeDoc = new Challenge(challenge);
         challengeDoc.save(function(err, data) {
-            if (err) return callback({succes: false});
-            callback({succes: true, challenge: data});
+            if (err) return callback({success: false});
+            callback({success: true, challenge: data});
         });
     }
+
+    function updateIdeas(updatequery, callback){
+      updatequery = updatequery || {$set: {status: 'active'}};
+      var bulk = Idea.collection.initializeOrderedBulkOp();
+      bulk.find({}).update(updatequery);
+      bulk.execute(function (err) {
+          if(err) {
+            console.log(err.message);
+            return callback({success: false});
+          }
+          callback({success: true});
+      });
+    }
+
     function getIdeas(requestIp, callback){
         Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList.map(function(ideaDoc){
@@ -236,8 +250,8 @@ module.exports = (function(){
 
     function getIdea(id, requestIp, callback){
         Idea.findOne({_id : id}).exec(function(err, found){
-            if(!found || err) return callback({succes: false});
-            callback({succes: true, data: found.getPublic(requestIp)});
+            if(!found || err) return callback({success: false});
+            callback({success: true, data: found.getPublic(requestIp)});
         });
     }
 
@@ -258,7 +272,7 @@ module.exports = (function(){
                     upsert: true
                 },
                 function(err, data){
-                    if (err) return callback({succes: false});
+                    if (err) return callback({success: false});
                     getIdeas(vote.id, callback);
                 }
             );
@@ -277,12 +291,12 @@ module.exports = (function(){
                     upsert: true
                 },
                 function(err, data){
-                    if (err) return callback({succes: false});
+                    if (err) return callback({success: false});
                     getIdeas(vote.id, callback);
                 }
             );
         } else {
-            return callback({succes: false});
+            return callback({success: false});
         }
     }
 
@@ -293,7 +307,7 @@ module.exports = (function(){
                 'additions': post.addition
             }},
             function(err, data){
-                if (err) return callback({succes: false});
+                if (err) return callback({success: false});
                 getIdea(post.id, ip, callback);
             }
         );
@@ -306,7 +320,7 @@ module.exports = (function(){
                 'additions.$.comments': post.comment
             }},
             function(err, data){
-                if (err) return callback({succes: false});
+                if (err) return callback({success: false});
                 getIdea(post.id, ip, callback);
             }
         );
@@ -318,17 +332,21 @@ module.exports = (function(){
         confirmUser: confirmUser,
         resetUser: resetUser,
 
-        addIdea: addIdea,
-        updateIdea: updateIdea,
-
+        getChallenges: getChallenges,
         getChallenge: getChallenge,
         addChallenge: addChallenge,
+
         getIdeas: getIdeas,
         getIdea: getIdea,
-
+        addIdea: addIdea,
+        updateIdea: updateIdea,
+        updateIdeas: updateIdeas,
         voteIdea: voteIdea,
+
         addAddition: addAddition,
+
         addComment: addComment,
+
         mongoose: mongoose
     };
 })();
