@@ -38,7 +38,7 @@ var IdeaData = {
     },
     view: function(ctrl, idea) {
         return m("div", {class: "ui card stats"}, [
-            m.component(Badge, idea.additions.length),
+            m.component(Badge, idea.badge),
             m.component(VoteButtons, idea.yourvote, ctrl.onvote.bind(ctrl)),
             m("span", {class: "metric"}, [
                 m("span", {class:"number"}, idea.votecount),
