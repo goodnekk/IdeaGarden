@@ -117,7 +117,7 @@ var IdeaText = {
                                     return [
                                         m("p", {class: "label"}, i18next.t('idea.text.full')),
                                         m("p", i18next.t('idea.text.fulldesc')),
-                                        m("button", {class: "ui middle", onclick: ctrl.edit.bind(ctrl)}, i18next.t('idea.text.submit'))
+                                        m("button", {class: "ui middle", onclick: ctrl.edit.bind(ctrl)}, i18next.t('button.submit'))
                                     ];
                                 }
                             } else {
@@ -147,7 +147,7 @@ var IdeaText = {
                           placeholder: i18next.t('idea.text.fullplaceholder'),
                           value: idea.content
                         }),
-                        m("button", {action: "submit", class: "ui"}, i18next.t('idea.text.submit'))
+                        m("button", {action: "submit", class: "ui"}, i18next.t('button.submit'))
                     ]);
                 }
             })()
@@ -257,7 +257,7 @@ var DoAddition = {
                     }
                 }(),
                 m("p", {class: "ui errorhelp"}, ctrl.error),
-                m("button", {action: "submit", class: "ui"}, i18next.t('idea.tabs.submit'))
+                m("button", {action: "submit", class: "ui"}, i18next.t('button.submit'))
             ])
         ]);
     }
@@ -389,7 +389,7 @@ var AddComment = {
                     class: "ui", name: "comment", placeholder: i18next.t('idea.text.commentplaceholder'),
                     config: ctrl.focus.bind(ctrl)
                 }),
-                m("button", {type: "submit", class: "ui", value: "submit"}, i18next.t('idea.tabs.submit'))
+                m("button", {type: "submit", class: "ui", value: "submit"}, i18next.t('button.submit'))
             ]);
         } else {
             return m("",[]);
