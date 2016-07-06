@@ -24,6 +24,7 @@ module.exports = (function(){
         var token = req.headers['x-access-token'];
         jwt.verify(token, config.secret, function(err, decoded) {
             if (err) {
+                console.log(err);
                 callback({ success: false });
             } else {
                 callback({ success: true, decoded: decoded });

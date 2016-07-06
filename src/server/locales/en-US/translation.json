@@ -82,7 +82,8 @@
         "summary": "Summary",
         "summary_desc": "Write a summary with a maximum of 150 characters",
         "full": "Description",
-        "full_desc": "Please give a detailed description of your idea...",
+        "full_desc": "You haven't given a detailed description of your idea yet...",
+        "full_donow": "Describe your idea now!",
         "fullplaceholder": "Describe your idea...",
         "comment": "Comment",
         "commentplaceholder": "Your comment..."

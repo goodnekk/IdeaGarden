@@ -74,14 +74,9 @@ module.exports = (function(){
         if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-<<<<<<< HEAD
-        if(!post.email)                             return res.json({succes: false, message: "no email"});
-        if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
-=======
         if(!post.email)                             return res.json({success: false, message: "no email"});
         if(!emailValidator.validate(post.email))    return res.json({success: false, message: "invalid email"});
 
->>>>>>> origin/master
         post.email = post.email.toLowerCase();
 
         var secret = uuid.v4(); //generate a secret
@@ -95,31 +90,31 @@ module.exports = (function(){
 
     function updateUser(req, res){
         //validate
-        if(!req.body) return res.json({succes: false, message: "empty post"});
+        if(!req.body) return res.json({success: false, message: "empty post"});
         var post = req.body;
 
-        if(!post.name)                              return res.json({succes: false, message: "no name"});
+        if(!post.name)                              return res.json({success: false, message: "no name"});
 
-        if(!post.email)                             return res.json({succes: false, message: "no email"});
-        if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+        if(!post.email)                             return res.json({success: false, message: "no email"});
+        if(!emailValidator.validate(post.email))    return res.json({success: false, message: "invalid email"});
         post.email = post.email.toLowerCase();
 
         authenticate.verify(req, function(auth){
-            if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+            if(!auth.success) return res.json({success: false, message: "verification failed"});
 
             var newUser = {id: auth.decoded.id, name: post.name, email: post.email};
             database.updateUser(newUser ,function(data){
-                if(!data.succes) return res.json({succes: false, message: "user update failed"});
+                if(!data.succes) return res.json({success: false, message: "user update failed"});
 
                 console.log(newUser);
                 authenticate.sign(newUser, function(nauth){
                     console.log(nauth);
-                    if(!nauth.succes){
-                        return res.json({succes: false, message: "failed to sign token"});
+                    if(!nauth.success){
+                        return res.json({success: false, message: "failed to sign token"});
                     }
 
                     return res.json({
-                        succes: true,
+                        success: true,
                         token: nauth.token,
                         name: post.name,
                         email: post.email
