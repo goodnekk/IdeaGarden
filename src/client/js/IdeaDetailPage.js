@@ -184,7 +184,7 @@ var DoAddition = {
             if(this.category === 1) category = "question";
             if(this.category === 2) category = "image";
 
-            if(!Model.token().succes){
+            if(!Model.token().success){
                 ViewModel.loginPopup(true);
             } else {
                 if(category === "addition" || category === "question"){
@@ -207,7 +207,7 @@ var DoAddition = {
                             image: this.mediaDataUrl()
                         }
                     },function(answer){
-                        if(answer.succes){
+                        if(answer.success){
                             this.addition = "";
                             this.mediaDataUrl("");
                             window.scrollTo(0,document.body.scrollHeight);
@@ -341,7 +341,7 @@ var ReactionBar = {
             this.token = Model.token;
 
             this.comment = function(){
-                if(!Model.token().succes){
+                if(!Model.token().success){
                     ViewModel.loginPopup(true);
                 } else {
                     this.show = true;

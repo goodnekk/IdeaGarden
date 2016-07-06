@@ -29,7 +29,7 @@ var LoginPopup = {
                 email: e.target.elements.email.value,
                 password: e.target.elements.password.value
             }, function(token){
-                if(!token.succes){
+                if(!token.success){
                     if(token.message === "no email"){ this.error = i18next.t('error.noemail');}
                     if(token.message === "no password"){ this.error = i18next.t('error.nopassword');}
                     if(token.message === "wrong password"){ this.error = i18next.t('error.wrongpassword');}
@@ -47,7 +47,7 @@ var LoginPopup = {
             Model.registerAccount({
                 email: e.target.elements.email.value
             }, function(answer){
-                if(!answer.succes){
+                if(!answer.success){
                     if(answer.message === "no email"){ this.error = i18next.t('error.noemail');}
                     if(answer.message === "new user failed"){ this.error = this.error = i18next.t('error.newuserfailed');}
                 } else {
@@ -63,7 +63,7 @@ var LoginPopup = {
             Model.forgetPassword({
                 email: e.target.elements.email.value
             }, function(answer){
-                if(!answer.succes){
+                if(!answer.success){
                     if(answer.message === "no email"){ this.error = i18next.t('error.noemail');}
                     if(answer.message === "new user failed"){ this.error = i18next.t('error.unknownuser');}
                 } else {

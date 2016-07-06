@@ -11,7 +11,7 @@ var ConfirmPage = {
                 name: elements.name.value,
                 password: elements.password.value
             }, function(response){
-                if(response.succes) {
+                if(response.success) {
                     m.route("/welcome");
                 } else {
                     if(response.message === "no name"){ this.error = i18next.t('error.noname');}
