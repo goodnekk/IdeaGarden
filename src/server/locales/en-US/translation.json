@@ -48,6 +48,9 @@
       "password": "Password..."
     },
     "dashboardpage":{
+      "username": "Username",
+      "email": "Email Adress",
+      "logoff": "Logout",
       "profile":"Profile"
     },
     "thankspage":{

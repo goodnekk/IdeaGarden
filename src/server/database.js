@@ -180,6 +180,22 @@ module.exports = (function(){
         );
     }
 
+    function updateUser(user, callback){
+        User.findOneAndUpdate({
+                "_id": user.id,
+            },{
+                $set: {
+                    "name": user.name,
+                    "email": user.email
+                }
+            }, function(err, doc){
+                if (err) return callback({succes: false});
+                if(!doc) return callback({succes: false});
+                callback({succes: true});
+            }
+        );
+    }
+
     function addIdea(idea, callback){
         var ideaDoc = new Idea(idea);
         ideaDoc.save(function(err, data) {
@@ -302,6 +318,7 @@ module.exports = (function(){
         getUser: getUser,
         confirmUser: confirmUser,
         resetUser: resetUser,
+        updateUser: updateUser,
 
         addIdea: addIdea,
         updateIdea: updateIdea,

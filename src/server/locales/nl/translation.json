@@ -48,6 +48,8 @@
       "password": "Wachtwoord..."
     },
     "dashboardpage":{
+      "username": "Gebruikersnaam",
+      "email": "Email Adres",
       "logoff": "Nu Uitloggen",
       "profile":"Mijn profiel"
     },

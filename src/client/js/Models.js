@@ -45,6 +45,25 @@ var Model = (function(){
         }).then(token).then(callback);
     }
 
+    function updateUser(user, callback){
+        m.request({
+            method: "POST",
+            url: "/api/update",
+            data: user,
+            config: xhrConfig
+        }).then(function(t){
+            console.log(t);
+            if(typeof(localStorage) !== "undefined") {
+                try {
+                    localStorage.setItem("token", JSON.stringify(t));
+                } catch(e) {
+                    console.log(e);
+                }
+            }
+            return t;
+        }).then(token).then(callback);
+    }
+
     function logout(callback){
         token({succes: false});
         localStorage.setItem("token", "");
@@ -193,6 +212,8 @@ var Model = (function(){
         login: login,
         logout: logout,
         token: token,
+        updateUser: updateUser,
+
         getOverview: getOverview,
         getMyIdeas: getMyIdeas,
         voteIdeaOverview: voteIdeaOverview,

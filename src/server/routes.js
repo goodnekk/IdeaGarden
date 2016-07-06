@@ -8,8 +8,10 @@ var dataurl = require("dataurl");
 var fs = require("fs");
 var emailValidator = require("email-validator");
 
+var i18next;
+
 module.exports = (function(){
-    function login(req, res){
+    function loginUser(req, res){
         //validate
         if(!req.body) return res.json({succes: false, message: "empty post"});
         var post = req.body;
@@ -27,7 +29,6 @@ module.exports = (function(){
             if(!doc.user.password){
                 return res.json({succes: false, message: "unconfirmed user"});
             }
-
             //check password
             var correct = bcrypt.compareSync(post.password, doc.user.password);
             if(!correct) return res.json({succes: false, message: "wrong password"});
@@ -37,7 +38,7 @@ module.exports = (function(){
                 email: doc.user.email,
                 id: doc.user._id
             }, function(auth){
-
+                console.log("login");
                 if(!auth.succes){
                     return res.json({succes: false, message: "failed to sign token"});
                 }
@@ -67,14 +68,13 @@ module.exports = (function(){
         });
     }
 
-    function register(req, res){
+    function registerUser(req, res){
         //validate
         if(!req.body) return res.json({succes: false, message: "empty post"});
         var post = req.body;
 
         if(!post.email)                             return res.json({succes: false, message: "no email"});
         if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
-
         post.email = post.email.toLowerCase();
 
         var secret = uuid.v4(); //generate a secret
@@ -83,6 +83,42 @@ module.exports = (function(){
             if(!userDoc.succes) return res.json({succes: false, message: "new user failed"});
             res.json({succes: true});
             email.sendMail(userDoc.user.email, i18next.t('email.register'), userDoc.user.secret, "confirm");
+        });
+    }
+
+    function updateUser(req, res){
+        //validate
+        if(!req.body) return res.json({succes: false, message: "empty post"});
+        var post = req.body;
+
+        if(!post.name)                              return res.json({succes: false, message: "no name"});
+
+        if(!post.email)                             return res.json({succes: false, message: "no email"});
+        if(!emailValidator.validate(post.email))    return res.json({succes: false, message: "invalid email"});
+        post.email = post.email.toLowerCase();
+
+        authenticate.verify(req, function(auth){
+            if(!auth.succes) return res.json({succes: false, message: "verification failed"});
+
+            var newUser = {id: auth.decoded.id, name: post.name, email: post.email};
+            database.updateUser(newUser ,function(data){
+                if(!data.succes) return res.json({succes: false, message: "user update failed"});
+
+                console.log(newUser);
+                authenticate.sign(newUser, function(nauth){
+                    console.log(nauth);
+                    if(!nauth.succes){
+                        return res.json({succes: false, message: "failed to sign token"});
+                    }
+
+                    return res.json({
+                        succes: true,
+                        token: nauth.token,
+                        name: post.name,
+                        email: post.email
+                    });
+                });
+            });
         });
     }
 
@@ -299,10 +335,15 @@ module.exports = (function(){
         });
     }
 
+    function setI18next(i){
+        i18next = i;
+    }
+
     return {
-        login: login,
+        loginUser: loginUser,
         confirmUser: confirmUser,
-        register: register,
+        registerUser: registerUser,
+        updateUser: updateUser,
         forgetPassword: forgetPassword,
 
         getChallenge: getChallenge,
@@ -314,6 +355,8 @@ module.exports = (function(){
 
         postIdeaVote: postIdeaVote,
         postIdeaAddition: postIdeaAddition,
-        postIdeaComment: postIdeaComment
+        postIdeaComment: postIdeaComment,
+
+        setI18next: setI18next
     };
 })();

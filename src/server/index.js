@@ -6,6 +6,7 @@ var middleware = require('i18next-express-middleware');
 var Backend = require('i18next-node-fs-backend');
 var fs = require('fs');
 var routes = require('./routes');
+
 var config;
 if (!fs.existsSync(__dirname + '/./config.js')) {
   console.log('Warning, no config.js present. Falling back to config.default.js');
@@ -17,16 +18,17 @@ if (!fs.existsSync(__dirname + '/./config.js')) {
 var env = process.env.NODE_ENV || 'development';
 
 i18next
-  .use(Backend)
-  .use(middleware.LanguageDetector)
-  .init({
-    lng: 'nl',
-    debug: false,
-    "fallbackLng": "en",
-    backend: {
-      loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json'
-    }
-  });
+    .use(Backend)
+    .use(middleware.LanguageDetector)
+    .init({
+        lng: 'nl',
+        debug: false,
+        "fallbackLng": "en",
+        backend: {
+            loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json'
+        }
+    });
+routes.setI18next(i18next);
 
 var app = express();
 app.use(middleware.handle(i18next, {
@@ -56,9 +58,10 @@ app.get('/api', function (req, res) {
     res.json({message: 'Hello World!'});
 });
 
-app.post('/api/login', routes.login); //login
+app.post('/api/login', routes.loginUser); //login
 app.post('/api/confirm', routes.confirmUser);
-app.post('/api/register', routes.register);
+app.post('/api/register', routes.registerUser);
+app.post('/api/update', routes.updateUser);
 app.post('/api/forgetpassword', routes.forgetPassword);
 
 app.get('/api/challenge/:id', routes.getChallenge); //get challenge data

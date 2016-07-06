@@ -72,10 +72,12 @@ var ShareButtons = {
 var IdeaText = {
     controller: function(idea){
         this.owner = false;
-        if(idea.owner.name){
-          if(idea.owner.name === Model.token().name){
-            this.owner = true;
-          }
+        if(idea.owner){
+            if(idea.owner.name){
+                if(idea.owner.name === Model.token().name){
+                    this.owner = true;
+                }
+            }
         }
 
         this.editmode = false;
@@ -98,7 +100,7 @@ var IdeaText = {
         if(!idea.content) {idea.content="";}
         return m("div", {class: "ui card"}, [
             (function(){
-              if(idea.owner.name){
+              if(idea.owner){
                   return m("p", {class: "label left"}, i18next.t('idea.text.by') + ' ' ,m("span", {class:"name"}, idea.owner.name));
               }
             })(),
@@ -417,9 +419,9 @@ var MarkupBlock = {
               var inputText = inputArray.pop();//
               //console.log(inputText);
               //URLs starting with http://, https://, or ftp://
-              var pattern1 = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+              var pattern1 = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|()!:,.;]*[-A-Z0-9+&@#\/%=~_|()])/gim;
               //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
-              var pattern2 = /(\b(www)\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+              var pattern2 = /(\b(www)\.[-A-Z0-9+&@#\/%?=~_|()!:,.;]*[-A-Z0-9+&@#\/%=~_|()])/gim;
               //Change email addresses to mailto:: links.
               var pattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
 
