@@ -118,8 +118,8 @@ var IdeaText = {
                                 if(ctrl.owner) {
                                     return [
                                         m("p", {class: "label"}, i18next.t('idea.text.full')),
-                                        m("p", i18next.t('idea.text.fulldesc')),
-                                        m("button", {class: "ui middle", onclick: ctrl.edit.bind(ctrl)}, i18next.t('button.submit'))
+                                        m("p", i18next.t('idea.text.full_desc')),
+                                        m("button", {class: "ui middle", onclick: ctrl.edit.bind(ctrl)}, i18next.t('idea.text.full_donow'))
                                     ];
                                 }
                             } else {
@@ -128,7 +128,6 @@ var IdeaText = {
                                     m.component(MarkupBlock, {type: "content", text: idea.content})
                                 ];
                             }
-
                         })()
                     ];
                 } else  {

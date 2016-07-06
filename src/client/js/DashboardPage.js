@@ -10,7 +10,7 @@ var DashboardPage = {
                 name: e.target.elements.username.value,
                 email: e.target.elements.email.value
             }, function(e){
-                if(e.succes){
+                if(e.success){
                     m.route("/ideas")
                 };
             });
