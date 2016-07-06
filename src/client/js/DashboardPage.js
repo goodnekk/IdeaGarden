@@ -11,8 +11,8 @@ var DashboardPage = {
                 email: e.target.elements.email.value
             }, function(e){
                 if(e.success){
-                    m.route("/ideas")
-                };
+                    m.route("/ideas");
+                }
             });
         };
 

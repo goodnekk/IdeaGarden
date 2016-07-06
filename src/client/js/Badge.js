@@ -1,5 +1,9 @@
 var Badge = {
     view: function(ctrl, image){
-        return m("img", {src: "static/stage" + image + ".png"});
+        var c = "";
+        if(image > 3){
+            c="largefish";
+        };
+        return m("img", {class: c, src: "static/stage" + image + ".png"});
     }
 };
