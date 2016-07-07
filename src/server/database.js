@@ -82,9 +82,10 @@ var IdeaSchema = new mongoose.Schema({
 }, SchemaOptions);
 
 IdeaSchema.plugin(autopopulate);
-IdeaSchema.methods.getPublic = function(requestIp, position){
+
+IdeaSchema.methods.getVotes = function(requestIp){
     //get user votes
-    var yourvote = 0;
+    this.yourvote = 0;
 
     if (this.upvotes.find(function(ip){
         return ip === requestIp;
@@ -98,36 +99,53 @@ IdeaSchema.methods.getPublic = function(requestIp, position){
         yourvote = -1;
     }
 
-    var votecount = this.upvotes.length-this.downvotes.length;
+    this.votecount = this.upvotes.length-this.downvotes.length;
 
+    return this;
+};
+
+IdeaSchema.methods.getBadge = function(position){
     //get fish type
-    var badge = 1;
+    this.badge = 1;
+    this.position = position;
+
     if(this.additions.length > 0){
-        badge = 2;
+        this.badge = 2;
         if(this.additions.some(function(a){
             if(this.owner && a.owner){
                 return (JSON.stringify(a.owner._id) !== JSON.stringify(this.owner._id));
             }
             return false;
         }.bind(this))){
-            badge = 3;
+            this.badge = 3; //if it has additions with another owner
         }
     }
     if(position < 5) {
-        badge = 4;
+        this.badge = 4;
     }
 
+    return this;
+};
+
+IdeaSchema.methods.hideAdditions = function(){
+    //get fish type
+    this.additions = undefined;
+    return this;
+};
+
+IdeaSchema.methods.getPublic = function(){
     return {
         _id: this._id,
         title: this.title,
         summary: this.summary,
         content: this.content,
         additions: this.additions,
-        votecount: votecount,
+        votecount: this.votecount,
         owner: this.owner,
-        yourvote: yourvote,
+        yourvote: this.yourvote,
         updated: this.updatedAt,
-        badge: badge
+        badge: this.badge,
+        position: this.position
     };
 };
 
@@ -204,7 +222,7 @@ module.exports = (function(){
         var ideaDoc = new Idea(idea);
         ideaDoc.save(function(err, data) {
             if(err) return callback({success: false, message: "duplicate"});
-            if(callback) return callback({success: true, idea:data.getPublic()});
+            if(callback) return callback({success: true});
         });
     }
 
@@ -261,12 +279,8 @@ module.exports = (function(){
     function getIdeas(requestIp, callback){
         Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList
-                .map(function(ideaDoc, count){
-                    return ideaDoc.getPublic(requestIp, count);
-                })
-                .map(function(d){
-                    d.additions = d.additions.length;
-                    return d;
+                .map(function(ideaDoc){
+                    return ideaDoc.getVotes(requestIp);
                 })
                 .sort(function(a,b){
                     var delta = b.votecount - a.votecount;
@@ -274,18 +288,21 @@ module.exports = (function(){
                         delta = b.additions.length - a.additions.length;
                     }
                     return delta;
+                })
+                .map(function(ideaDoc, count){
+                    return ideaDoc.getBadge(count).hideAdditions().getPublic();
                 });
+
             if(callback) callback(ideaDocList);
         });
     }
 
     function getIdea(id, requestIp, callback){
-        //this is a stupid but it works
-
+        //this is a stupid implementation but it works
         Idea.find({}).exec(function(err, ideaDocList){
             ideaDocList = ideaDocList
-                .map(function(ideaDoc, count){
-                    return ideaDoc.getPublic(requestIp, count);
+                .map(function(ideaDoc){
+                    return ideaDoc.getVotes(requestIp);
                 })
                 .sort(function(a,b){
                     var delta = b.votecount - a.votecount;
@@ -294,19 +311,15 @@ module.exports = (function(){
                     }
                     return delta;
                 })
+                .map(function(ideaDoc, count){
+                    return ideaDoc.getBadge(count).getPublic();
+                })
                 .filter(function(a){
                     return JSON.stringify(a._id) === JSON.stringify(id);
                 });
-
             if(ideaDocList.length === 0) return callback({success: false});
             if(callback) callback({success: true, data: ideaDocList[0]});
         });
-        /*
-        Idea.findOne({_id : id}).exec(function(err, found){
-            if(!found || err) return callback({success: false});
-            callback({success: true, data: found.getPublic(requestIp)});
-        });
-        */
     }
 
     function voteIdea(vote, callback) {

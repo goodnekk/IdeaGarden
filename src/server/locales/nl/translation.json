@@ -104,7 +104,7 @@
       },
       "message":{
         "image_too_large": "Het bestand is te groot, 5Mb is het maximum",
-        "no_jpeg": "Gebruik aub alleen jpg bestanden"
+        "no_jpeg": "Gebruik a.u.b. alleen .jpg bestanden"
       },
       "image":{
         "description": "Je kunt alleen .jpg bestanden uploaden",
