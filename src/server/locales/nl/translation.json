@@ -5,7 +5,7 @@
         "logout": "afmelden",
         "register":"registreren",
         "confirm": "registratie bevestigen",
-        "reset": "annuleren"
+        "reset": "herstellen"
     },
     "email": {
         "register": "Welkom bij Ideeënvijver",
