@@ -1,4 +1,8 @@
 var i18nextOptions = {
+  detection: {
+    order: ['navigator', 'querystring', 'cookie'],
+    caches: ['cookie']
+  },
   debug: false,
   fallbackLng: 'nl',
   whitelist:['nl', 'en-US'],
