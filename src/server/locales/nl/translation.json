@@ -8,108 +8,108 @@
         "reset": "annuleren"
     },
     "email": {
-      "register": "Welkom bij Ideeënvijver",
-      "forgetpassword": "Wachtwoord herstellen",
-      "postidea": "Gefeliciteerd met jouw idee!"
+        "register": "Welkom bij Ideeënvijver",
+        "forgetpassword": "Wachtwoord herstellen",
+        "postidea": "Gefeliciteerd met jouw idee!"
     },
     "error":{
-      "notitle": "Vergeet niet om je idee een titel te geven!",
-      "nosummary": "Vergeet niet om je idee te omschrijven!",
-      "noemail": "Vergeet niet om je email adres in te vullen!",
-      "noagree": "Vergeet niet akkoord te gaan met de voorwaarden!",
-      "duplicatetitle": "Er is al een idee met deze titel!",
-      "noname": "Je bent vergeten je naam in te vullen",
-      "nopassword": "Geef een wachtwoord",
-      "wrongpassword": "Wachtwoord is onjuist",
-      "unknownuser": "Het opgegeven email adres is onbekend",
-      "unconfirmeduser": "Je hebt je registratie nog niet bevestigd",
-      "newuserfailed": "Dit email adres is al geregistreerd",
-      "registrationfailed": "Registratie mislukt",
-      "general": "Oeps, er gaat iets fout! Neem contact op met Frederique."
+        "notitle": "Vergeet niet om je idee een titel te geven!",
+        "nosummary": "Vergeet niet om je idee te omschrijven!",
+        "noemail": "Vergeet niet om je email adres in te vullen!",
+        "noagree": "Vergeet niet akkoord te gaan met de voorwaarden!",
+        "duplicatetitle": "Er is al een idee met deze titel!",
+        "noname": "Je bent vergeten je naam in te vullen",
+        "nopassword": "Geef een wachtwoord",
+        "wrongpassword": "Wachtwoord is onjuist",
+        "unknownuser": "Het opgegeven email adres is onbekend",
+        "unconfirmeduser": "Je hebt je registratie nog niet bevestigd",
+        "newuserfailed": "Dit email adres is al geregistreerd",
+        "registrationfailed": "Registratie mislukt",
+        "general": "Oeps, er gaat iets fout! Neem contact op met Frederique."
     },
     "menu":{
-      "login": "Aanmelden",
-      "myideas": "Mijn Ideeën",
-      "ideas": "Ideeën",
-      "challenge": "De Vraag",
-      "explain": "Uitleg",
-      "rules": "Regels",
-      "contact":"Contact"
+        "login": "Aanmelden",
+        "myideas": "Mijn Ideeën",
+        "ideas": "Ideeën",
+        "challenge": "De Vraag",
+        "explain": "Uitleg",
+        "rules": "Regels",
+        "contact":"Contact"
     },
     "loginpopup":{
-      "emailplaceholder": "Email adres...",
-      "reset": "wachtwoord herstellen",
-      "reset_desc":"We gaan je wachtwoord voor je herstellen.",
-      "resetaction": "Open de email die je zojuist ontvangen hebt en klik op de link."
+        "emailplaceholder": "Email adres...",
+        "reset": "wachtwoord herstellen",
+        "reset_desc":"We gaan je wachtwoord voor je herstellen.",
+        "resetaction": "Open de email die je zojuist ontvangen hebt en klik op de link."
     },
     "confirmpage":{
-      "description": "Welkom terug bij Ideeënvijver. Geef je naam en verzin een wachtwoord.",
-      "username": "Gebruikersnaam...",
-      "password": "Wachtwoord..."
+        "description": "Welkom terug bij Ideeënvijver. Geef je naam en verzin een wachtwoord.",
+        "username": "Gebruikersnaam...",
+        "password": "Wachtwoord..."
     },
     "dashboardpage":{
-      "username": "Gebruikersnaam",
-      "email": "Email Adres",
-      "logoff": "Nu Uitloggen",
-      "profile":"Mijn profiel"
+        "username": "Gebruikersnaam",
+        "email": "Email Adres",
+        "logoff": "Nu Uitloggen",
+        "profile":"Mijn profiel"
     },
     "thankspage":{
-      "title": "gefeliciteerd!",
-      "description": "Jouw idee is zojuist geplaatst op Ideeënvijver.",
-      "action": "Open de email die je zojuist ontvangen hebt en klik op de link."
+        "title": "gefeliciteerd!",
+        "description": "Jouw idee is zojuist geplaatst op Ideeënvijver.",
+        "action": "Open de email die je zojuist ontvangen hebt en klik op de link."
     },
     "errorpage":{
-      "title": "Oeps!",
-      "description": "Er ging iets mis, sorry!"
+        "title": "Oeps!",
+        "description": "Er ging iets mis, sorry!"
     },
     "idea":{
-      "titleplaceholder": "Titel...",
-      "summaryplaceholder": "Omschrijf kort je idee (Je kunt dit later nog uitbreiden)...",
-      "emailplaceholder": "Email adres...",
-      "agree": "Mijn idee mag worden",
-      "rules":"gedeeld en bewerkt",
-      "data":{
-        "votecount": "kudos",
-        "additions": "aanvullingen"
-      },
-      "share":{
-        "facebook": "Deel op facebook",
-        "twitter": "Deel op twitter"
-      },
-      "text":{
-        "edit": "Idee Bewerken",
-        "by": "Idee van:",
-        "summary": "Samenvatting",
-        "summary_desc": "Samenvatting van max. 150 tekens",
-        "summaryplaceholder":"Samenvatting van je idee...",
-        "full": "Gedetailleerde omschrijving",
-        "full_desc": "Je hebt je idee nog niet uitgebreid omschreven...",
-        "fullplaceholder": "Omschrijf je idee...",
-        "full_donow": "Omschrijf nu je idee!",
-        "comment": "Reageer",
-        "commentplaceholder": "Uw reactie..."
-      },
-      "tabs":{
-        "addition": "Aanvulling",
-        "addition_desc":"Doe een aanvulling op dit idee",
-        "question": "Vraag",
-        "question_desc":"Stel een vraag over dit idee",
-        "image": "Afbeelding",
-        "image_desc": "Geef een beschrijving van de afbeelding"
-      },
-      "log":{
-        "addition": "heeft een aanvulling gedaan",
-        "question": "heeft een vraag gesteld",
-        "image": "heeft een afbeelding toegevoegd"
-      },
-      "message":{
-        "image_too_large": "Het bestand is te groot, 5Mb is het maximum",
-        "no_jpeg": "Gebruik a.u.b. alleen .jpg bestanden"
-      },
-      "image":{
-        "description": "Je kunt alleen .jpg bestanden uploaden",
-        "other":"Andere afbeelding",
-        "select":"Selecteer afbeelding"
-      }
+        "titleplaceholder": "Titel...",
+        "summaryplaceholder": "Omschrijf kort je idee (Je kunt dit later nog uitbreiden)...",
+        "emailplaceholder": "Email adres...",
+        "agree": "Mijn idee mag worden",
+        "rules":"gedeeld en bewerkt",
+        "data":{
+            "votecount": "kudos",
+            "additions": "aanvullingen"
+        },
+        "share":{
+            "facebook": "Deel op facebook",
+            "twitter": "Deel op twitter"
+        },
+        "text":{
+            "edit": "Idee Bewerken",
+            "by": "Idee van:",
+            "summary": "Samenvatting",
+            "summary_desc": "Samenvatting van max. 150 tekens",
+            "summaryplaceholder":"Samenvatting van je idee...",
+            "full": "Gedetailleerde omschrijving",
+            "full_desc": "Je hebt je idee nog niet uitgebreid omschreven...",
+            "fullplaceholder": "Omschrijf je idee...",
+            "full_donow": "Omschrijf nu je idee!",
+            "comment": "Reageer",
+            "commentplaceholder": "Uw reactie..."
+        },
+        "tabs":{
+            "addition": "Aanvulling",
+            "addition_desc":"Doe een aanvulling op dit idee",
+            "question": "Vraag",
+            "question_desc":"Stel een vraag over dit idee",
+            "image": "Afbeelding",
+            "image_desc": "Geef een beschrijving van de afbeelding"
+        },
+        "log":{
+            "addition": "heeft een aanvulling gedaan",
+            "question": "heeft een vraag gesteld",
+            "image": "heeft een afbeelding toegevoegd"
+        },
+        "message":{
+            "image_too_large": "Het bestand is te groot, 5Mb is het maximum",
+            "no_jpeg": "Gebruik a.u.b. alleen .jpg bestanden"
+        },
+        "image":{
+            "description": "Je kunt alleen .jpg bestanden uploaden",
+            "other":"Andere afbeelding",
+            "select":"Selecteer afbeelding"
+        }
     }
 }

@@ -90,13 +90,13 @@ IdeaSchema.methods.getVotes = function(requestIp){
     if (this.upvotes.find(function(ip){
         return ip === requestIp;
     })) {
-        yourvote = 1;
+        this.yourvote = 1;
     }
 
     if (this.downvotes.find(function(ip){
         return ip === requestIp;
     })) {
-        yourvote = -1;
+        this.yourvote = -1;
     }
 
     this.votecount = this.upvotes.length-this.downvotes.length;

@@ -13,102 +13,102 @@
         "postidea": "Thank you for your idea"
     },
     "error":{
-      "notitle": "Please provide a title for your idea",
-      "nosummary": "Please provide a description for your idea",
-      "noemail": "Please enter a valid email address",
-      "noagree": "You have to agree to the terms to post an idea",
-      "duplicatetitle": "Another idea with the same title exists",
-      "noname": "Enter a name",
-      "nopassword": "Enter a password",
-      "wrongpassword": "Wrong password",
-      "unknownuser": "The email address is unknown to the system",
-      "unconfirmeduser": "The email address has not been confirmed",
-      "newuserfailed": "The email address is already registered",
-      "registrationfailed": "Registration failed",
-      "general": "Something went wrong! Please contact us."
+        "notitle": "Please provide a title for your idea",
+        "nosummary": "Please provide a description for your idea",
+        "noemail": "Please enter a valid email address",
+        "noagree": "You have to agree to the terms to post an idea",
+        "duplicatetitle": "Another idea with the same title exists",
+        "noname": "Enter a name",
+        "nopassword": "Enter a password",
+        "wrongpassword": "Wrong password",
+        "unknownuser": "The email address is unknown to the system",
+        "unconfirmeduser": "The email address has not been confirmed",
+        "newuserfailed": "The email address is already registered",
+        "registrationfailed": "Registration failed",
+        "general": "Something went wrong! Please contact us."
     },
     "menu":{
-      "login":"Login",
-      "myideas":"My ideas",
-      "ideas": "Ideas",
-      "challenge": "Challenge",
-      "explain": "How it works",
-      "rules": "Rules",
-      "contact":"Contact"
+        "login":"Login",
+        "myideas":"My ideas",
+        "ideas": "Ideas",
+        "challenge": "Challenge",
+        "explain": "How it works",
+        "rules": "Rules",
+        "contact":"Contact"
     },
     "loginpopup":{
-      "emailplaceholder": "Email address...",
-      "reset": "Reset password",
-      "reset_desc":"Your password will be reset.",
-      "resetaction": "Open your email and click the link in the confirmation we sent you."
+        "emailplaceholder": "Email address...",
+        "reset": "Reset password",
+        "reset_desc":"Your password will be reset.",
+        "resetaction": "Open your email and click the link in the confirmation we sent you."
     },
     "confirmpage":{
-      "description": "Welcome in the Ideapond. Please enter your name and a password .",
-      "username": "Name...",
-      "password": "Password..."
+        "description": "Welcome in the Ideapond. Please enter your name and a password .",
+        "username": "Name...",
+        "password": "Password..."
     },
     "dashboardpage":{
-      "username": "Username",
-      "email": "Email Adress",
-      "logoff": "Logout",
-      "profile":"Profile"
+        "username": "Username",
+        "email": "Email Adress",
+        "logoff": "Logout",
+        "profile":"Profile"
     },
     "thankspage":{
-      "title": "Congratulations!",
-      "description": "Your idea has landed in the Ideapond.",
-      "action": "Open your email and click the link in the confirmation we sent you."
+        "title": "Congratulations!",
+        "description": "Your idea has landed in the Ideapond.",
+        "action": "Open your email and click the link in the confirmation we sent you."
     },
     "errorpage":{
-      "title": "Oops!",
-      "description": "Something has gone wrong!"
+        "title": "Oops!",
+        "description": "Something has gone wrong!"
     },
     "idea":{
-      "titleplaceholder": "Title...",
-      "summaryplaceholder": "Describe your idea (Can be altered later on)...",
-      "emailplaceholder": "Email address...",
-      "agree": "I allow my idea to be",
-      "rules":"shared and edited",
-      "data":{
-        "votecount": "credits",
-        "additions": "additions"
-      },
-      "share":{
-        "facebook": "Share on facebook",
-        "twitter": "Share on twitter"
-      },
-      "text":{
-        "edit": "Edit Idea",
-        "by": "Idea by",
-        "summary": "Summary",
-        "summary_desc": "Write a summary with a maximum of 150 characters",
-        "full": "Description",
-        "full_desc": "You haven't given a detailed description of your idea yet...",
-        "full_donow": "Describe your idea now!",
-        "fullplaceholder": "Describe your idea...",
-        "comment": "Comment",
-        "commentplaceholder": "Your comment..."
-      },
-      "tabs":{
-        "addition": "Addition",
-        "addition_desc":"Add something to this idea",
-        "question": "Question",
-        "question_desc":"Ask a question about this idea",
-        "image": "Image",
-        "image_desc": "Describe the image"
-      },
-      "log":{
-        "addition": "wrote an addition",
-        "question": "asked a question",
-        "image": "added an image"
-      },
-      "message":{
-        "image_too_large": "The Image is too large, 5Mb is the maximum",
-        "no_jpeg": "Please make sure your file is a jpg image"
-      },
-      "image":{
-        "description": "Only .jpg files can be uploaded",
-        "other":"Select different image",
-        "select":"Select image"
-      }
+        "titleplaceholder": "Title...",
+        "summaryplaceholder": "Describe your idea (Can be altered later on)...",
+        "emailplaceholder": "Email address...",
+        "agree": "I allow my idea to be",
+        "rules":"shared and edited",
+        "data":{
+            "votecount": "credits",
+            "additions": "additions"
+        },
+        "share":{
+            "facebook": "Share on facebook",
+            "twitter": "Share on twitter"
+        },
+        "text":{
+            "edit": "Edit Idea",
+            "by": "Idea by",
+            "summary": "Summary",
+            "summary_desc": "Write a summary with a maximum of 150 characters",
+            "full": "Description",
+            "full_desc": "You haven't given a detailed description of your idea yet...",
+            "full_donow": "Describe your idea now!",
+            "fullplaceholder": "Describe your idea...",
+            "comment": "Comment",
+            "commentplaceholder": "Your comment..."
+        },
+        "tabs":{
+            "addition": "Addition",
+            "addition_desc":"Add something to this idea",
+            "question": "Question",
+            "question_desc":"Ask a question about this idea",
+            "image": "Image",
+            "image_desc": "Describe the image"
+        },
+        "log":{
+            "addition": "wrote an addition",
+            "question": "asked a question",
+            "image": "added an image"
+        },
+        "message":{
+            "image_too_large": "The Image is too large, 5Mb is the maximum",
+            "no_jpeg": "Please make sure your file is a jpg image"
+        },
+        "image":{
+            "description": "Only .jpg files can be uploaded",
+            "other":"Select different image",
+            "select":"Select image"
+        }
     }
 }
