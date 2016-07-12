@@ -129,6 +129,7 @@ IdeaSchema.methods.getBadge = function(position){
 
 IdeaSchema.methods.hideAdditions = function(){
     //get fish type
+    this.additioncount = this.additions.length;
     this.additions = undefined;
     return this;
 };
@@ -140,6 +141,7 @@ IdeaSchema.methods.getPublic = function(){
         summary: this.summary,
         content: this.content,
         additions: this.additions,
+        additioncount: this.additioncount,
         votecount: this.votecount,
         owner: this.owner,
         yourvote: this.yourvote,
@@ -167,6 +169,13 @@ module.exports = (function(){
         User.findOne({ email: user.email }, function(err, found) {
             if(!found) return callback({success: false});
             callback({success: true, user: found});
+        });
+    }
+
+    function getUsers(callback){
+        User.find({},function(err, found) {
+            if(!found) return callback({success: false});
+            callback({success: true, users: found});
         });
     }
 
@@ -396,6 +405,7 @@ module.exports = (function(){
     return {
         addUser: addUser,
         getUser: getUser,
+        getUsers: getUsers,
         confirmUser: confirmUser,
         resetUser: resetUser,
         updateUser: updateUser,
