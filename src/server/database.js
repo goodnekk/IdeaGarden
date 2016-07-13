@@ -150,6 +150,7 @@ IdeaSchema.methods.getPublic = function(){
         owner: this.owner,
         yourvote: this.yourvote,
         updated: this.updatedAt,
+        created: this.createdAt,
         badge: this.badge,
         position: this.position
     };
@@ -290,7 +291,7 @@ module.exports = (function(){
     }
 
     function getIdeas(requestIp, callback){
-        Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt').exec(function(err, ideaDocList){
+        Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt createdAt').exec(function(err, ideaDocList){
             ideaDocList = ideaDocList
                 .map(function(ideaDoc){
                     return ideaDoc.getVotes(requestIp);

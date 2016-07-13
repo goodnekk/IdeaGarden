@@ -12,7 +12,6 @@ var IdeaOverviewPage = {
                     m("div", {class: "ui col-3"}, m.component(QuestionCard)),
                     m("div", {class: "ui col-9"}, m.component(SubmitCard)),
                 ]),
-
                 m.component(IdeaGrid),
                 m.component(Footer)
             ])
@@ -82,15 +81,42 @@ var SubmitCard = {
 var IdeaGrid = {
     controller: function(){
         this.cards = Model.getOverview();
+        this.mode = "0";
+        this.changeSort = function(e){
+            this.mode = e.target.value;
+        };
     },
     view: function(ctrl){
-        return m("div", {class: "ui grid"},
-            ctrl.cards().map(function(e){
+
+        var cards = ctrl.cards();
+
+        if(ctrl.mode === "1"){
+            cards = cards.concat().sort(function(a,b){
+                return moment(b.created).diff(moment(a.created));
+            });
+        }
+        if(ctrl.mode === "2"){
+            cards = cards.concat().sort(function(a,b){
+                return moment(b.updated).diff(moment(a.updated));
+            });
+        }
+
+        return m("div", {class: "ui grid"},[
+            m("div", {class: "ui col-12"},[
+                m("div", {class: "ui card colorless"},[
+                    m("select",{class:"ui", onchange: ctrl.changeSort.bind(ctrl)},[
+                        m("option", {value: 0},"populairste"),
+                        m("option", {value: 1},"nieuwste"),
+                        m("option", {value: 2},"laaste bijgewerkt"),
+                    ]),
+                ]),
+            ]),
+            cards.map(function(e){
                 return m("div", {class: "ui col-6"}, [
                     m.component(IdeaCard, e)
                 ]);
             })
-        );
+        ]);
     }
 };
 
