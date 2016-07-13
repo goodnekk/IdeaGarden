@@ -45,6 +45,16 @@ app.use('/images', express.static(__dirname + '/imageData'));
 //serve translation files
 app.use('/locales', express.static(__dirname + '/locales'));
 
+//no caching
+app.use(function (req, res, next) {
+    res.set({
+        "Cache-control": "no-cache",
+        "Pragma": "no-cache",
+        "Expires": "0"
+    });
+    next();
+});
+
 //parse JSON posts
 var limit = '5Mb';
 app.use(bodyParser.json({limit: limit}));
