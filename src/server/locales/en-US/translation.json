@@ -68,6 +68,11 @@
         "emailplaceholder": "Email address...",
         "agree": "I allow my idea to be",
         "rules":"shared and edited",
+        "sort": {
+            "popular": "Popular ideas",
+            "new": "Newest ideas",
+            "updated": "Recently updated ideas"
+        },
         "data":{
             "votecount": "credits",
             "additions": "additions"

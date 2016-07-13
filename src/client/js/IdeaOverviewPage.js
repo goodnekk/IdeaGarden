@@ -103,11 +103,11 @@ var IdeaGrid = {
 
         return m("div", {class: "ui grid"},[
             m("div", {class: "ui col-12"},[
-                m("div", {class: "ui card colorless"},[
+                m("div", {class: "ui card colorless nopadding"},[
                     m("select",{class:"ui", onchange: ctrl.changeSort.bind(ctrl)},[
-                        m("option", {value: 0},"populairste"),
-                        m("option", {value: 1},"nieuwste"),
-                        m("option", {value: 2},"laaste bijgewerkt"),
+                        m("option", {value: 0},i18next.t('idea.sort.popular')),
+                        m("option", {value: 1},i18next.t('idea.sort.new')),
+                        m("option", {value: 2},i18next.t('idea.sort.updated')),
                     ]),
                 ]),
             ]),

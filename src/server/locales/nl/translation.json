@@ -68,6 +68,11 @@
         "emailplaceholder": "Email adres...",
         "agree": "Mijn idee mag worden",
         "rules":"gedeeld en bewerkt",
+        "sort": {
+            "popular": "Populairste ideeën",
+            "new": "Nieuwste ideeën",
+            "updated": "Laatst bijgewerkte ideeën"
+        },
         "data":{
             "votecount": "kudos",
             "additions": "aanvullingen"
