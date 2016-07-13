@@ -124,6 +124,10 @@ IdeaSchema.methods.getBadge = function(position){
         this.badge = 4;
     }
 
+    if(position === 0) {
+        this.badge = 5;
+    }
+
     return this;
 };
 
