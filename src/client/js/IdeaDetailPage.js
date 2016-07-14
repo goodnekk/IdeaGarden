@@ -46,7 +46,7 @@ var IdeaData = {
             ]),
             m("span", {class: "metric"}, [
                 m("span", {class:"number"}, idea.additions.length),
-                m("span", {class:"label"}, i18next.t('idea.data.votecount'))
+                m("span", {class:"label"}, i18next.t('idea.data.additions'))
             ]),
             m.component(ShareButtons, idea)
         ]);

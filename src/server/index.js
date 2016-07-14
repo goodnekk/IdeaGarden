@@ -45,7 +45,7 @@ app.use('/images', express.static(__dirname + '/imageData'));
 //serve translation files
 app.use('/locales', express.static(__dirname + '/locales'));
 
-//no caching
+//no caching (express.static implicity ignores/overwrites this)
 app.use(function (req, res, next) {
     res.set({
         "Cache-control": "no-cache",
