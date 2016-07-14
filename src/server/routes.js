@@ -240,10 +240,13 @@ module.exports = (function(){
         else if(req.params.operation==="down"){ value = -1; }
         else { return res.json({error: "invalid vote"}); }
 
+        res.json({message: "closed due to spamming"});
+        /*
         //post
         database.voteIdea({id:req.params.id, value:value, ip: req.ip}, function(data){
             res.json(data);
         });
+        */
     }
 
     function postIdeaAddition(req, res){
