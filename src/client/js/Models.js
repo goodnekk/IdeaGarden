@@ -91,11 +91,12 @@ var Model = (function(){
         return overview;
     }
 
-    function voteIdeaOverview(id, value) {
+    function voteIdeaOverview(id, value, callback) {
         m.request({
             method: "GET",
-            url: "/api/idea/"+id+"/vote/"+value
-        }).then(function(){
+            url: "/api/idea/"+id+"/vote/"+value,
+            config: xhrConfig
+        }).then(callback).then(function(){
             getOverview();
         });
     }
@@ -108,11 +109,12 @@ var Model = (function(){
         }).then(callback);
     }
 
-    function voteIdeaDetail(id, value) {
+    function voteIdeaDetail(id, value, callback) {
         m.request({
             method: "GET",
-            url: "/api/idea/"+id+"/vote/"+value
-        }).then(function(){
+            url: "/api/idea/"+id+"/vote/"+value,
+            config: xhrConfig
+        }).then(callback).then(function(){
             getDetail();
         });
     }

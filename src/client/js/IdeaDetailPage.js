@@ -33,7 +33,13 @@ var IdeaDetailPage = {
 var IdeaData = {
     controller: function(idea){
         this.onvote = function(value){
-            Model.voteIdeaDetail(idea._id, value);
+            Model.voteIdeaDetail(idea._id, value,function(d){
+                if(!d.succes){
+                    if(d.message === "verification failed"){
+                        ViewModel.loginPopup(true);
+                    }
+                }
+            });
         };
     },
     view: function(ctrl, idea) {

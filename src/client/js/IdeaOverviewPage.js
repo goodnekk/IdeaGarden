@@ -128,7 +128,13 @@ var IdeaCard = {
         };
 
         this.onvote = function(value){
-            Model.voteIdeaOverview(this.id, value);
+            Model.voteIdeaOverview(this.id, value, function(d){
+                if(!d.succes){
+                    if(d.message === "verification failed"){
+                        ViewModel.loginPopup(true);
+                    }
+                }
+            });
         };
     },
     view: function(ctrl, data){

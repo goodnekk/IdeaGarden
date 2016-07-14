@@ -239,14 +239,14 @@ module.exports = (function(){
         if(req.params.operation==="up"){ value = 1; }
         else if(req.params.operation==="down"){ value = -1; }
         else { return res.json({error: "invalid vote"}); }
+        //authenticate
+        authenticate.verify(req, function(auth){
+            if(!auth.success) return res.json({success: false, message: "verification failed"});
 
-        res.json({message: "closed due to spamming"});
-        /*
-        //post
-        database.voteIdea({id:req.params.id, value:value, ip: req.ip}, function(data){
-            res.json(data);
+            database.voteIdea({id:req.params.id, value:value, ip: req.ip}, function(data){
+                res.json(data);
+            });
         });
-        */
     }
 
     function postIdeaAddition(req, res){
