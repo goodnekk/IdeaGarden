@@ -331,7 +331,7 @@ module.exports = (function(){
     function getIdea(id, requestIp, callback){
         //this is a stupid implementation but it works
         Idea.find({}).exec(function(err, ideaDocList){
-            if(err || !ideaDoc){
+            if(err || !ideaDocList){
                 console.log(err);
                 return callback({success: false});
             }
