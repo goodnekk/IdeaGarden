@@ -305,6 +305,10 @@ module.exports = (function(){
 
     function getIdeas(requestIp, callback){
         Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt createdAt').exec(function(err, ideaDocList){
+            if(err || !ideaDocList){
+                console.log(err);
+                return callback({success: false});
+            }
             ideaDocList = ideaDocList
                 .map(function(ideaDoc){
                     return ideaDoc.getVotes(requestIp);
@@ -327,6 +331,10 @@ module.exports = (function(){
     function getIdea(id, requestIp, callback){
         //this is a stupid implementation but it works
         Idea.find({}).exec(function(err, ideaDocList){
+            if(err || !ideaDoc){
+                console.log(err);
+                return callback({success: false});
+            }
             ideaDocList = ideaDocList
                 .map(function(ideaDoc){
                     return ideaDoc.getVotes(requestIp);
@@ -345,7 +353,7 @@ module.exports = (function(){
                     return JSON.stringify(a._id) === JSON.stringify(id);
                 });
             if(ideaDocList.length === 0) return callback({success: false});
-            if(callback) callback({success: true, data: ideaDocList[0]});
+            return callback({success: true, data: ideaDocList[0]});
         });
     }
 
