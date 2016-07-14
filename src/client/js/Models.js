@@ -73,7 +73,8 @@ var Model = (function(){
     function getOverview(){
         m.request({
             method: "GET",
-            url: "/api/ideas"
+            url: "/api/ideas",
+            config: xhrConfig
         }).then(overview);
         return overview;
     }
@@ -150,7 +151,8 @@ var Model = (function(){
         id = m.route.param("id");
         m.request({
             method: "GET",
-            url: "/api/idea/"+id
+            url: "/api/idea/"+id,
+            config: xhrConfig
         }).then(validate).then(detail);
         return detail;
     }

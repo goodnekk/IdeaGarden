@@ -150,12 +150,14 @@ module.exports = (function(){
     }
 
     function getIdeas(req, res) {
+        authenticate.verify(req, function(auth){}); //just do this to register ip
         database.getIdeas(req.ip, function(data){
             res.json(data);
         });
     }
 
     function getIdea(req, res) {
+        authenticate.verify(req, function(auth){}); //just do this to register ip
         database.getIdea(req.params.id, req.ip, function(data){
             if(!data.success) return res.json({success: false, message: "idea does not exist"});
             res.json(data);

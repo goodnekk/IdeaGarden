@@ -55,7 +55,8 @@ var UserSchema =  new mongoose.Schema({
     name: String,
     email: {type: String , unique: true},
     password: String,
-    secret: String
+    secret: String,
+    ips: [String]
 });
 
 var IdeaSchema = new mongoose.Schema({
@@ -230,6 +231,18 @@ module.exports = (function(){
                 callback({succes: true});
             }
         );
+    }
+
+    function registerUserIp(user, ip, callback){
+        User.findOneAndUpdate({
+            "_id": user.id,
+            "ips": {"$ne": ip}
+        },{
+            "$push": {"ips": ip}
+        }, function(err, doc){
+            if (err) return callback({succes: false});
+            callback({succes: true});
+        });
     }
 
     function addIdea(idea, callback){
@@ -414,6 +427,7 @@ module.exports = (function(){
         confirmUser: confirmUser,
         resetUser: resetUser,
         updateUser: updateUser,
+        registerUserIp: registerUserIp,
 
         getChallenges: getChallenges,
         getChallenge: getChallenge,
