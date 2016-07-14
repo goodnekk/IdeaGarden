@@ -424,40 +424,68 @@ var DoAddition = {
                     var pattern2 = /(\b(www)\.[-A-Z0-9+&@#\/%?=~_|()!:,.;]*[-A-Z0-9+&@#\/%=~_|()])/gim;
                     //Change email addresses to mailto:: links.
                     var pattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+                    //Find line breaks
+                    var pattern4 = /\r\n|\n\r|\r|\n/g;
 
                     //find matches
-                    var match1 = pattern1.exec(inputText) || {index: Infinity};
-                    var match2 = pattern2.exec(inputText) || {index: Infinity};
-                    var match3 = pattern3.exec(inputText) || {index: Infinity};
+                    //var match1 = pattern1.exec(inputText) || {index: Infinity};
+                    //var match2 = pattern2.exec(inputText) || {index: Infinity};
+                    //var match3 = pattern3.exec(inputText) || {index: Infinity};
+                    //var match4 = pattern4.exec(inputText) || {index: Infinity};
 
                     var slices = {};
+                    var bestmatch = [
+                        {name: "http", match: pattern1.exec(inputText) || {index: Infinity}},
+                        {name: "www", match: pattern2.exec(inputText) || {index: Infinity}},
+                        {name: "mail", match: pattern3.exec(inputText) || {index: Infinity}},
+                        {name: "linebreak", match: pattern4.exec(inputText) || {index: Infinity}}
+                    ].sort(function(a,b){
+                        return a.match.index - b.match.index;
+                    }).shift();
 
-                    if(match1.index < match2.index && match2.index <= match3.index){ //normal link
+
+                    if(bestmatch.match.index === Infinity){
+                        //console.log("return");
+                        inputArray.push(inputText);
+                        return inputArray;
+                    }
+
+                    if(bestmatch.name === "http"){
                         //console.log("normal link");
-                        slices = slice(inputText, match1, pattern1);
+                        slices = slice(inputText, bestmatch.match, pattern1);
                         inputArray.push(slices.head);
                         inputArray.push(m("a", {class: "external-link", href: slices.mid, target: '_blank'}, slices.mid));
                         inputArray.push(slices.tail);
                         return findUrl(inputArray);
                     }
 
-                    if(match2.index < match1.index && match2.index <= match3.index){ //just www
+                    if(bestmatch.name === "www"){
                         //console.log("www link");
-                        slices = slice(inputText, match2, pattern2);
+                        slices = slice(inputText, bestmatch.match, pattern2);
                         inputArray.push(slices.head);
                         inputArray.push(m("a", {class: "external-link", href: "http://" + slices.mid, target: '_blank'}, slices.mid));
                         inputArray.push(slices.tail);
                         return findUrl(inputArray);
                     }
 
-                    if(match2.index <= match1.index && match3.index < match2.index){ //email
+                    if(bestmatch.name === "email"){
                         //console.log("email");
-                        slices = slice(inputText, match3, pattern3);
+                        slices = slice(inputText, bestmatch.match, pattern3);
                         inputArray.push(slices.head);
                         inputArray.push(m("a", {class: "external-link", href: "mailto:" + slices.mid, target: '_blank'}, slices.mid));
                         inputArray.push(slices.tail);
                         return findUrl(inputArray);
                     }
+
+                    if(bestmatch.name === "linebreak") {
+                        //console.log("linebreak");
+                        slices = slice(inputText, bestmatch.match, pattern4);
+                        inputArray.push(slices.head);
+                        inputArray.push(m("br"));
+                        inputArray.push(slices.tail);
+                        return findUrl(inputArray);
+                    }
+
                     inputArray.push(inputText);
                     return inputArray;
                 }
