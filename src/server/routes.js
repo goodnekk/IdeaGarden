@@ -277,12 +277,12 @@ module.exports = (function(){
 
         //if the post is an image
         if(post.category === "image") {
-            if(!post.content.image) return res.json({auth: auth.success, success: false, message: "no image"});
+            if(!post.content.image) return res.json({success: false, message: "no image"});
 
             //parse image file from base64
             var dataUrl = post.content.image;
             var image = dataurl.parse(dataUrl);
-            if(image.mimetype !== "image/jpeg") return res.json({auth: auth.success, success: false, message: "not a jpeg image"});
+            if(image.mimetype !== "image/jpeg") return res.json({success: false, message: "not a jpeg image"});
 
             //save image file
             var imageId = uuid.v4();
@@ -302,6 +302,7 @@ module.exports = (function(){
                 });
             });
         } else {
+            if(!post.content.description) return res.json({success: false, message: "no text"});
             postToDatabase({
                 id: req.params.id,
                 addition: post,
