@@ -79,8 +79,8 @@ var IdeaText = {
     controller: function(idea){
         this.owner = false;
         if(idea.owner){
-            if(idea.owner.name){
-                if(idea.owner.name === Model.token().name){
+            if(idea.owner._id){
+                if(idea.owner._id === Model.token().id){
                     this.owner = true;
                 }
             }
@@ -106,7 +106,7 @@ var IdeaText = {
         if(!idea.content) {idea.content="";}
         return m("div", {class: "ui card"}, [
             (function(){
-                if(idea.owner){
+                if(ctrl.owner){
                     return m("p", {class: "label left"}, i18next.t('idea.text.by') + ' ' ,m("span", {class:"name"}, idea.owner.name));
                 }
             })(),

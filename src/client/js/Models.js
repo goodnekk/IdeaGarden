@@ -23,9 +23,13 @@ var Model = (function(){
 
     //validate requests
     function validate(answer) {
-      if(answer.success) {
-        return answer.data;
-      }
+        if(answer.auth === false){
+            token({success: false});
+            localStorage.setItem("token", "");
+        }
+        if(answer.success) {
+            return answer.data;
+        }
     }
 
     function login(user, callback) {
@@ -75,17 +79,20 @@ var Model = (function(){
             method: "GET",
             url: "/api/ideas",
             config: xhrConfig
-        }).then(overview);
+        }).then(validate).then(overview);
         return overview;
     }
 
     function getMyIdeas(){
         m.request({
             method: "GET",
-            url: "/api/ideas"
-        }).then(function(o){
+            url: "/api/ideas",
+            config: xhrConfig
+        }).then(validate).then(function(o){
             return o.filter(function(i){
-                return i.owner.name === token().name;
+                console.log(i.owner._id);
+                console.log(token().id);
+                return i.owner._id === token().id;
             });
         }).then(overview);
         return overview;

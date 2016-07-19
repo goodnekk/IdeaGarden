@@ -41,13 +41,15 @@ module.exports = (function(){
 
 
                 if(!auth.success){
-                    return res.json({success: false, message: "failed to sign token"});
+                    return res.json({auth: auth.success, success: false, message: "failed to sign token"});
                 }
                 return res.json({
+                    auth: auth.success,
                     success: true,
                     token: auth.token,
                     name: doc.user.name,
-                    email: doc.user.email
+                    email: doc.user.email,
+                    id: doc.user._id
                 });
             });
         });
@@ -100,7 +102,7 @@ module.exports = (function(){
         post.email = post.email.toLowerCase();
 
         authenticate.verify(req, function(auth){
-            if(!auth.success) return res.json({success: false, message: "verification failed"});
+            if(!auth.success) return res.json({auth: auth.success, success: false, message: "verification failed"});
 
             var newUser = {id: auth.decoded.id, name: post.name, email: post.email};
             database.updateUser(newUser ,function(data){
@@ -114,6 +116,7 @@ module.exports = (function(){
                     }
 
                     return res.json({
+                        auth: auth.success,
                         success: true,
                         token: nauth.token,
                         name: post.name,
@@ -150,18 +153,21 @@ module.exports = (function(){
     }
 
     function getIdeas(req, res) {
-        authenticate.verify(req, function(auth){}); //just do this to register ip
-        database.getIdeas(req.ip, function(data){
-            res.json(data);
-        });
+        authenticate.verify(req, function(auth){
+            database.getIdeas(req.ip, function(data){
+                res.json({auth: auth.success, success: true, data: data});
+            });
+        }); //just do this to register ip
+
     }
 
     function getIdea(req, res) {
-        authenticate.verify(req, function(auth){}); //just do this to register ip
-        database.getIdea(req.params.id, req.ip, function(data){
-            if(!data.success) return res.json({success: false, message: "idea does not exist"});
-            res.json(data);
-        });
+        authenticate.verify(req, function(auth){
+            database.getIdea(req.params.id, req.ip, function(data){
+                if(!data.success) return res.json({auth: auth.success,success: false, message: "idea does not exist"});
+                res.json({auth: auth.success, success: true, data: data.data});
+            });
+        }); //just do this to register ip
     }
 
     function postIdea(req, res) {
@@ -177,6 +183,7 @@ module.exports = (function(){
         authenticate.verify(req, function(auth){
             function addIdeawithUser(userId){
                 database.addIdea({
+                    auth: auth.success,
                     title: post.title,
                     summary: post.summary,
                     votecount: 0,
@@ -188,8 +195,8 @@ module.exports = (function(){
             }
 
             if(!auth.success) {//create a new user
-                if(!post.email)                             return res.json({success: false, message: "no email"});
-                if(!emailValidator.validate(post.email))    return res.json({success: false, message: "invalid email"});
+                if(!post.email)                             return res.json({auth: false, success: false, message: "no email"});
+                if(!emailValidator.validate(post.email))    return res.json({auth: false, success: false, message: "invalid email"});
                 post.email = post.email.toLowerCase();
 
                 var secret = uuid.v4(); //generate a secret
@@ -216,7 +223,7 @@ module.exports = (function(){
 
         //authenticate
         authenticate.verify(req, function(auth){
-            if(!auth.success) return res.json({success: false, message: "verification failed"});
+            if(!auth.success) return res.json({auth: auth.success, success: false, message: "verification failed"});
 
             //database
             database.updateIdea({
@@ -228,7 +235,7 @@ module.exports = (function(){
             req.ip,
             function(doc){
                 if(!doc.success) return res.json({success: false, message: "update failed."});
-                res.json({success: true, data: doc.data});
+                res.json({auth: auth.success, success: true, data: doc.data});
             });
         });
     }
@@ -241,7 +248,7 @@ module.exports = (function(){
         else { return res.json({error: "invalid vote"}); }
         //authenticate
         authenticate.verify(req, function(auth){
-            if(!auth.success) return res.json({success: false, message: "verification failed"});
+            if(!auth.success) return res.json({auth: auth.success, success: false, message: "verification failed"});
 
             database.voteIdea({id:req.params.id, value:value, ip: req.ip}, function(data){
                 res.json(data);
@@ -258,31 +265,31 @@ module.exports = (function(){
 
         function postToDatabase(addition){
             authenticate.verify(req, function(auth){
-                if(!auth.success) return res.json({success: false, message: "verification failed"});
+                if(!auth.success) return res.json({auth: auth.success, success: false, message: "verification failed"});
                 post.owner = auth.decoded.id;
                 //database
                 database.addAddition(addition, req.ip, function(doc){
-                    if(!doc.success) return res.json({success: false, message: "comment failed."});
-                    res.json({success: true, data: doc.data});
+                    if(!doc.success) return res.json({auth: auth.success, success: false, message: "comment failed."});
+                    res.json({auth: auth.success, success: true, data: doc.data});
                 });
             });
         }
 
         //if the post is an image
         if(post.category === "image") {
-            if(!post.content.image) return res.json({success: false, message: "no image"});
+            if(!post.content.image) return res.json({auth: auth.success, success: false, message: "no image"});
 
             //parse image file from base64
             var dataUrl = post.content.image;
             var image = dataurl.parse(dataUrl);
-            if(image.mimetype !== "image/jpeg") return res.json({success: false, message: "not a jpeg image"});
+            if(image.mimetype !== "image/jpeg") return res.json({auth: auth.success, success: false, message: "not a jpeg image"});
 
             //save image file
             var imageId = uuid.v4();
             var fileUrl = __dirname + "/imageData/"+imageId+".jpg";
             fs.writeFile(fileUrl, image.data, function (err) {
                 if (err) {
-                  return res.json({success: false, message: "error saving file"});
+                  return res.json({auth: auth.success, success: false, message: "error saving file"});
                 }
                 post.content = {
                     src: imageId + ".jpg",
@@ -313,7 +320,7 @@ module.exports = (function(){
 
         //authenticate
         authenticate.verify(req, function(auth){
-            if(!auth.success) return res.json({success: false, message: "verification failed"});
+            if(!auth.success) return res.json({auth: auth.success, success: false, message: "verification failed"});
 
             //database
             database.addComment({
@@ -327,7 +334,7 @@ module.exports = (function(){
             req.ip,
             function(doc){
                 if(!doc.success) return res.json({success: false, message: "comment failed."});
-                res.json({success: true, data: doc.data});
+                res.json({auth: auth.success, success: true, data: doc.data});
             });
         });
     }
