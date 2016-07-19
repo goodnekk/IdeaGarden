@@ -106,7 +106,7 @@ var IdeaText = {
         if(!idea.content) {idea.content="";}
         return m("div", {class: "ui card"}, [
             (function(){
-                if(ctrl.owner){
+                if(idea.owner){
                     return m("p", {class: "label left"}, i18next.t('idea.text.by') + ' ' ,m("span", {class:"name"}, idea.owner.name));
                 }
             })(),
