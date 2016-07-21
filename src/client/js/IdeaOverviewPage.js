@@ -4,14 +4,22 @@
 //=require Badge.js
 
 var IdeaOverviewPage = {
-    view: function() {
+    controller: function(){
+        this.momentcheck = moment([2016, 6, 26]).diff(moment(),'days');
+        console.log(this.momentcheck);
+    },
+    view: function(ctrl) {
         return m("div",[
             m.component(Menu),
             m("div", {class: "ui page"}, [
-                m("div", {class: "ui grid"}, [
-                    m("div", {class: "ui col-3"}, m.component(QuestionCard)),
-                    m("div", {class: "ui col-9"}, m.component(SubmitCard)),
-                ]),
+                (function(){
+                    if(ctrl.momentcheck >= 0){
+                        return m("div", {class: "ui grid"}, [
+                            m("div", {class: "ui col-3"}, m.component(QuestionCard)),
+                            m("div", {class: "ui col-9"}, m.component(SubmitCard)),
+                        ]);
+                    }
+                })(),
                 m.component(IdeaGrid),
                 m.component(Footer)
             ])
