@@ -108,7 +108,8 @@ var IdeaGrid = {
                 return moment(b.updated).diff(moment(a.updated));
             });
         }
-
+        console.log(cards);
+        
         return m("div", {class: "ui grid"},[
             m("div", {class: "ui col-12"},[
                 m("div", {class: "ui card colorless nopadding"},[
