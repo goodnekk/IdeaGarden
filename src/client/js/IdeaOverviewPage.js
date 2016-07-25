@@ -5,13 +5,18 @@
 
 var IdeaOverviewPage = {
     controller: function(){
-        this.momentcheck = moment([2016, 6, 26]).diff(moment(),'days');
-        console.log(this.momentcheck);
+        this.momentcheck = moment([2016, 6, 27]).diff(moment(),'days');
     },
     view: function(ctrl) {
         return m("div",[
             m.component(Menu),
             m("div", {class: "ui page"}, [
+                m("div", {class: "ui card colorless"}, [
+                    m("div", {class: "centerimage"},[
+                        m("h1", {class: "center"},"Nog "+(ctrl.momentcheck+1)+" dagen om mee te doen!"),
+                        m("p", "De Ideeënvijver is nog open tot en met 26 Juli. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!")
+                    ]),
+                ]),
                 (function(){
                     if(ctrl.momentcheck >= 0){
                         return m("div", {class: "ui grid"}, [
@@ -109,7 +114,7 @@ var IdeaGrid = {
             });
         }
         console.log(cards);
-        
+
         return m("div", {class: "ui grid"},[
             m("div", {class: "ui col-12"},[
                 m("div", {class: "ui card colorless nopadding"},[
