@@ -5,20 +5,30 @@
 
 var IdeaOverviewPage = {
     controller: function(){
-        this.momentcheck = moment([2016, 6, 27]).diff(moment(),'days');
+        this.moment = moment([2016, 6, 26]).diff(moment(),'days');
+        this.opened = Model.getOpened();
     },
     view: function(ctrl) {
         return m("div",[
             m.component(Menu),
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui card colorless"}, [
-                    m("div", {class: "centerimage"},[
-                        m("h1", {class: "center"},"Nog "+(ctrl.momentcheck+1)+" dagen om mee te doen!"),
-                        m("p", "De Ideeënvijver is nog open tot en met 26 Juli. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!")
-                    ]),
+                    (function(){
+                        if(ctrl.opened){
+                            return m("div", {class: "centerimage"},[
+                                m("h1", {class: "center"},"Nog "+(ctrl.moment+1)+" dag om mee te doen!"),
+                                m("p", "De Ideeënvijver is nog open tot en met 26 Juli. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!")
+                            ]);
+                        } else {
+                            return m("div", {class: "centerimage"},[
+                                m("h1", {class: "center"},"Dankjewel voor jullie Ideeën!"),
+                                m("p", "De Ideeënvijver is vanaf 26 Juli gesloten. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!")
+                            ]);
+                        }
+                    })()
                 ]),
                 (function(){
-                    if(ctrl.momentcheck >= 0){
+                    if(ctrl.opened){
                         return m("div", {class: "ui grid"}, [
                             m("div", {class: "ui col-3"}, m.component(QuestionCard)),
                             m("div", {class: "ui col-9"}, m.component(SubmitCard)),

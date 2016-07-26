@@ -219,6 +219,10 @@ var Model = (function(){
         }).then(validate).then(detail);
     }
 
+    function getOpened(){
+        return (moment([2016, 6, 26]).diff(moment(),'days') >= 0);
+    }
+
     return {
         login: login,
         logout: logout,
@@ -240,5 +244,7 @@ var Model = (function(){
         addAddition: addAddition,
         addComment: addComment,
         confirmUser: confirmUser,
+
+        getOpened: getOpened
     };
 })();
