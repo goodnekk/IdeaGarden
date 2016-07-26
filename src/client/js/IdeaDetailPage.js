@@ -165,6 +165,8 @@ var IdeaText = {
 
 var DoAddition = {
     controller: function(){
+        this.opened = Model.getOpened();
+
         this.token = Model.token;
         this.addition = "";
         this.category = 0;
@@ -233,41 +235,45 @@ var DoAddition = {
         };
     },
     view: function(ctrl) {
-        return m("div", {class: "ui card"}, [
-            m.component(SwitchBar,
-                [
-                    i18next.t('idea.tabs.addition'),
-                    i18next.t('idea.tabs.question'),
-                    i18next.t('idea.tabs.image')
-                ],
-                ctrl.onSwitch.bind(ctrl)),
-                m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
-                    function(){
-                        if(ctrl.category === 0){
-                            return m("textarea", {
-                                value: ctrl.addition,class: "ui", placeholder: i18next.t('idea.tabs.addition_desc'),
-                                onchange: ctrl.update.bind(ctrl)
-                            });
-                        } else if(ctrl.category === 1){
-                            return m("textarea", {
-                                value: ctrl.addition, class: "ui", placeholder: i18next.t('idea.tabs.question_desc'),
-                                onchange: ctrl.update.bind(ctrl)
-                            });
-                        } else {
-                            return m("div",[
-                                m("textarea", {
-                                    value: ctrl.addition, class: "ui", placeholder: i18next.t('idea.tabs.image_desc'),
+        if(ctrl.opened){
+            return m("div", {class: "ui card"}, [
+                m.component(SwitchBar,
+                    [
+                        i18next.t('idea.tabs.addition'),
+                        i18next.t('idea.tabs.question'),
+                        i18next.t('idea.tabs.image')
+                    ],
+                    ctrl.onSwitch.bind(ctrl)),
+                    m("form", {onsubmit: ctrl.submit.bind(ctrl)},[
+                        function(){
+                            if(ctrl.category === 0){
+                                return m("textarea", {
+                                    value: ctrl.addition,class: "ui", placeholder: i18next.t('idea.tabs.addition_desc'),
                                     onchange: ctrl.update.bind(ctrl)
-                                }),
-                                m.component(MediaInput, ctrl.mediaDataUrl)
-                            ]);
+                                });
+                            } else if(ctrl.category === 1){
+                                return m("textarea", {
+                                    value: ctrl.addition, class: "ui", placeholder: i18next.t('idea.tabs.question_desc'),
+                                    onchange: ctrl.update.bind(ctrl)
+                                });
+                            } else {
+                                return m("div",[
+                                    m("textarea", {
+                                        value: ctrl.addition, class: "ui", placeholder: i18next.t('idea.tabs.image_desc'),
+                                        onchange: ctrl.update.bind(ctrl)
+                                    }),
+                                    m.component(MediaInput, ctrl.mediaDataUrl)
+                                ]);
 
-                        }
-                    }(),
-                    m("p", {class: "ui errorhelp"}, ctrl.error),
-                    m("button", {action: "submit", class: "ui"}, i18next.t('button.submit'))
-                ])
-            ]);
+                            }
+                        }(),
+                        m("p", {class: "ui errorhelp"}, ctrl.error),
+                        m("button", {action: "submit", class: "ui"}, i18next.t('button.submit'))
+                    ])
+                ]);
+            } else {
+                return m("div");
+            }
         }
     };
 
@@ -357,17 +363,22 @@ var DoAddition = {
                 this.show = false;
             };
             this.show = false;
+
+            this.opened = Model.getOpened();
         },
         view: function(ctrl, index){
-            return m("div",[
-                m("div", {class:"reactionbar"}, [
-                    m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
-                        m("img", {src: "static/comment.png"}),
-                        m("span", i18next.t('idea.text.comment'))
+            if(ctrl.opened){
+                return m("div",[
+                    m("div", {class:"reactionbar"}, [
+                        m("span", {class: "commentbutton", onclick: ctrl.comment.bind(ctrl)}, [
+                            m("img", {src: "static/comment.png"}),
+                            m("span", i18next.t('idea.text.comment'))
+                        ]),
                     ]),
-                ]),
-                m.component(AddComment, ctrl.show ,index, ctrl.close.bind(ctrl))
-            ]);
+                    m.component(AddComment, ctrl.show ,index, ctrl.close.bind(ctrl))
+                ]);
+            }
+            return m("div", {class:"reactionbar"});
         }
     };
 

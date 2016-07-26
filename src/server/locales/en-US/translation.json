@@ -114,6 +114,16 @@
             "description": "Only .jpg files can be uploaded",
             "other":"Select different image",
             "select":"Select image"
+        },
+        "topmessage": {
+            "countdown":{
+                "title": "Nog 1 dag om mee te doen!",
+                "message": "De Ideeënvijver is nog open tot en met 26 Juli. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!"
+            },
+            "thanks": {
+                "title": "Dankjewel voor jullie Ideeën!",
+                "message": "Vanaf 26 juli kan er niet meer gestemd en gereageerd worden. De jury gaat in beraad over wie de winnaars zijn en op 31 juli worden de winnaars bekend gemaakt!"
+            }
         }
     }
 }

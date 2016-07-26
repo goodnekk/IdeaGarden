@@ -5,7 +5,6 @@
 
 var IdeaOverviewPage = {
     controller: function(){
-        this.moment = moment([2016, 6, 26]).diff(moment(),'days');
         this.opened = Model.getOpened();
     },
     view: function(ctrl) {
@@ -16,13 +15,13 @@ var IdeaOverviewPage = {
                     (function(){
                         if(ctrl.opened){
                             return m("div", {class: "centerimage"},[
-                                m("h1", {class: "center"},"Nog "+(ctrl.moment+1)+" dag om mee te doen!"),
-                                m("p", "De Ideeënvijver is nog open tot en met 26 Juli. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!")
+                                m("h1", {class: "center"}, i18next.t('topmessage.countdown.title')),
+                                m("p", i18next.t('topmessage.countdown.message'))
                             ]);
                         } else {
                             return m("div", {class: "centerimage"},[
-                                m("h1", {class: "center"},"Dankjewel voor jullie Ideeën!"),
-                                m("p", "De Ideeënvijver is vanaf 26 Juli gesloten. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!")
+                                m("h1", {class: "center"},i18next.t('topmessage.thanks.title')),
+                                m("p", i18next.t('topmessage.thanks.message'))
                             ]);
                         }
                     })()
