@@ -7,7 +7,11 @@ database.getAllIdeas(function(ideas){
         var output = users.users.map(function(u){
             var additionsperidea = ideas.map(function(i){
                 var count = i.additions.filter(function(a){
-                    return (JSON.stringify(a.owner._id) === JSON.stringify(u._id));
+                    if(a.owner){
+                        return (JSON.stringify(a.owner._id) === JSON.stringify(u._id));
+                    } else {
+                        return false;
+                    }
                 }).length;
 
                 return {
