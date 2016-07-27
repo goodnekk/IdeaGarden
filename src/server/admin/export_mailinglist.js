@@ -19,9 +19,9 @@ database.getIdeas('',function(ideas){
                 ideas: 0,
                 votes: 0,
                 additions: 0
-            }).sort(function(a,b){
-                return b.ideas - a.ideas;
             });
+        }).sort(function(a,b){
+            return b.ideas - a.ideas;
         });
         fs.writeFile('mailinglist.json', JSON.stringify(output), function (err) {
             if (err) return console.log(err);
