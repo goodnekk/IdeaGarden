@@ -328,6 +328,20 @@ module.exports = (function(){
         });
     }
 
+    function getAllIdeas(callback){
+        Idea.find({}).select('title summary upvotes downvotes additions owner updatedAt createdAt').exec(function(err, ideaDocList){
+            if(err || !ideaDocList){
+                console.log(err);
+                return callback({success: false});
+            }
+            ideaDocList = ideaDocList.map(function(ideaDoc, count){
+                return ideaDoc.getBadge(count).getPublic();
+            });
+
+            if(callback) callback(ideaDocList);
+        });
+    }
+
     function getIdea(id, requestIp, callback){
         //this is a stupid implementation but it works
         Idea.find({}).exec(function(err, ideaDocList){
@@ -442,6 +456,7 @@ module.exports = (function(){
         addChallenge: addChallenge,
 
         getIdeas: getIdeas,
+        getAllIdeas: getAllIdeas,
         getIdea: getIdea,
         addIdea: addIdea,
         updateIdea: updateIdea,
