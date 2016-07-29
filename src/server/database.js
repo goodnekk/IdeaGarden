@@ -148,6 +148,8 @@ IdeaSchema.methods.getPublic = function(){
         additions: this.additions,
         additioncount: this.additioncount,
         votecount: this.votecount,
+        upvotes: this.upvotes,
+        downvotes: this.downvotes,
         owner: this.owner,
         yourvote: this.yourvote,
         updated: this.updatedAt,
