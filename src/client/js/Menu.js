@@ -17,6 +17,10 @@ var Menu = {
             m.route("/explain");
         };
 
+        this.prize = function(){
+            m.route("/prize");
+        };
+
         this.loginClick = function(){
             ViewModel.loginPopup(true);
         };
@@ -25,10 +29,7 @@ var Menu = {
             m.route("/dashboard");
         };
 
-        this.prizeClick = function(){
-            m.route("/prize");
-        };
-
+    
         this.fold = "fold";
         this.mobileSwitch = function(){
             if(this.fold == "fold"){
