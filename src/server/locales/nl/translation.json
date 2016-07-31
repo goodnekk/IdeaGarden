@@ -35,7 +35,8 @@
         "explain": "Uitleg",
         "rules": "Regels",
         "contact":"Contact",
-        "prize": "Winnaars"
+        "prize": "Winnaars",
+        "platfrm": "Platform"
     },
     "loginpopup":{
         "emailplaceholder": "Email adres...",

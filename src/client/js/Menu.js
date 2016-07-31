@@ -21,6 +21,10 @@ var Menu = {
             m.route("/prize");
         };
 
+        this.platfrm = function(){
+            m.route("/platform");
+        };
+
         this.loginClick = function(){
             ViewModel.loginPopup(true);
         };
@@ -29,7 +33,7 @@ var Menu = {
             m.route("/dashboard");
         };
 
-    
+
         this.fold = "fold";
         this.mobileSwitch = function(){
             if(this.fold == "fold"){
@@ -51,6 +55,7 @@ var Menu = {
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, i18next.t('menu.ideas')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, i18next.t('menu.explain')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.prize}, i18next.t('menu.prize')),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.platfrm}, i18next.t('menu.platfrm')),
                 (function(){
                     if(ctrl.token().success) {
                         return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, i18next.t('menu.myideas')); //ctrl.token().email

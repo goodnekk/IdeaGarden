@@ -35,7 +35,8 @@
         "explain": "How it works",
         "rules": "Rules",
         "contact":"Contact",
-        "prize": "Winners"
+        "prize": "Winners",
+        "platfrm": "Platform"
     },
     "loginpopup":{
         "emailplaceholder": "Email address...",

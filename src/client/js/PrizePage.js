@@ -39,7 +39,7 @@ var PrizePage = {
                                    m("p",{class:"winner"},"De Gouden Guppie:"),
                                    m("h2", "Big Objects"),
                                    m("p", [
-                                       "Het idee van Eindhovenhotspots: ",
+                                       "Het idee van Eindhovenhotspots(Marc Engelman): ",
                                        m("a", {href: "https://www.ideeenvijver.nl/#/idea/578215ea48dd5e12003ad342"}, "Big Objects"),
                                        " gaat uit van grote nieuwe (kunst) objecten in de ruimte zoals een gigtantisch eendje. Dit idee had niet enorm veel stemmen gehaald, maar verdient volgens de jury wel een prijs omdat het hoog scoort op FUN, Design en haalbaarheid."
                                    ]),
