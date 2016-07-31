@@ -34,7 +34,8 @@
         "challenge": "Challenge",
         "explain": "How it works",
         "rules": "Rules",
-        "contact":"Contact"
+        "contact":"Contact",
+        "prize": "Winners"
     },
     "loginpopup":{
         "emailplaceholder": "Email address...",

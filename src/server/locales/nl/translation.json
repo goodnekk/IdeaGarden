@@ -34,7 +34,8 @@
         "challenge": "De Vraag",
         "explain": "Uitleg",
         "rules": "Regels",
-        "contact":"Contact"
+        "contact":"Contact",
+        "prize": "Winnaars"
     },
     "loginpopup":{
         "emailplaceholder": "Email adres...",

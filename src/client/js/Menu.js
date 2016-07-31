@@ -25,6 +25,10 @@ var Menu = {
             m.route("/dashboard");
         };
 
+        this.prizeClick = function(){
+            m.route("/prize");
+        };
+
         this.fold = "fold";
         this.mobileSwitch = function(){
             if(this.fold == "fold"){
@@ -45,6 +49,7 @@ var Menu = {
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.challenge}, i18next.t('menu.challenge')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, i18next.t('menu.ideas')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, i18next.t('menu.explain')),
+                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.prize}, i18next.t('menu.prize')),
                 (function(){
                     if(ctrl.token().success) {
                         return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.dashboardClick.bind(ctrl)}, i18next.t('menu.myideas')); //ctrl.token().email

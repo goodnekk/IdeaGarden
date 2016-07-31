@@ -20,6 +20,7 @@ String.prototype.trunc = String.prototype.trunc ||
 //=require ErrorPage.js
 //=require RulesPage.js
 //=require ResetPage.js
+//=require PrizePage.js
 
 m.route.mode = "hash";
 m.route(document.getElementById("content"), "/", {
@@ -35,5 +36,6 @@ m.route(document.getElementById("content"), "/", {
     "/welcomeregister": WelcomeRegisterPage,
     "/rules": RulesPage,
     "/error": ErrorPage,
-    "/reset": ResetPage
+    "/reset": ResetPage,
+    "/prize": PrizePage
 });
