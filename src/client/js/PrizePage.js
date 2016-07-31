@@ -53,7 +53,10 @@ var PrizePage = {
                                    m("a",{href:"https://www.ideeenvijver.nl/#/idea/578410c248dd5e12003ad354"}, "De Luchtbrug Eindhoven"),
                                    " ontving de meeste kudos en verdient daarmee een bijzondere vermelding. Het idee ging uit van een kabelbaan en had prachtige visuals. De jury was dan ook zeer onder de indruk en ziet de potentie voor een FUN element in de stad, maar wijst op het beperkte innovatieve karakter (bestaande technologie), de haalbaarheid (erg kostbaar) en de lage snelheid om echt een effectieve verbinding te kunnen zijn. Dankzij alle stemmen kan De Luchtbrug zich wel de Koningsvis van de Ideeënvijver noemen. "
                                ]),
-                               m("p", "Er volgt een officiële publieksonthulling waarbij de winnaars hun prijs in ontvangst mogen nemen en de kans krijgen om hun idee te presenteren. Daarnaast komt er nog een publicatie in Groot Eindhoven en een artikel op Eindhoven.nl. Het zou fantastisch zijn als de ideeën ook daadwerkelijk uitgevoerd kunnen worden. Die mogelijkheden worden onderzocht en mocht je hier nog ideeën over hebben of een bijdrage in willen leveren dan kan dat via deze link."),
+                               m("p", [
+                                   "Er volgt een officiële publieksonthulling waarbij de winnaars hun prijs in ontvangst mogen nemen en de kans krijgen om hun idee te presenteren. Daarnaast komt er nog een publicatie in Groot Eindhoven en een artikel op Eindhoven.nl. Het zou fantastisch zijn als de ideeën ook daadwerkelijk uitgevoerd kunnen worden. Die mogelijkheden worden onderzocht en mocht je hier nog ideeën over hebben of een bijdrage in willen leveren dan kan dat via ",
+                                   m("a",{href: "http://www.eindhoven.nl/producten/Ideeenbus.htm"},"deze link.")
+                               ]),
                                m("p", "Wij feliciteren de winnaars en bedanken graag iedereen die een bijdrage heeft geleverd. Mogelijk wordt de ideeënvijver vaker ingezet voor vraagstukken, dus graag tot de volgende keer!")
                            ])
                        ]),
