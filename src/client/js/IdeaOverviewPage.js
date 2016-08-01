@@ -22,6 +22,11 @@ var IdeaOverviewPage = {
                             return m("div", {class: "centerimage"},[
                                 m("h1", {class: "center"},i18next.t('topmessage.thanks.title')),
                                 //m("p", i18next.t('topmessage.thanks.message'))
+                                m("p", [
+                                    "De winnaars zijn bekend! kijk ",
+                                    m("a", {href: "/#/prize"}, "hier"),
+                                    "."
+                                ])
                             ]);
                         }
                     })()
