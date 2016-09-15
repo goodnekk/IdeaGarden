@@ -50,7 +50,7 @@ var ChallengePage = {
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card colorless"}, [
                             m("div", {class: "centerimage"},[
-                                m("img", {class: "", src: "static/fishrow2.png"})
+                                m("img", {class: "", src: "static/fishrow.png"})
                             ])
                         ])
                     ]),
@@ -58,33 +58,27 @@ var ChallengePage = {
                         m("div", {class: "ui card color"}, [
                             m("div", {class: "centerimage"},[
                                 m("p", [
-                                    "Eindhoven nodigt je uit om ",
-                                    m("em", "jouw stad"),
-                                    " mooier, leuker, chiller en aantrekkelijker te maken!"
+                                    "De gemeente Eersel nodigt je uit om samen na te denken over onze toekomst! Hoe maken we het ‘Kem-pisch wonen in een wereldregio’ nog mooier, leuker en aantrekkelijker? "
                                 ]),
-                                m("p", "Heel de maand juli kun je reageren op de vraag:"),
-
-                                m("img", {src: "static/route.png"}),
-                                m("h1", "Hoe zou jij het Centrum met Strijp-s verbinden?"),
+                                m("p", "Leuke ideeën? Doe Mee Met Jouw Idee! Je kunt jouw eigen idee blijven aanvullen, ideeën van anderen bekijken en stemmen op de ideeën die jou het meeste aanspreken. Jij bepaalt! "),
                             ])
-                        ]),
-                        m("div", {class: "videoWrapper"},[
-                            m("iframe", {src:"https://www.youtube.com/embed/hseiRm-JzXg?showinfo=0", frameborder:"0"})
+                        ])
+                    ]),
+                    m("div", {class: "ui col-12"}, [
+                        m("div", {class: "ui card colorless"}, [
+                            m("img", {src: "static/frontpage_visual.png"}),
+                            m("p", "De samenleving verandert continu en dat gaat de laatste jaren nog net iets harder dan daarvoor. Daarmee ontstaan nieuwe (soms nog onbewuste) vragen en behoeften. Wij streven ernaar zo goed mogelijk voorbereid te zijn op onze toekomst. Dat doen we met z’n allen door te zoeken, experimenteren en leren. Vernieuwend, Innovatief, Samen. "),
                         ])
                     ]),
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card color"},[
                             m("p",{class: "centerimage"},[
+                                m("p", [
+                                    m("h2","Open Data Experience"),
+                                    "Op 9 en 10 november organiseren we voor het eerst de Open Data Experience in het gemeentehuis in Eersel. Op deze twee dagen willen we samen met jou experimenteren met nieuwe manieren om onze informatie te delen. Slimmer, efficiënter en klantvriendelijker. Klik hier <link naar ideeën voor Open Data Experience>  om inspiratie op te doen."
+                                ]),
+                                m("p", "Heb jij al geweldige ideeën? Laat het ons nu weten!"),
                                 checkButton(),
-                                m("p", [
-                                    m("h2","HOE?"),
-                                    "Een nieuw vervoersconcept? De reis spannender maken? Leuke ideeën? Doe Mee Met Jouw Idee! Je kunt ook de ideeën van anderen bekijken, aanvullen & stemmen op de ideeën die jou het meest aanspreken."
-                                ]),
-                                m("p", [
-                                    m("h2","WAAROM?"),
-                                    "Strijp-s en het centrum van Eindhoven zijn nu twee gescheiden werelden. Je loopt niet voor je lol van het centrum naar Strijp-s of andersom. Dan pak je de trein of de bus of je gaat rechtstreeks naar huis. Hoe mooi zou het zijn als mensen die Strijp-s voor een evenement bezoeken, ook worden uitgenodigd de rest van Eindhoven te verkennen? Hoe mooi zou het zijn als winkelend publiek in het centrum ook even een hapje gaat eten op Strijp-s?"
-                                ]),
-                                m("p", "Bezoekers zien meer, inwoners genieten meer en studenten ontdekken meer als we beide gebieden op een leuke manier met elkaar verbinden. Bovendien kunnen ondernemers profiteren van meer traffic.")
                             ]),
                         ])
                     ]),

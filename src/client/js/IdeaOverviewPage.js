@@ -11,6 +11,7 @@ var IdeaOverviewPage = {
         return m("div",[
             m.component(Menu),
             m("div", {class: "ui page"}, [
+                /*
                 m("div", {class: "ui card colorless"}, [
                     (function(){
                         if(ctrl.opened){
@@ -31,6 +32,7 @@ var IdeaOverviewPage = {
                         }
                     })()
                 ]),
+                */
                 (function(){
                     if(ctrl.opened){
                         return m("div", {class: "ui grid"}, [

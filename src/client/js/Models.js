@@ -220,7 +220,7 @@ var Model = (function(){
     }
 
     function getOpened(){
-        return (moment([2016, 6, 26]).diff(moment(),'days') >= 0);
+        return (moment([2016, 9, 12]).diff(moment(),'days') >= 0);
     }
 
     return {

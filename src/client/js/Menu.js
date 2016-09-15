@@ -46,15 +46,15 @@ var Menu = {
     view: function(ctrl, data) {
         return m("div", {class: "ui menu"}, [
             m.component(LoginPopup),
-            m("img", {src: "static/fish logo.png", class: "ui menuelement"}),
+            m("img", {src: "static/toplogo.png", class: "ui menuelement"}),
 
             m("nav", [
-                m("h3", {class: "ui menuelement", onclick: ctrl.ideas}, "Ideeënvijver"),
+                m("h3", {class: "ui menuelement", onclick: ctrl.ideas}, "Toekomstvijver Eersel"),
                 m("img", {src:"static/hamburger.png", class: "ui menuelement hamburger", onclick: ctrl.mobileSwitch.bind(ctrl)}, "="),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.challenge}, i18next.t('menu.challenge')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.ideas}, i18next.t('menu.ideas')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.explain}, i18next.t('menu.explain')),
-                m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.prize}, i18next.t('menu.prize')),
+                //m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.prize}, i18next.t('menu.prize')),
                 m("a", {class: "ui menuelement option "+ctrl.fold, onclick: ctrl.platfrm}, i18next.t('menu.platfrm')),
                 (function(){
                     if(ctrl.token().success) {
