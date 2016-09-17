@@ -36,8 +36,8 @@ var IdeaOverviewPage = {
                 (function(){
                     if(ctrl.opened){
                         return m("div", {class: "ui grid"}, [
-                            m("div", {class: "ui col-3"}, m.component(QuestionCard)),
-                            m("div", {class: "ui col-9"}, m.component(SubmitCard)),
+                            //m("div", {class: "ui col-3"}, m.component(QuestionCard)),
+                            m("div", {class: "ui col-12"}, m.component(SubmitCard)),
                         ]);
                     }
                 })(),

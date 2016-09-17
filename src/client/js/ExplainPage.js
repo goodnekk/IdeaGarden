@@ -7,19 +7,23 @@ var ExplainPage = {
             m("div", {class: "ui page"}, [
                 m("div", {class: "ui grid"}, [
                     m("div", {class: "ui col-12"}, [
-                        m("div", {class: "ui card colorless header"}, [
+                        m("div", {class: "ui card color header"}, [
                             m("p", {class: "centerimage"},[
-                                m("h1", "Hoe werkt Ideeënvijver?"),
-                                m("p", "Elke vis in de vijver is een idee. Hoe groter je vis, hoe verder je idee al ontwikkeld is. Elke vis kan uitgroeien tot hét winnende idee: de Koningsvis! Hieronder kun je zien welke stappen je idee kan zetten. Je vis groeit dus mee, met jouw idee! ")
+                                m("h1", "Hoe werkt Toekomstvijver Eersel?"),
+                                m("p", "We zijn steeds op zoek naar de meest innovatieve ideeën uit de gemeente Eersel. Je kunt meedoen door jouw ideeën te delen op toekomstvijvereersel.nl. We geloven dat de beste ideeën tot stand komen als je samenwerkt. Daarom vragen we je niet alleen jouw ideeën te delen, maar ook ideeën van anderen nog beter, innovatiever of completer te maken. Dit doe je door ideeën van anderen aan te vullen met opmerkingen, schetsen, afbeeldingen of door vragen te stellen. "),
                             ])
                         ]),
-                        m("div", {class: "ui card color"}, [
+                        m("div", {class: "ui card base"}, [
+                            m("p", {class: "centerimage"},[
+                                m("h1", "Hoe groeit mijn idee?"),
+                                m("p", "Elke vis in de vijver is een idee. Hoe groter je vis, hoe verder je idee al ontwikkeld is. Elke vis kan uitgroeien tot het beste idee: dé VIS! Hieronder kun je zien welke stappen je idee kan zetten. Je vis groeit mee met jouw idee!")
+                            ]),
                             m("p", {class: "centerimage stages"},[
                                 m("div",{class:"stage"},[
                                     m("img", {class: "img", src: "static/stage1_hi.png"}),
                                     m("div", {class: "explain"},[
                                         m("h2", "Het kikkervisje"),
-                                        m("p", "Je hebt een idee bedacht en gepost!")
+                                        m("p", "Je hebt een idee bedacht en geplaatst!")
                                     ])
                                 ]),
                                 m("div",{class:"stage"},[
@@ -40,31 +44,22 @@ var ExplainPage = {
                                     m("img", {class: "img king", src: "static/stage4_hi.png"}),
                                     m("div", {class: "explain"},[
                                         m("h2", "De kei grote vis"),
-                                        m("p", "Jouw idee staat in de top 5! Er is zo veel op gestemd dat jouw idee tot één van de vijf beste ideeën hoort.")
+                                        m("p", "Jouw idee staat in de top 5!")
                                     ])
                                 ]),
                                 m("div",{class:"stage"},[
                                     m("img", {class: "img king", src: "static/stage5_hi.png"}),
                                     m("div", {class: "explain"},[
                                         m("h2", "De Koningsvis"),
-                                        m("p", "Jouw idee staat op nummer 1 in de top 5! Een jury zal uiteindelijk kiezen of jouw idee ook daadwerkelijk de titel “Koningsvis 2016” verdient.")
+                                        m("p", "Jouw idee staat op nummer 1 in de top 5. Dat maakt jouw idee de winnaar van Toekomstvijver Eersel. ")
                                     ])
                                 ])
                             ])
                         ]),
                         m("div", {class: "ui card colorless"}, [
                             m("p", {class: "centerimage"},[
-                                m("h1", "Hoe kan ik winnen?"),
-                                m("p", "Er zijn twee prijzen. Je kunt winnen door het winnende idee in te dienen óf door zoveel en zo goed mogelijk bij te dragen aan de ideeën van anderen."),
-                                m("p", "We zijn op zoek naar leuke en innovatieve ideeën om het centrum en Strijp-s met elkaar te verbinden. Maak het leuker voor voetgangers om er te lopen of bedenk een vervoersconcept. De kans dat je wint is extra groot als de pijlers van Eindhoven Design, Kennis en Technologie, terugkomen in jouw idee. "),
-                                m("p", "We geloven dat de beste ideeën tot stand komen als je samenwerkt. Daarom wordt samenwerken beloond: er is een prijs voor degene die het beste heeft meegedacht met de ideeën van anderen. Dit doe je door ideeën van anderen aan te vullen met vragen, opmerkingen, schetsen, afbeeldingen of vragen te stellen.")
-                            ])
-                        ]),
-                        m("div", {class: "ui card colorless"}, [
-                            m("p", {class: "centerimage"},[
-                                m("h1", "Wat kan ik winnen?"),
-                                m("p", "De mogelijkheid dat jouw idee werkelijkheid wordt! Als je wilt mag je hier zelf ook een rol in nemen en meewerken aan de totstandkoming van jouw idee. Je krijgt een officiële publicatie in Groot Eindhoven, een artikel op de website van Eindhoven en een publieksonthulling tijdens de Dutch Design Week. Bovendien is er €1000,- te winnen! €500,- voor de Indiener van hét winnende idee en €500,- voor de Beste Samenwerker."),
-                                m("p", "In de maand juli kun je jouw idee indienen. Van 1 juli tot en met 26 juli kun je jouw ideeën posten, de ideeën van anderen bekijken, deze aanvullen en omhoog of omlaag stemmen. Van 27 juli tot en met 30 juli gaat de jury in beraad over wie de winnaars zijn. Op 31 juli worden de winnaars bekend gemaakt!"),
+                                m("h1", "Wat gebeurt er met mijn idee?"),
+                                m("p", "De mogelijkheid dat jouw idee werkelijkheid wordt. Jouw idee zou zo maar eens de sleutel tot de toekomst van de gemeente Eersel kunnen zijn. Wie weet zie je jouw idee uiteindelijk in heel de Kempen, Nederland, Europa of de rest van de wereld terug. "),
                             ])
                         ]),
                         m("div", {class: "ui card colorless"}, [

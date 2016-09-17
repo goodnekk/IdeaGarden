@@ -9,9 +9,9 @@ var Footer = {
             m("div", {class: "ui card color footer"}, [
                 m("div", {class: "ui col-4 third"},[
                     m("div",[
-                        "Dit crowdsourcing platform is een initiatief van de gemeente Eindhoven, en is als pilot ontwikkeld door Code for NL.",
+                        "De Toekomstvijver Eersel is een initiatief van de gemeente Eersel, en is als pilot ontwikkeld door Code for NL.",
                         " Vragen? Neem contact op: ",
-                        m("a", {href:"mailto:info@ideeenvijver.nl"}, "info@ideeenvijver.nl")
+                        m("a", {href:"mailto:info@eersel.nl"}, "info@eersel.nl")
                     ]),
                 ]),
                 m("div", {class: "ui col-4 third logos"},
@@ -29,7 +29,7 @@ var Footer = {
                         m("a", {href:"/#/"}, i18next.t('menu.challenge')),
                     ]),
                     m("div",[
-                        m("a", {href:"mailto:info@ideeenvijver.nl"}, i18next.t('menu.contact'))
+                        m("a", {href:"mailto:info@eersel.nl"}, i18next.t('menu.contact'))
                     ])
                 )
             ])
