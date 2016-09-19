@@ -15,7 +15,7 @@ var Footer = {
                     ]),
                 ]),
                 m("div", {class: "ui col-4 third logos"},
-                    m("div", m("img", {class: "keepsize", src: "static/eindhoven.png"})),
+                    m("div", m("img", {class: "keepsize", src: "static/eersel.png"})),
                     m("div", m("img", {class: "keepsize", src: "static/codefornl.png"}))
                 ),
                 m("div", {class: "ui col-4 third right"},

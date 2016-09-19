@@ -21,9 +21,9 @@ module.exports = (function(){
     var templateDir = path.join(__dirname, './templates/mail', mailtype);
     var template = new EmailTemplate(templateDir);
     var templateVars = {
-      title: "Ideeënvijver",
-      site: "https://www.ideeenvijver.nl",
-      mail: "info@ideeenvijver.nl",
+      title: "Toekomstvijver Eersel",
+      site: "https://www.toekomstvijvereersel.nl",
+      mail: "info@toekomstvijvereersel.nl",
       code: content
     };
     template.render(templateVars, function (err, results) {
