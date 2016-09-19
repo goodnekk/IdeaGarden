@@ -75,6 +75,7 @@ var ChallengePage = {
                     m("div", {class: "ui col-12"}, [
                         m("div", {class: "ui card color"},[
                             m("p",{class: "centerimage"},[
+                                m("h1","Wat speelt er nu?"),
                                 m("p", [
                                     m("h2","Toekomstgericht lokaal bestuur"),
                                     "In de lijn van onze Toekomstvisie en mede ingegeven door het project ‘Veerkrachtig Bestuur’ van de provincie Noord-Brabant, zijn wij benieuwd naar jouw ideeën, wensen en behoeften op het gebied van lokaal bestuur in de toekomst. Je bent van harte welkom op maandag 17 oktober om 20.00 uur in de Muzenval voor de conferentie toekomstgericht lokaal bestuur.",
