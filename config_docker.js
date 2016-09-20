@@ -9,7 +9,7 @@ module.exports = {
     email:{
         from: "__EMAIL_FROM__",
         host: "__EMAIL_HOST__",
-        port: 25,
+        port: "__EMAIL_PORT__",
         auth: {
             user: "__EMAIL_USER__",
             pass: "__EMAIL_PASS__"
