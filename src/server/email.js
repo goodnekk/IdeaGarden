@@ -35,7 +35,7 @@ module.exports = (function(){
       transporter.sendMail({
         from: {
           name: 'Frederique van Ideeënvijver',
-          address: config.email.auth.user
+          address: config.email.from
         },
         to: receiver,
         subject: subject,

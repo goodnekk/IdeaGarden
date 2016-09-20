@@ -7,6 +7,7 @@ module.exports = {
         }
     },
     email:{
+       from: "test@localhost",
        host: "localhost",
        port: 25,
        auth: {
