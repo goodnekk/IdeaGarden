@@ -34,7 +34,7 @@ module.exports = (function(){
       }
       transporter.sendMail({
         from: {
-          name: 'Frederique van Ideeënvijver',
+          name: 'info@toekomstvijvereersel.nl',
           address: config.email.from
         },
         to: receiver,

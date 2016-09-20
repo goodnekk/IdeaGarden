@@ -7,7 +7,7 @@ module.exports = {
         }
     },
     email:{
-       from: "test@localhost",
+       from: "info@toekomstvijvereersel.nl",
        host: "localhost",
        port: 25,
        auth: {
