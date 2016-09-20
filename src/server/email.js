@@ -41,11 +41,11 @@ module.exports = (function(){
         subject: subject,
         html: results.html,
         text: results.text,
-        attachments: [{
-            filename: 'logo_mail.png',
-            path: './templates/mail/logo_mail.png',
-            cid: 'logo@ideeenvijver.nl' //same cid value as in the html img src
-        }]
+        //attachments: [{
+        //    filename: 'logo_mail.png',
+        //    path: './templates/mail/logo_mail.png',
+        //    cid: 'logo@ideeenvijver.nl' //same cid value as in the html img src
+        //}]
       }, function (err, responseStatus) {
         if (err) {
           console.log("Error occured sending email.");
