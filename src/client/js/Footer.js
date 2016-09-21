@@ -15,8 +15,8 @@ var Footer = {
                     ]),
                 ]),
                 m("div", {class: "ui col-4 third logos"},
-                    m("div", m("img", {class: "keepsize", src: "static/eersel.png"})),
-                    m("div", m("img", {class: "keepsize", src: "static/codefornl.png"}))
+                    m("div", m("img", {class: "keepsize", src: "static/eersel.png", alt: "Logo van de gemeente Eersel"})),
+                    m("div", m("img", {class: "keepsize", src: "static/codefornl.png", alt: "Logo van Code for NL"}))
                 ),
                 m("div", {class: "ui col-4 third right"},
                     m("div",[
