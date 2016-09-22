@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+//mongoose.Promise = require('bluebird');
 var autopopulate = require('mongoose-autopopulate');
 var fs = require("fs");
 var config;
@@ -8,6 +9,7 @@ if (!fs.existsSync(__dirname + '/./config.js')) {
 } else {
   config = require(__dirname + '/./config.js');
 }
+
 
 var db = mongoose.connection;
 db.on('error', console.log);
