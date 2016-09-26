@@ -65,10 +65,10 @@ var ShareButtons = {
     },
     view: function(ctrl, idea){
         return m("",[
-            m("a", {target: "_blank", href: "https://www.facebook.com/sharer/sharer.php?u=https%3A//www.ideeenvijver.nl/%23/idea/"+idea._id},
+            m("a", {target: "_blank", href: "https://www.facebook.com/sharer/sharer.php?u=https%3A//www.toekomstvijver.nl/%23/idea/"+idea._id},
             m("img", {class: "ui sharebutton", src:"/static/fb_share.png", title: i18next.t('idea.share.facebook')})
         ),
-        m("a", {target: "_blank", href: "https://twitter.com/home?status=Bekijk%20mijn%20idee%20op%20%23idee%C3%ABnvijver!%20https%3A//www.ideeenvijver.nl/%23/idea/"+idea._id},
+        m("a", {target: "_blank", href: "https://twitter.com/home?status=Bekijk%20mijn%20idee%20op%20%23idee%C3%ABnvijver!%20https%3A//www.toekomstvijver.nl/%23/idea/"+idea._id},
         m("img", {class: "ui sharebutton", src:"/static/tw_share.png", title: i18next.t('idea.share.twitter')})
     )
 ]);

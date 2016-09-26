@@ -11,7 +11,7 @@ var Footer = {
                     m("div",[
                         "De Toekomstvijver Eersel is een initiatief van de gemeente Eersel, en is als pilot ontwikkeld door Code for NL.",
                         " Vragen? Neem contact op: ",
-                        m("a", {href:"mailto:info@eersel.nl"}, "info@eersel.nl")
+                        m("a", {href:"mailto:gemeente@eersel.nl"}, "gemeente@eersel.nl")
                     ]),
                 ]),
                 m("div", {class: "ui col-4 third logos"},
@@ -20,16 +20,19 @@ var Footer = {
                 ),
                 m("div", {class: "ui col-4 third right"},
                     m("div",[
+                        m("a", {href:"/#/"}, "Toekomstvijver Eersel"),
+                    ]),
+                    m("div",[
                         m("a", {href:"/#/rules"}, i18next.t('menu.rules')),
                     ]),
                     m("div",[
                         m("a", {href:"/#/explain"}, i18next.t('menu.explain')),
                     ]),
+                    //m("div",[
+                        //m("a", {href:"/#/"}, i18next.t('menu.challenge')),
+                    //]),
                     m("div",[
-                        m("a", {href:"/#/"}, i18next.t('menu.challenge')),
-                    ]),
-                    m("div",[
-                        m("a", {href:"mailto:info@eersel.nl"}, i18next.t('menu.contact'))
+                        m("a", {href:"mailto:gemeente@eersel.nl"}, i18next.t('menu.contact'))
                     ])
                 )
             ])

@@ -12,7 +12,7 @@ var RulesPage = {
                                m("h1", "Regels"),
                                m("div", {class: "stage"}, [
                                    m("p", [
-                                       "Alles wat op Ideeënvijver wordt gedeeld valt onder een ",
+                                       "Alles wat op de toekomstvijver wordt gedeeld valt onder een ",
                                        m("a",{href:"https://creativecommons.org/licenses/by-sa/4.0/deed.nl"},"Creative Commons Licentie"),
                                        ". " +
                                        "Dit betekent dat je al je rechten behoudt en anderen toestemming geeft om het werk te delen, verspreiden en te gebruiken. Dit kan in elk medium en format voor elk doel, ook voor commerciële doeleinden."

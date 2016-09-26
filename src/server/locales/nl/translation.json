@@ -8,7 +8,7 @@
         "reset": "herstellen"
     },
     "email": {
-        "register": "Welkom bij Ideeënvijver",
+        "register": "Welkom bij de Toekomstvijver",
         "forgetpassword": "Wachtwoord herstellen",
         "postidea": "Gefeliciteerd met jouw idee!"
     },
@@ -45,7 +45,7 @@
         "resetaction": "Open de email die je zojuist ontvangen hebt en klik op de link."
     },
     "confirmpage":{
-        "description": "Welkom terug bij Ideeënvijver. Geef je naam en verzin een wachtwoord.",
+        "description": "Welkom terug bij de Toekomstvijer Eersel. Geef je naam en verzin een wachtwoord.",
         "username": "Gebruikersnaam...",
         "password": "Wachtwoord..."
     },
@@ -57,7 +57,7 @@
     },
     "thankspage":{
         "title": "gefeliciteerd!",
-        "description": "Jouw idee is zojuist geplaatst op Ideeënvijver.",
+        "description": "Jouw idee is zojuist geplaatst op de Toekomstvijer.",
         "action": "Open de email die je zojuist ontvangen hebt en klik op de link."
     },
     "errorpage":{

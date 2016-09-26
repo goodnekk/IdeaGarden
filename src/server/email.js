@@ -23,7 +23,7 @@ module.exports = (function(){
     var templateVars = {
       title: "Toekomstvijver Eersel",
       site: "https://www.toekomstvijvereersel.nl",
-      mail: "info@toekomstvijvereersel.nl",
+      mail: "gemeente@eersel.nl",
       code: content
     };
     template.render(templateVars, function (err, results) {

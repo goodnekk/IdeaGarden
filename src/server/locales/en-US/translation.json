@@ -8,7 +8,7 @@
         "reset": "reset"
     },
     "email": {
-        "register": "Welcome to Ideapond",
+        "register": "Welcome to Toekomstvijver",
         "forgetpassword": "Forgot password",
         "postidea": "Thank you for your idea"
     },
@@ -45,7 +45,7 @@
         "resetaction": "Open your email and click the link in the confirmation we sent you."
     },
     "confirmpage":{
-        "description": "Welcome in the Ideapond. Please enter your name and a password .",
+        "description": "Welcome to the Toekomstvijver. Please enter your name and a password .",
         "username": "Name...",
         "password": "Password..."
     },
@@ -57,7 +57,7 @@
     },
     "thankspage":{
         "title": "Congratulations!",
-        "description": "Your idea has landed in the Ideapond.",
+        "description": "Your idea has landed in the Toekomstvijver.",
         "action": "Open your email and click the link in the confirmation we sent you."
     },
     "errorpage":{
