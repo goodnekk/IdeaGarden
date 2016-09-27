@@ -28,9 +28,6 @@ var Footer = {
                     m("div",[
                         m("a", {href:"/#/explain"}, i18next.t('menu.explain')),
                     ]),
-                    //m("div",[
-                        //m("a", {href:"/#/"}, i18next.t('menu.challenge')),
-                    //]),
                     m("div",[
                         m("a", {href:"mailto:gemeente@eersel.nl"}, i18next.t('menu.contact'))
                     ])

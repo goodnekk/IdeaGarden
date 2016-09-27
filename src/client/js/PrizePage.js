@@ -1,7 +1,12 @@
 //=require Menu.js
 
 var PrizePage = {
-   view: function() {
+    controller: function(){
+        this.ideas = function(){
+            m.route("/ideas");
+        };
+    },
+   view: function(ctrl) {
        return m("div",[
            m.component(Menu),
            m("div", {class: "ui page"}, [
@@ -22,7 +27,8 @@ var PrizePage = {
                            m("p", {class: "centerimage"},[
                                m("p", {class: "centerimage"},[
                                    m("h1", "Ideeën opdoen?"),
-                                   m("p", "Hier vind je Dé VISsen van Eersel.")
+                                   m("p", "Hier vind je Dé VISsen van Eersel."),
+                                   m("button", {type:"submit", class: "ui no-float", onclick: ctrl.ideas}, m("h2","Bekijk de ideeën"))
                                ])
                            ])
                        ]),

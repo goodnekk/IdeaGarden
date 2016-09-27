@@ -6,6 +6,7 @@ String.prototype.trunc = String.prototype.trunc ||
 
 //=require i18n.js
 
+//=require HomePage.js
 //=require ChallengePage.js
 
 //=require IdeaOverviewPage.js
@@ -25,7 +26,8 @@ String.prototype.trunc = String.prototype.trunc ||
 
 m.route.mode = "hash";
 m.route(document.getElementById("content"), "/", {
-    "/": ChallengePage,
+    "/": HomePage,
+    "/challenge": ChallengePage,
     "/ideas": IdeaOverviewPage,
     "/idea/:id": IdeaDetailPage,
     "/dashboard": DashboardPage,
