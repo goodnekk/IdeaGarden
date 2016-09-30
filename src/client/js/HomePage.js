@@ -61,7 +61,7 @@ var HomePage = {
                         m("div", {class: "ui card color"}, [
                             m("div", {class: "centerimage"},[
                                 m("p", [
-                                    "De gemeente Eersel nodigt je uit om samen na te denken over onze toekomst! Hoe maken we het ‘Kem-pisch wonen in een wereldregio’ nog mooier, leuker en aantrekkelijker? "
+                                    "De gemeente Eersel nodigt je uit om samen na te denken over onze toekomst! Hoe maken we het ‘Kempisch wonen in een wereldregio’ nog mooier, leuker en aantrekkelijker? "
                                 ]),
                                 m("p", "Leuke ideeën? Doe Mee Met Jouw Idee! Je kunt jouw eigen idee blijven aanvullen, ideeën van anderen bekijken en stemmen op de ideeën die jou het meeste aanspreken. Jij bepaalt! "),
                             ])
@@ -71,7 +71,12 @@ var HomePage = {
                         m("div", {class: "ui card base"}, [
                             m("div", {class: "centerimage"},[
                                 m("img", {src: "static/frontpage_visual.png", alt: "Vernieuwend Innovatief Samen"}),
-                                m("p", "De samenleving verandert continu en dat gaat de laatste jaren nog net iets harder dan daarvoor. Daarmee ontstaan nieuwe (soms nog onbewuste) vragen en behoeften. Wij streven ernaar zo goed mogelijk voorbereid te zijn op onze toekomst. Dat doen we met z’n allen door te zoeken, experimenteren en leren. Vernieuwend, Innovatief, Samen. "),
+                                m("p", [
+                                    "De samenleving verandert continu en dat gaat de laatste jaren nog net iets harder dan daarvoor. Daarmee ontstaan nieuwe (soms nog onbewuste) vragen en behoeften. Wij streven ernaar zo goed mogelijk voorbereid te zijn op onze toekomst. Dat doen we met z’n allen door te zoeken, experimenteren en leren. ",
+                                    m("b","V"),"ernieuwend ",
+                                    m("b","I"),"nnovatief ",
+                                    m("b","S"),"amen.  "
+                                ]),
                             ])
                         ])
                     ]),

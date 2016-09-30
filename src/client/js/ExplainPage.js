@@ -37,7 +37,7 @@ var ExplainPage = {
                                     m("img", {class: "img", src: "static/stage3_hi.png"}),
                                     m("div", {class: "explain"},[
                                         //m("h2", "De grote vis"),
-                                        m("p", "Jouw idee spreekt anderen aan! Er word op gestemd, toevoegingen gedaan, vragen gesteld en schetsen toegevoegd.")
+                                        m("p", "Jouw idee spreekt anderen aan! Er wordt op gestemd, toevoegingen gedaan, vragen gesteld en schetsen toegevoegd.")
                                     ])
                                 ]),
                                 m("div",{class:"stage"},[
