@@ -69,7 +69,7 @@ var Menu = {
                     return m("a", {class: "ui menuelement right "+ctrl.fold, onclick: ctrl.loginClick.bind(ctrl)}, i18next.t('menu.login'));
                 })()
             ]),
-            m("img", {src: "static/eersel_small.png", class: "ui menuelement right logo", alt: "Logo van de gemeente eersel"}),
+            //m("img", {src: "static/eersel_small.png", class: "ui menuelement right logo", alt: "Logo van de gemeente eersel"}),
             ]);
         }
 };
