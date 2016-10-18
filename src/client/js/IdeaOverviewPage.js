@@ -34,6 +34,7 @@ var IdeaOverviewPage = {
                 ]),
                 */
                 //this is very strange
+                //very strange indeed
                 (function(){
                     if(ctrl.opened){
                         return m("div", {class: "ui grid"}, [
