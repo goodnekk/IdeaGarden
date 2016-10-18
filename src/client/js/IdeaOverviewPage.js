@@ -33,14 +33,14 @@ var IdeaOverviewPage = {
                     })()
                 ]),
                 */
-                //(function(){
-                //    if(ctrl.opened){
-                //        return m("div", {class: "ui grid"}, [
+                (function(){
+                    if(ctrl.opened){
+                        return m("div", {class: "ui grid"}, [
                             //m("div", {class: "ui col-3"}, m.component(QuestionCard)),
                             m("div", {class: "ui col-12"}, m.component(SubmitCard)),
-                //        ]);
-                //    }
-                //})(),
+                        ]);
+                    }
+                })(),
                 m.component(IdeaGrid),
                 m.component(Footer)
             ])
@@ -105,7 +105,6 @@ var SubmitCard = {
         ]);
     }
 };
-
 
 var IdeaGrid = {
     controller: function(){
