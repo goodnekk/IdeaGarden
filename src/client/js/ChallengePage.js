@@ -52,20 +52,11 @@ var ChallengePage = {
                             m("p",{class: "centerimage"},[
                                 m("h1","Wat speelt er nu?"),
                                 m("p", [
-                                    m("h2","Toekomstgericht lokaal bestuur"),
-                                    "In de lijn van onze Toekomstvisie en mede ingegeven door het project ‘Veerkrachtig Bestuur’ van de provincie Noord-Brabant, zijn wij benieuwd naar jouw ideeën, wensen en behoeften op het gebied van lokaal bestuur in de toekomst. Je bent van harte welkom op maandag 17 oktober om 20.00 uur in de Muzenval voor de conferentie toekomstgericht lokaal bestuur.",
-                                    m("p","De samenleving verandert en daarmee de vragen richting overheid. Wij willen graag van jou horen wat jij in de toekomst van ons verwacht.  Past de huidige vorm van het gemeentelijk bestuur nog wel bij de hedendaagse samenleving? Hoe sta jij bijvoorbeeld tegenover verdergaande samenwerking met de omliggende gemeenten? Om die vragen te beantwoorden hebben wij jou nodig."),
-                                    m("p", "Heb jij al geweldige ideeën? Laat het ons nu weten!"),
+                                    m("h2","Duurzaamheid"),
+                                    m("p","Het klimaat is aan het veranderen, fossiele brandstoffen raken op, steeds meer natuur verdwijnt door ont-bossing en de biodiversiteit daalt. We willen echter dat wij, maar ook onze kinderen en kleinkinderen in een gezonde, fijne en groene omgeving kunnen wonen. Daarom werkt de gemeente Eersel aan een duurzame toekomst. We willen in de gemeente duurzame energie gaan opwekken en de uitstoot van fijnstof en CO2 verminderen. Maar dit kunnen we niet alleen.Om dit te bereiken hebben we de hulp van alle inwoners, be-drijven en instellingen nodig!."),
+                                    m("p", "Heb jij goede ideeën hoe we als gemeente een duurzame, gezonde toekomst kunnen creëren? Laat het ons dan nu weten! "),
                                     checkButton(),
-                                ]),
-                                m("p", [
-                                    m("h2","Open Data Experience"),
-                                    "Op 9 en 10 november organiseren we voor het eerst de Open Data Experience in het gemeentehuis in Eersel. Op deze twee dagen willen we samen met jou experimenteren met nieuwe manieren om onze informatie te delen. Slimmer, efficiënter en klantvriendelijker.",
-                                    m("p", "Bekijk de ideeën om inspiratie op te doen!"),
-                                    checkButton(),
-                                ]),
-
-
+                                ])
                             ]),
                         ])
                     ]),

@@ -16,7 +16,7 @@ var PrizePage = {
                            m("p", {class: "centerimage"},[
                                m("h1", "Dankjewel voor jullie ideeën!"),
                                m("p", [
-                                   "Bedankt voor jouw enthousiasme en samenwerking. We zijn steeds op zoek naar de meest innovatieve ideeën die de gemeente Eersel toekomstbestendig maken. Houd toekomstvijvereersel.nl in de gaten om al jouw ideeën te kunnen delen, ",
+                                   "Bedankt voor jouw enthousiasme en samenwerking. We zijn steeds op zoek naar de meest innovatieve ideeën die de gemeente Eersel toekomstbestendig maken. De beste ideeën worden bekend gemaakt en gerealiseerd: ",
                                    m("b","V"),"ernieuwend ",
                                    m("b","I"),"nnovatief ",
                                    m("b","S"),"amen.  "])

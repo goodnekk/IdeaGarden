@@ -85,8 +85,7 @@ var HomePage = {
                             m("p",{class: "centerimage"},[
                                 m("h1","Wat speelt er nu?"),
                                 m("p", [
-                                    m("h2","Toekomstgericht lokaal bestuur"),
-                                    m("h2","Open Data Experience"),
+                                    m("h2","Duurzaamheid"),
                                     m("button", {type:"submit", class: "ui no-float", onclick: ctrl.challenge}, m("h2","Meer informatie")),
                                     m("button", {type:"submit", class: "ui no-float", onclick: ctrl.ideas}, m("h2","Bekijk de ideeën"))
                                 ]),

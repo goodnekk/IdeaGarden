@@ -59,7 +59,7 @@ var ExplainPage = {
                         m("div", {class: "ui card color"}, [
                             m("p", {class: "centerimage"},[
                                 m("h1", "Wat gebeurt er met mijn idee?"),
-                                m("p", "De mogelijkheid dat jouw idee werkelijkheid wordt. Jouw idee zou zo maar eens de sleutel tot de toekomst van de gemeente Eersel kunnen zijn. Wie weet zie je jouw idee uiteindelijk in heel de Kempen, Nederland, Europa of de rest van de wereld terug. "),
+                                m("p", "Jouw idee zou zo maar eens de sleutel tot de toekomst van de gemeente Eersel kunnen zijn. Voor de beste ideeën bestaat de mogelijkheid deze samen met de gemeente te realiseren. En wie weet zie je jouw idee werkelijkheid worden! "),
                             ])
                         ]),
                         m("div", {class: "ui card base"}, [
