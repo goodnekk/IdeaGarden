@@ -1,16 +1,16 @@
 [![Dependency Status](https://david-dm.org/CodeForEindhoven/IdeaGarden.svg?path=src/server)](https://david-dm.org/CodeForEindhoven/IdeaGarden?path=src/server)
 
-#IdeaGarden
+# IdeaGarden
 
-#requirements
+## requirements
 
 IdeaGarden requires mongodb.
 
-#Configure
+## Configure
 
 Copy the file src/server/config.default.js to src/server/config.js and alter the settings to fit your needs.
 
-#Install
+## Install
 We use gulp as a build system. gulp can be installed with:
 
 ```
@@ -24,7 +24,7 @@ gulp build
 gulp install_npm
 ```
 
-#Run
+## Run
 
 You can run IdeaGarden locally with
 ```
@@ -34,7 +34,7 @@ gulp run
 for development you can use `gulp develop`. This will start the server and automagically rebuild on file changes.
 It will watch changes in the source directory.
 
-#Test data
+## Test data
 
 There is a file with some test data. Run it with
 
